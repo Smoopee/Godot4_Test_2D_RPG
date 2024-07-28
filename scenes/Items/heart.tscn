@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnlcmjfguedlp"]
+
+[ext_resource type="PackedScene" uid="uid://4q2wmqy4faj7" path="res://scenes/Items/collectable.tscn" id="1_ol1gq"]
+[ext_resource type="Texture2D" uid="uid://hale0rqp07kt" path="res://art/objects/heart.png" id="2_qku1u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wgwm0"]
+resource_local_to_scene = true
+size = Vector2(12, 11)
+
+[node name="Heart" instance=ExtResource("1_ol1gq")]
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_wgwm0")
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_qku1u")

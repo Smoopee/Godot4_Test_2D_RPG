@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://m1rolwu0n3f3"]
+
+[ext_resource type="Texture2D" uid="uid://chewicsrv2m66" path="res://art/characters/LifeBarMiniUnder.png" id="1_gss8l"]
+[ext_resource type="Script" path="res://scenes/ui.gd" id="1_lt0dn"]
+[ext_resource type="Texture2D" uid="uid://qsdtsxe6cs0a" path="res://art/characters/LifeBarMiniProgress.png" id="2_u6yc4"]
+
+[node name="UI" type="Node2D"]
+script = ExtResource("1_lt0dn")
+
+[node name="player_health_bar" type="TextureProgressBar" parent="."]
+offset_right = 18.0
+offset_bottom = 4.0
+scale = Vector2(2.14816, 2.14816)
+texture_under = ExtResource("1_gss8l")
+texture_progress = ExtResource("2_u6yc4")
+
+[node name="player_mana_bar" type="TextureProgressBar" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0

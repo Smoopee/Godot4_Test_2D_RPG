@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EnemyTB" load_steps=3 format=3 uid="uid://o02831gyccod"]
+
+[ext_resource type="Script" path="res://resources/tb_resources/tb_enemy.gd" id="1_wjwgf"]
+[ext_resource type="Texture2D" uid="uid://2omktruyo1pf" path="res://art/turn_base_characters/slime/00_slime.png" id="2_g5cea"]
+
+[resource]
+script = ExtResource("1_wjwgf")
+texture = ExtResource("2_g5cea")
+health = 5
+attack = 1
+speed = 1

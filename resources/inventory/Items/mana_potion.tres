@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://ctbqnru8xs5xd"]
+
+[ext_resource type="Script" path="res://resources/inventory/inventoryItem.gd" id="1_br3de"]
+[ext_resource type="Texture2D" uid="uid://pafpaai1v1uv" path="res://art/objects/mana_potion.png" id="2_vw3ho"]
+
+[resource]
+script = ExtResource("1_br3de")
+name = "mana_potion"
+texture = ExtResource("2_vw3ho")

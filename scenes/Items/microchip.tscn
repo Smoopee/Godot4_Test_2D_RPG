@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://pgb0ki0t6be6"]
+
+[ext_resource type="PackedScene" uid="uid://4q2wmqy4faj7" path="res://scenes/Items/collectable.tscn" id="1_j1o41"]
+[ext_resource type="Texture2D" uid="uid://7plsvyfxjuyk" path="res://art/objects/newMicrochip.png" id="2_fxg0d"]
+[ext_resource type="Resource" uid="uid://cr56rrp8eb53" path="res://resources/inventory/Items/microchip.tres" id="2_slhot"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aweks"]
+resource_local_to_scene = true
+size = Vector2(16, 16)
+
+[node name="Microchip" instance=ExtResource("1_j1o41")]
+visibility_layer = 3
+z_index = 1
+itemRes = ExtResource("2_slhot")
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("RectangleShape2D_aweks")
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_fxg0d")

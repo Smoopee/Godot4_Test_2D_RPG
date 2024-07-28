@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://ctyu26vyq6lnk"]
+
+[ext_resource type="Script" path="res://scripts/CollisionShape2D.gd" id="1_2e04b"]
+[ext_resource type="Script" path="res://bladeVortex.gd" id="1_lm6f4"]
+[ext_resource type="Texture2D" uid="uid://c7av6lbqstr6u" path="res://art/objects/objects.png" id="3_phjvn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bk33s"]
+radius = 7.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rul0i"]
+atlas = ExtResource("3_phjvn")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dixay"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rul0i")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="blade_vortex" type="Area2D"]
+light_mask = 0
+visibility_layer = 2
+z_index = 2
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_lm6f4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(15, 15)
+shape = SubResource("CircleShape2D_bk33s")
+script = ExtResource("1_2e04b")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D"]
+position = Vector2(3, 3)
+scale = Vector2(0.258888, 0.319999)
+sprite_frames = SubResource("SpriteFrames_dixay")

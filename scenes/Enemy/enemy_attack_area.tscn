@@ -1,0 +1,96 @@
+[gd_scene load_steps=10 format=3 uid="uid://bpqmimumqxoa1"]
+
+[ext_resource type="Texture2D" uid="uid://bicmt477j1by2" path="res://art/characters/Enemy/EnemyAttackArea.png" id="1_dqfu8"]
+[ext_resource type="Script" path="res://scripts/Enemy/enemy_attack_area.gd" id="2_618vs"]
+[ext_resource type="Texture2D" uid="uid://b2biml5xo51gv" path="res://art/characters/Enemy/enemy_attack_area_visual_timer.png" id="3_6uttv"]
+[ext_resource type="Script" path="res://scripts/Enemy/enemy_attack_area_timer.gd" id="4_gmgl5"]
+
+[sub_resource type="Animation" id="Animation_ljgf5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemyAttackAreaVisualTimer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EnemyAttackAreaVisualTimer:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.12, 0.12)]
+}
+
+[sub_resource type="Animation" id="Animation_ryxd1"]
+resource_name = "attack_landing"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemyAttackAreaVisualTimer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, -1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EnemyAttackAreaVisualTimer:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.12, 0.12), Vector2(0.993467, 0.993467)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_agvqk"]
+_data = {
+"RESET": SubResource("Animation_ljgf5"),
+"attack_landing": SubResource("Animation_ryxd1")
+}
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lk41f"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lvdfm"]
+radius = 30.0
+
+[node name="EnemyAttackArea" type="Area2D"]
+z_index = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_agvqk")
+}
+autoplay = "attack_landing"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+material = SubResource("CanvasItemMaterial_lk41f")
+shape = SubResource("CircleShape2D_lvdfm")
+
+[node name="EnemyAttackArea" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+texture = ExtResource("1_dqfu8")
+script = ExtResource("2_618vs")
+
+[node name="EnemyAttackAreaVisualTimer" type="Sprite2D" parent="."]
+rotation = 3.14159
+scale = Vector2(0.12, 0.12)
+texture = ExtResource("3_6uttv")
+script = ExtResource("4_gmgl5")

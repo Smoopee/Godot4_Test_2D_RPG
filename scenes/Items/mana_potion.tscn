@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://bckqfqew2ajqh"]
+
+[ext_resource type="PackedScene" uid="uid://4q2wmqy4faj7" path="res://scenes/Items/collectable.tscn" id="1_le7gy"]
+[ext_resource type="Resource" uid="uid://ctbqnru8xs5xd" path="res://resources/inventory/Items/mana_potion.tres" id="2_2nqix"]
+[ext_resource type="Texture2D" uid="uid://pafpaai1v1uv" path="res://art/objects/mana_potion.png" id="3_ba4fs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jm0hj"]
+resource_local_to_scene = true
+size = Vector2(9, 12)
+
+[node name="mana_potion" instance=ExtResource("1_le7gy")]
+itemRes = ExtResource("2_2nqix")
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_jm0hj")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("3_ba4fs")
