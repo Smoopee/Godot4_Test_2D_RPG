@@ -1,9 +1,10 @@
-[gd_scene load_steps=32 format=3 uid="uid://52ucgdfpwadj"]
+[gd_scene load_steps=33 format=3 uid="uid://52ucgdfpwadj"]
 
 [ext_resource type="Script" path="res://scripts/Enemy/enemy.gd" id="1_1def1"]
 [ext_resource type="Texture2D" uid="uid://c3hsvmutfu3qs" path="res://art/characters/slime.png" id="1_i4dag"]
 [ext_resource type="Texture2D" uid="uid://chewicsrv2m66" path="res://art/characters/LifeBarMiniUnder.png" id="3_honbp"]
 [ext_resource type="Texture2D" uid="uid://qsdtsxe6cs0a" path="res://art/characters/LifeBarMiniProgress.png" id="4_3wabo"]
+[ext_resource type="PackedScene" uid="uid://bpqmimumqxoa1" path="res://scenes/Enemy/enemy_attack_area.tscn" id="5_6l11q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3y6bu"]
 atlas = ExtResource("1_i4dag")
@@ -220,11 +221,22 @@ attack_range = 50
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_183qr")
-animation = &"attacking"
+animation = &"corpse"
 autoplay = "idle"
-frame_progress = 0.417025
+
+[node name="health_bar" type="TextureProgressBar" parent="."]
+visibility_layer = 3
+z_index = 1
+y_sort_enabled = true
+offset_left = -9.0
+offset_top = -15.0
+offset_right = 31.0
+offset_bottom = 25.0
+texture_under = ExtResource("3_honbp")
+texture_progress = ExtResource("4_3wabo")
 
 [node name="detection_area" type="Area2D" parent="."]
+visible = false
 collision_layer = 2
 collision_mask = 2
 
@@ -263,18 +275,9 @@ one_shot = true
 
 [node name="CanAttackTimer" type="Timer" parent="."]
 wait_time = 4.0
-one_shot = true
 
-[node name="health_bar" type="TextureProgressBar" parent="."]
-visibility_layer = 3
-z_index = 1
-y_sort_enabled = true
-offset_left = -9.0
-offset_top = -15.0
-offset_right = 31.0
-offset_bottom = 25.0
-texture_under = ExtResource("3_honbp")
-texture_progress = ExtResource("4_3wabo")
+[node name="EnemyAttackArea" parent="." instance=ExtResource("5_6l11q")]
+visible = false
 
 [connection signal="area_entered" from="detection_area" to="." method="_on_detection_area_area_entered"]
 [connection signal="area_shape_entered" from="detection_area" to="." method="_on_detection_area_area_shape_entered"]
@@ -286,3 +289,4 @@ texture_progress = ExtResource("4_3wabo")
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="AttackRecoveryTimer" to="." method="_on_attack_recovery_timer_timeout"]
 [connection signal="timeout" from="CanAttackTimer" to="." method="_on_can_attack_timer_timeout"]
+[connection signal="attack_hit_player" from="EnemyAttackArea" to="." method="_on_enemy_attack_area_attack_hit_player"]

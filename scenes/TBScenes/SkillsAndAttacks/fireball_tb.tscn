@@ -1,0 +1,73 @@
+[gd_scene load_steps=12 format=3 uid="uid://dmiwbqkcebv68"]
+
+[ext_resource type="Texture2D" uid="uid://dancethlhq5er" path="res://art/TBSkillsAndAttacks/fireball_0.png" id="1_jnnrq"]
+[ext_resource type="Script" path="res://scripts/turn_based/SkillsAndAttacks/fireball_tb.gd" id="2_u820s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wp14f"]
+atlas = ExtResource("1_jnnrq")
+region = Rect2(0, 256, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s75c2"]
+atlas = ExtResource("1_jnnrq")
+region = Rect2(64, 256, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jpljs"]
+atlas = ExtResource("1_jnnrq")
+region = Rect2(128, 256, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0v5i8"]
+atlas = ExtResource("1_jnnrq")
+region = Rect2(192, 256, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lg8nw"]
+atlas = ExtResource("1_jnnrq")
+region = Rect2(256, 256, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kowld"]
+atlas = ExtResource("1_jnnrq")
+region = Rect2(320, 256, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4lqgf"]
+atlas = ExtResource("1_jnnrq")
+region = Rect2(384, 256, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_srvxa"]
+atlas = ExtResource("1_jnnrq")
+region = Rect2(448, 256, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e1k0k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wp14f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s75c2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jpljs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0v5i8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lg8nw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kowld")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4lqgf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_srvxa")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
+
+[node name="FireballTB" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_e1k0k")
+frame_progress = 0.334268
+script = ExtResource("2_u820s")

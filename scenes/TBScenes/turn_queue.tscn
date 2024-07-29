@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://d12ws4o2qane5"]
+
+[ext_resource type="Texture2D" uid="uid://2omktruyo1pf" path="res://art/TBCharacters/slime/00_slime.png" id="1_7pub8"]
+
+[node name="TurnQueue" type="Node2D"]
+
+[node name="slime" type="Sprite2D" parent="."]
+position = Vector2(17, 17)
+texture = ExtResource("1_7pub8")
+
+[node name="slime2" type="Sprite2D" parent="."]
+position = Vector2(17, 118)
+texture = ExtResource("1_7pub8")
+
+[node name="slime3" type="Sprite2D" parent="."]
+position = Vector2(17, 65)
+texture = ExtResource("1_7pub8")

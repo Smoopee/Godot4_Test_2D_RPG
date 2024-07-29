@@ -10,10 +10,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Input.is_action_just_pressed("attack"):
-		value -= 10
-		print("Mana is: " + str(value))
-		
+	value = Global.player_mana
+	
 	if mana_timer_lock:
 		var timer : Timer = Timer.new()
 		add_child(timer)
@@ -26,5 +24,5 @@ func _process(delta):
 
 func _timer_Timeout():
 	print("Gaining mana")
-	value += 15
+	Global.change_mana(15)
 	mana_timer_lock = true

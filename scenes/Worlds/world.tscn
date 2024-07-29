@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://osaefhaf6eyg"]
+[gd_scene load_steps=21 format=3 uid="uid://osaefhaf6eyg"]
 
 [ext_resource type="Script" path="res://scripts/Worlds/world.gd" id="1_fi8x0"]
 [ext_resource type="Texture2D" uid="uid://bls7fk7fwpgqa" path="res://art/tilesets/plains.png" id="2_nt0gy"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://bckqfqew2ajqh" path="res://scenes/Items/mana_potion.tscn" id="5_ei57g"]
 [ext_resource type="Texture2D" uid="uid://c7av6lbqstr6u" path="res://art/objects/objects.png" id="6_s6fu2"]
 [ext_resource type="PackedScene" uid="uid://w6ek38apyy1i" path="res://scenes/Player/player.tscn" id="7_fhyoc"]
-[ext_resource type="PackedScene" uid="uid://ctyu26vyq6lnk" path="res://scenes/Attacks/bladeVortex.tscn" id="8_nwt8w"]
 [ext_resource type="Script" path="res://scripts/UI/CanvasLayer.gd" id="9_5pxlg"]
 [ext_resource type="PackedScene" uid="uid://pe374ryuub05" path="res://scenes/UI/Inventory/inventory_gui.tscn" id="10_yed8g"]
 [ext_resource type="Texture2D" uid="uid://chewicsrv2m66" path="res://art/characters/LifeBarMiniUnder.png" id="11_c3k35"]
@@ -199,8 +198,6 @@ z_index = 1
 
 [node name="Camera2D" type="Camera2D" parent="player"]
 position_smoothing_enabled = true
-
-[node name="blade_vortex" parent="player" instance=ExtResource("8_nwt8w")]
 
 [node name="UI" type="CanvasLayer" parent="."]
 process_mode = 3

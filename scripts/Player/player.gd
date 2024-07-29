@@ -7,8 +7,13 @@ enum State{
 	RUNNING,
 }
 
-var health = Global.player_health
-var mana = Global.player_mana
+var blade_vortex_scene = load("res://scenes/Attacks/blade_vortex.tscn")
+var blade_vortex
+
+var maxHealth = 100
+var maxMana = 100
+var attack_power = 10
+var da_damage: int
 
 var speed = 50
 var current_dir = "none"
@@ -28,7 +33,13 @@ func _ready():
 	# Click Position
 	click_position = position
 	set_state(State.IDLE)
+	Global.change_max_player_health(maxHealth)
+	Global.change_max_player_mana(maxMana)
 	
+	blade_vortex = blade_vortex_scene.instantiate()
+	add_child(blade_vortex)
+	
+	print("Da Damage is: " + str(da_damage))
 
 func _physics_process(delta):
 	
@@ -49,6 +60,8 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed("attack"):
 		set_state(State.ATTACKING)
+		da_damage = blade_vortex.attack_callback(attack_power)
+
 
 func set_state(new_state):
 	if new_state == current_state:
@@ -129,10 +142,10 @@ func player_animation(direction: String, state: State):
 		animated_sprite.flip_h = true
 		animated_sprite.play("side_idle")
 
-
-
-
-
+#GRABS THE LOOT
 func _on_pickup_area_area_entered(area):
 	if area.has_method("collect"):
 		area.collect(inventory)
+
+func deal_da_damage():
+	return da_damage

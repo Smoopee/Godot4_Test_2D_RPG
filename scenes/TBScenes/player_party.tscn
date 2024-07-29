@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmcvuebka07l1"]
+
+[ext_resource type="Texture2D" uid="uid://cjvatdn3liydq" path="res://art/icon.svg" id="1_ivkb4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_44sxm"]
+atlas = ExtResource("1_ivkb4")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w0ufd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_44sxm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="PlayerParty" type="Node2D"]
+
+[node name="PartyMember1" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_w0ufd")
+
+[node name="PartyMember2" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1, 136)
+sprite_frames = SubResource("SpriteFrames_w0ufd")
