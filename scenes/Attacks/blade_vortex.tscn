@@ -1,6 +1,5 @@
-[gd_scene load_steps=10 format=3 uid="uid://ctyu26vyq6lnk"]
+[gd_scene load_steps=9 format=3 uid="uid://ctyu26vyq6lnk"]
 
-[ext_resource type="Script" path="res://scripts/Attacks/blade_vortex_collision.gd" id="1_8ek5l"]
 [ext_resource type="Script" path="res://scripts/Attacks/blade_vortex.gd" id="1_dyr6q"]
 [ext_resource type="Texture2D" uid="uid://5jvn0iqclowq" path="res://art/objects/weapons potions pack 1.png" id="2_rie0i"]
 
@@ -73,7 +72,6 @@ script = ExtResource("1_dyr6q")
 [node name="blade_vortex_collision" type="CollisionShape2D" parent="."]
 position = Vector2(10, -1.90735e-06)
 shape = SubResource("RectangleShape2D_bqebd")
-script = ExtResource("1_8ek5l")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="blade_vortex_collision"]
 position = Vector2(10, 1.43051e-06)

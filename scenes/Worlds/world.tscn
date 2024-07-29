@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://osaefhaf6eyg"]
+[gd_scene load_steps=23 format=3 uid="uid://osaefhaf6eyg"]
 
 [ext_resource type="Script" path="res://scripts/Worlds/world.gd" id="1_fi8x0"]
 [ext_resource type="Texture2D" uid="uid://bls7fk7fwpgqa" path="res://art/tilesets/plains.png" id="2_nt0gy"]
@@ -9,12 +9,14 @@
 [ext_resource type="PackedScene" uid="uid://w6ek38apyy1i" path="res://scenes/Player/player.tscn" id="7_fhyoc"]
 [ext_resource type="Script" path="res://scripts/UI/CanvasLayer.gd" id="9_5pxlg"]
 [ext_resource type="PackedScene" uid="uid://pe374ryuub05" path="res://scenes/UI/Inventory/inventory_gui.tscn" id="10_yed8g"]
-[ext_resource type="Texture2D" uid="uid://chewicsrv2m66" path="res://art/characters/LifeBarMiniUnder.png" id="11_c3k35"]
-[ext_resource type="Texture2D" uid="uid://qsdtsxe6cs0a" path="res://art/characters/LifeBarMiniProgress.png" id="12_j8r3y"]
+[ext_resource type="Texture2D" uid="uid://chewicsrv2m66" path="res://art/UI/PlayerElements/LifeBarMiniUnder.png" id="11_c3k35"]
+[ext_resource type="Texture2D" uid="uid://qsdtsxe6cs0a" path="res://art/UI/PlayerElements/LifeBarMiniProgress.png" id="12_j8r3y"]
 [ext_resource type="Script" path="res://scripts/UI/PlayerInfo/player_health_bar.gd" id="13_gy4hi"]
-[ext_resource type="Texture2D" uid="uid://7dfhjd0uftom" path="res://art/characters/ManaBarMiniProgress.png" id="14_inone"]
+[ext_resource type="Texture2D" uid="uid://7dfhjd0uftom" path="res://art/UI/PlayerElements/ManaBarMiniProgress.png" id="14_inone"]
+[ext_resource type="Texture2D" uid="uid://kfiqdsbxtkh2" path="res://art/UI/PlayerElements/player_stamina_bar.png" id="15_0kmpc"]
 [ext_resource type="Script" path="res://scripts/UI/PlayerInfo/player_mana_bar.gd" id="15_gerp2"]
 [ext_resource type="PackedScene" uid="uid://52ucgdfpwadj" path="res://scenes/Enemy/enemy.tscn" id="16_ma87a"]
+[ext_resource type="Script" path="res://scripts/UI/PlayerInfo/player_stamina_bar.gd" id="16_vewc3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8ea0k"]
 texture = ExtResource("2_nt0gy")
@@ -216,37 +218,54 @@ offset_bottom = 41.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="player_health_bar" type="TextureProgressBar" parent="UI"]
+[node name="PlayerHealthBar" type="TextureProgressBar" parent="UI"]
 z_index = 1
 z_as_relative = false
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -44.0
+offset_top = -43.9999
 offset_right = 18.0
-offset_bottom = -38.0
+offset_bottom = -39.9999
 grow_vertical = 0
-scale = Vector2(10.4267, 10.4267)
+scale = Vector2(10, 10)
 texture_under = ExtResource("11_c3k35")
 texture_progress = ExtResource("12_j8r3y")
 script = ExtResource("13_gy4hi")
 
-[node name="player_mana_bar" type="TextureProgressBar" parent="UI"]
+[node name="PlayerManaBar" type="TextureProgressBar" parent="UI"]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -207.0
+offset_left = -190.0
 offset_top = -44.0
-offset_right = -189.0
+offset_right = -172.0
 offset_bottom = -40.0
 grow_horizontal = 0
 grow_vertical = 0
-scale = Vector2(11.489, 10.427)
+scale = Vector2(10, 9.076)
 texture_under = ExtResource("11_c3k35")
 texture_progress = ExtResource("14_inone")
 script = ExtResource("15_gerp2")
+
+[node name="PlayerStaminaBar" type="TextureProgressBar" parent="UI"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -93.0
+offset_top = -43.9999
+offset_right = -75.0
+offset_bottom = -39.9999
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(10, 9.201)
+texture_under = ExtResource("11_c3k35")
+texture_progress = ExtResource("15_0kmpc")
+script = ExtResource("16_vewc3")
 
 [node name="Enemies" type="Node" parent="."]
 

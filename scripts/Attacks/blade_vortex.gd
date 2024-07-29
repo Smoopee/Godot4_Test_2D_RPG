@@ -4,6 +4,7 @@ extends Area2D
 @onready var bv_sprite = $blade_vortex_collision/AnimatedSprite2D
 @onready var bv_sprite2 = $blade_vortex_collision/AnimatedSprite2D2
 @onready var bv_sprite3 = $blade_vortex_collision/AnimatedSprite2D3
+@onready var spin_to_win = $AnimationPlayer
 
 
 var stacks = 0
@@ -11,6 +12,9 @@ var power = 2
 var xLength = stacks * 1
 var mana_cost = 10
 
+func _ready():
+	spin_to_win.play("spin_to_win")
+	spin_to_win.speed_scale = 2.0
 
 func _process(delta):
 	if stacks == 0:
@@ -63,7 +67,7 @@ func _process(delta):
 		bv_sprite.position = Vector2(xLength, 0)
 
 func attack_callback(value):
-	return stacks * value * power
+	return stacks * value * power *.5
 
 func _timer_Timeout():
 	stacks -= 1

@@ -69,5 +69,5 @@ animations = [{
 
 [node name="FireballTB" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_e1k0k")
-frame_progress = 0.334268
+frame_progress = 0.672331
 script = ExtResource("2_u820s")

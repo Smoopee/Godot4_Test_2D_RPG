@@ -56,5 +56,5 @@ animations = [{
 [node name="PlayerForTurnBase" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_vtrdt")
 autoplay = "default"
-frame_progress = 0.516011
+frame_progress = 0.591092
 script = ExtResource("2_3p82y")

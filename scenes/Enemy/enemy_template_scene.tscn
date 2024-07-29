@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://bx6anv76fwno2"]
 
 [ext_resource type="Script" path="res://scripts/Enemy/enemy.gd" id="1_cal3e"]
-[ext_resource type="Texture2D" uid="uid://chewicsrv2m66" path="res://art/characters/LifeBarMiniUnder.png" id="3_1ts0t"]
-[ext_resource type="Texture2D" uid="uid://qsdtsxe6cs0a" path="res://art/characters/LifeBarMiniProgress.png" id="4_afhuc"]
+[ext_resource type="Texture2D" uid="uid://chewicsrv2m66" path="res://art/UI/PlayerElements/LifeBarMiniUnder.png" id="3_1ts0t"]
+[ext_resource type="Texture2D" uid="uid://qsdtsxe6cs0a" path="res://art/UI/PlayerElements/LifeBarMiniProgress.png" id="4_afhuc"]
 [ext_resource type="PackedScene" uid="uid://bpqmimumqxoa1" path="res://scenes/Enemy/enemy_attack_area.tscn" id="5_6g1gy"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_183qr"]

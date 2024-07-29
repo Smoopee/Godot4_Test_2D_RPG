@@ -3,8 +3,7 @@ extends Node2D
 var loot_scene = load("res://scenes/Items/microchip.tscn")
 
 func _ready():
-	Global.player_health
-	Global.player_mana
+	pass
 
 func spawn_loot(area):
 	var loot = loot_scene.instantiate()

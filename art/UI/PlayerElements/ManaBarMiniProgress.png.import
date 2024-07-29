@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dt0qsy4dkojrj"
-path="res://.godot/imported/InventoryRect.png-5382d99624def9801ac217cb3f615ec9.ctex"
+uid="uid://7dfhjd0uftom"
+path="res://.godot/imported/ManaBarMiniProgress.png-e177c824933d50bbda93f2e5fcc244ce.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/UI/InventoryRect.png"
-dest_files=["res://.godot/imported/InventoryRect.png-5382d99624def9801ac217cb3f615ec9.ctex"]
+source_file="res://art/UI/PlayerElements/ManaBarMiniProgress.png"
+dest_files=["res://.godot/imported/ManaBarMiniProgress.png-e177c824933d50bbda93f2e5fcc244ce.ctex"]
 
 [params]
 

@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://scripts/Enemy/enemy.gd" id="1_1def1"]
 [ext_resource type="Texture2D" uid="uid://c3hsvmutfu3qs" path="res://art/characters/slime.png" id="1_i4dag"]
-[ext_resource type="Texture2D" uid="uid://chewicsrv2m66" path="res://art/characters/LifeBarMiniUnder.png" id="3_honbp"]
-[ext_resource type="Texture2D" uid="uid://qsdtsxe6cs0a" path="res://art/characters/LifeBarMiniProgress.png" id="4_3wabo"]
+[ext_resource type="Texture2D" uid="uid://chewicsrv2m66" path="res://art/UI/PlayerElements/LifeBarMiniUnder.png" id="3_honbp"]
+[ext_resource type="Texture2D" uid="uid://qsdtsxe6cs0a" path="res://art/UI/PlayerElements/LifeBarMiniProgress.png" id="4_3wabo"]
 [ext_resource type="PackedScene" uid="uid://bpqmimumqxoa1" path="res://scenes/Enemy/enemy_attack_area.tscn" id="5_6l11q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3y6bu"]

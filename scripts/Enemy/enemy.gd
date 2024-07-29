@@ -31,7 +31,6 @@ enum State{
 @onready var attack_timer = $AttackTimer
 @onready var attack_recovery_timer = $AttackRecoveryTimer
 @onready var can_attack_timer = $CanAttackTimer
-@onready var player_health_bar = $"../../UI/player_health_bar"
 @onready var world = $"../.."
 @onready var player = $"../../player"
 
@@ -172,7 +171,7 @@ func _on_collision_area_area_entered(area):
 		return
 	velocity = position + (position - area.get_parent().position) * knockbackPower
 	move_and_collide(velocity * get_physics_process_delta_time())
-	health -= player.deal_da_damage()
+	health -= player.damage_to_enemy_initializer()
 	health_bar.value = health
 
 
