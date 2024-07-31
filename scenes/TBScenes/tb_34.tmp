@@ -1,0 +1,471 @@
+[gd_scene load_steps=22 format=3 uid="uid://dt7ja5b3owfqv"]
+
+[ext_resource type="Script" path="res://scripts/turn_based/TurnQueue.gd" id="1_kroxe"]
+[ext_resource type="Texture2D" uid="uid://c45ug2k55xtqc" path="res://art/UI/tb_background/forest_of_pixels_by_bunnsp_ddxkac6-414w-2x.jpg" id="2_bh4vk"]
+[ext_resource type="PackedScene" uid="uid://bmcvuebka07l1" path="res://scenes/TBScenes/player_party.tscn" id="3_oc4ry"]
+[ext_resource type="PackedScene" uid="uid://by2qyvemev4se" path="res://scenes/TBScenes/Enemy/tb_enemy.tscn" id="4_soswa"]
+[ext_resource type="PackedScene" uid="uid://b2psi27f14s5u" path="res://scenes/TBScenes/TBBattleScene/arrow_indicator.tscn" id="5_ha75c"]
+[ext_resource type="Texture2D" uid="uid://chewicsrv2m66" path="res://art/UI/PlayerElements/LifeBarMiniUnder.png" id="6_wg7b6"]
+[ext_resource type="Texture2D" uid="uid://qsdtsxe6cs0a" path="res://art/UI/PlayerElements/LifeBarMiniProgress.png" id="7_3kroo"]
+[ext_resource type="Script" path="res://scripts/UI/PlayerInfo/player_health_bar.gd" id="8_glcwl"]
+[ext_resource type="Texture2D" uid="uid://7dfhjd0uftom" path="res://art/UI/PlayerElements/ManaBarMiniProgress.png" id="9_1gxnj"]
+[ext_resource type="Script" path="res://scripts/turn_based/ActionPanel.gd" id="9_173tm"]
+[ext_resource type="Script" path="res://scripts/UI/PlayerInfo/player_mana_bar.gd" id="10_3h00t"]
+[ext_resource type="Texture2D" uid="uid://kfiqdsbxtkh2" path="res://art/UI/PlayerElements/player_stamina_bar.png" id="11_2dv0h"]
+[ext_resource type="Script" path="res://scripts/UI/PlayerInfo/player_stamina_bar.gd" id="12_jgtwa"]
+[ext_resource type="Texture2D" uid="uid://cjvatdn3liydq" path="res://art/icon.svg" id="13_rdiku"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ohhgk"]
+bg_color = Color(0, 0, 0, 0.643137)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_04y1d"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.502747, 0.462693, 0.929306, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wgifl"]
+bg_color = Color(0.299948, 0.604184, 0.983624, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_idi54"]
+bg_color = Color(0, 0, 0, 0.643137)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_44sxm"]
+atlas = ExtResource("13_rdiku")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nsntp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_44sxm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j8i0i"]
+bg_color = Color(0, 0, 0, 0.643137)
+
+[node name="TBBattleArena" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PlayerPanel" type="Panel" parent="CanvasLayer"]
+offset_right = 118.0
+offset_bottom = 412.0
+scale = Vector2(1.36, 1.28069)
+theme_override_styles/panel = SubResource("StyleBoxFlat_ohhgk")
+
+[node name="PartyMember2" type="Control" parent="CanvasLayer/PlayerPanel"]
+anchors_preset = 0
+offset_left = 2.0
+offset_top = 93.0
+offset_right = 2.0
+offset_bottom = 93.0
+
+[node name="PlayerInfo" type="VBoxContainer" parent="CanvasLayer/PlayerPanel/PartyMember2"]
+layout_mode = 0
+offset_right = 62.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="CanvasLayer/PlayerPanel/PartyMember2/PlayerInfo"]
+layout_mode = 2
+text = "Player 2
+"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PlayerPanel/PartyMember2"]
+layout_mode = 0
+offset_top = 27.0
+offset_right = 18.0
+offset_bottom = 56.0
+scale = Vector2(6.32432, 2.70457)
+
+[node name="PlayerHealthBar" type="TextureProgressBar" parent="CanvasLayer/PlayerPanel/PartyMember2/VBoxContainer"]
+z_index = 1
+z_as_relative = false
+layout_mode = 2
+min_value = 50.0
+value = 50.0
+texture_under = ExtResource("6_wg7b6")
+texture_progress = ExtResource("7_3kroo")
+script = ExtResource("8_glcwl")
+
+[node name="PlayerManaBar" type="TextureProgressBar" parent="CanvasLayer/PlayerPanel/PartyMember2/VBoxContainer"]
+layout_mode = 2
+texture_under = ExtResource("6_wg7b6")
+texture_progress = ExtResource("9_1gxnj")
+script = ExtResource("10_3h00t")
+
+[node name="PlayerStaminaBar" type="TextureProgressBar" parent="CanvasLayer/PlayerPanel/PartyMember2/VBoxContainer"]
+layout_mode = 2
+texture_under = ExtResource("6_wg7b6")
+texture_progress = ExtResource("11_2dv0h")
+script = ExtResource("12_jgtwa")
+
+[node name="PartyMember3" type="Control" parent="CanvasLayer/PlayerPanel"]
+anchors_preset = 0
+offset_left = 2.0
+offset_top = 191.0
+offset_right = 2.0
+offset_bottom = 191.0
+
+[node name="PlayerInfo" type="VBoxContainer" parent="CanvasLayer/PlayerPanel/PartyMember3"]
+layout_mode = 0
+offset_right = 62.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="CanvasLayer/PlayerPanel/PartyMember3/PlayerInfo"]
+layout_mode = 2
+text = "Player 3
+"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PlayerPanel/PartyMember3"]
+layout_mode = 0
+offset_top = 27.0
+offset_right = 18.0
+offset_bottom = 56.0
+scale = Vector2(6.32432, 2.70457)
+
+[node name="PlayerHealthBar" type="TextureProgressBar" parent="CanvasLayer/PlayerPanel/PartyMember3/VBoxContainer"]
+z_index = 1
+z_as_relative = false
+layout_mode = 2
+min_value = 50.0
+value = 50.0
+texture_under = ExtResource("6_wg7b6")
+texture_progress = ExtResource("7_3kroo")
+script = ExtResource("8_glcwl")
+
+[node name="PlayerManaBar" type="TextureProgressBar" parent="CanvasLayer/PlayerPanel/PartyMember3/VBoxContainer"]
+layout_mode = 2
+texture_under = ExtResource("6_wg7b6")
+texture_progress = ExtResource("9_1gxnj")
+script = ExtResource("10_3h00t")
+
+[node name="PlayerStaminaBar" type="TextureProgressBar" parent="CanvasLayer/PlayerPanel/PartyMember3/VBoxContainer"]
+layout_mode = 2
+texture_under = ExtResource("6_wg7b6")
+texture_progress = ExtResource("11_2dv0h")
+script = ExtResource("12_jgtwa")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/PlayerPanel"]
+layout_mode = 0
+offset_left = 1.99998
+offset_top = 1.0
+offset_right = 42.0
+offset_bottom = 41.0
+scale = Vector2(2.95701, 2.22418)
+theme_override_styles/panel = SubResource("StyleBoxFlat_04y1d")
+
+[node name="PartyMember1" type="Panel" parent="CanvasLayer/PlayerPanel/Panel"]
+layout_mode = 0
+offset_left = 1.79555
+offset_top = -1.69762
+offset_right = 1.79555
+offset_bottom = -1.69762
+theme_override_styles/panel = SubResource("StyleBoxFlat_wgifl")
+
+[node name="PlayerInfo" type="VBoxContainer" parent="CanvasLayer/PlayerPanel/Panel/PartyMember1"]
+layout_mode = 2
+offset_left = 0.598516
+offset_top = 3.81964
+offset_right = 62.5985
+offset_bottom = 43.8196
+scale = Vector2(0.492319, 0.457497)
+
+[node name="Label" type="Label" parent="CanvasLayer/PlayerPanel/Panel/PartyMember1/PlayerInfo"]
+layout_mode = 2
+text = "Player 1"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PlayerPanel/Panel/PartyMember1"]
+layout_mode = 2
+offset_left = -1.49629
+offset_top = 16.9762
+offset_right = 16.5037
+offset_bottom = 45.9762
+scale = Vector2(2.11593, 0.94393)
+
+[node name="PlayerHealthBar" type="TextureProgressBar" parent="CanvasLayer/PlayerPanel/Panel/PartyMember1/VBoxContainer"]
+z_index = 1
+z_as_relative = false
+layout_mode = 2
+min_value = 50.0
+value = 50.0
+texture_under = ExtResource("6_wg7b6")
+texture_progress = ExtResource("7_3kroo")
+script = ExtResource("8_glcwl")
+
+[node name="PlayerManaBar" type="TextureProgressBar" parent="CanvasLayer/PlayerPanel/Panel/PartyMember1/VBoxContainer"]
+layout_mode = 2
+texture_under = ExtResource("6_wg7b6")
+texture_progress = ExtResource("9_1gxnj")
+script = ExtResource("10_3h00t")
+
+[node name="PlayerStaminaBar" type="TextureProgressBar" parent="CanvasLayer/PlayerPanel/Panel/PartyMember1/VBoxContainer"]
+layout_mode = 2
+texture_under = ExtResource("6_wg7b6")
+texture_progress = ExtResource("11_2dv0h")
+script = ExtResource("12_jgtwa")
+
+[node name="TurnPanel" type="Panel" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -289.0
+offset_top = 7.0
+offset_right = -239.0
+offset_bottom = 47.0
+grow_horizontal = 2
+scale = Vector2(11.5226, 1.1412)
+theme_override_styles/panel = SubResource("StyleBoxFlat_idi54")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/TurnPanel"]
+layout_mode = 2
+offset_right = 50.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="CanvasLayer/TurnPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PartyMember1" type="AnimatedSprite2D" parent="CanvasLayer/TurnPanel/HBoxContainer/Panel"]
+position = Vector2(7.39032, 20.5407)
+scale = Vector2(0.0574443, 0.5433)
+sprite_frames = SubResource("SpriteFrames_nsntp")
+
+[node name="Panel3" type="Panel" parent="CanvasLayer/TurnPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PartyMember1" type="AnimatedSprite2D" parent="CanvasLayer/TurnPanel/HBoxContainer/Panel3"]
+position = Vector2(7.08443, 22.5947)
+scale = Vector2(0.0574443, 0.5433)
+sprite_frames = SubResource("SpriteFrames_nsntp")
+
+[node name="Panel2" type="Panel" parent="CanvasLayer/TurnPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PartyMember1" type="AnimatedSprite2D" parent="CanvasLayer/TurnPanel/HBoxContainer/Panel2"]
+position = Vector2(5.00203, 19.856)
+scale = Vector2(0.0574443, 0.5433)
+sprite_frames = SubResource("SpriteFrames_nsntp")
+
+[node name="ActionPanel" type="Panel" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -120.0
+offset_right = 40.0
+offset_bottom = -80.0001
+grow_vertical = 0
+scale = Vector2(4.04265, 2.95894)
+theme_override_styles/panel = SubResource("StyleBoxFlat_j8i0i")
+script = ExtResource("9_173tm")
+
+[node name="ActionContainer" type="VBoxContainer" parent="CanvasLayer/ActionPanel"]
+layout_mode = 0
+offset_top = -0.675905
+offset_right = 67.0
+offset_bottom = 104.325
+scale = Vector2(0.592595, 0.374542)
+
+[node name="Attack" type="Button" parent="CanvasLayer/ActionPanel/ActionContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Attack"
+
+[node name="Evasion" type="Button" parent="CanvasLayer/ActionPanel/ActionContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Evasion"
+
+[node name="Item" type="Button" parent="CanvasLayer/ActionPanel/ActionContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Item
+"
+
+[node name="AttackContainer" type="VBoxContainer" parent="CanvasLayer/ActionPanel"]
+visible = false
+layout_mode = 0
+offset_left = 0.0742041
+offset_top = 0.274658
+offset_right = 65.0742
+offset_bottom = 136.275
+scale = Vector2(0.610591, 0.291148)
+localize_numeral_system = false
+
+[node name="Default" type="Button" parent="CanvasLayer/ActionPanel/AttackContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Default"
+
+[node name="Skill 1" type="Button" parent="CanvasLayer/ActionPanel/AttackContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Skill 1
+"
+
+[node name="Skill 2" type="Button" parent="CanvasLayer/ActionPanel/AttackContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Skill 2
+"
+
+[node name="Back" type="Button" parent="CanvasLayer/ActionPanel/AttackContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Back
+"
+
+[node name="EvasionContainer" type="VBoxContainer" parent="CanvasLayer/ActionPanel"]
+visible = false
+layout_mode = 0
+offset_left = 0.0742041
+offset_top = 0.274658
+offset_right = 67.0742
+offset_bottom = 136.275
+scale = Vector2(0.594282, 0.292845)
+
+[node name="Sprint" type="Button" parent="CanvasLayer/ActionPanel/EvasionContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Sprint"
+
+[node name="Dodge" type="Button" parent="CanvasLayer/ActionPanel/EvasionContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Dodge
+"
+
+[node name="Back" type="Button" parent="CanvasLayer/ActionPanel/EvasionContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Back
+"
+
+[node name="TurnQueue" type="Node2D" parent="."]
+script = ExtResource("1_kroxe")
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="TBEnemy" parent="Enemies" instance=ExtResource("4_soswa")]
+z_index = 1
+position = Vector2(767, 454)
+scale = Vector2(2.08888, 2.08888)
+
+[node name="TBEnemy2" parent="Enemies" instance=ExtResource("4_soswa")]
+position = Vector2(775, 533)
+scale = Vector2(2.08888, 2.08888)
+
+[node name="TBEnemy3" parent="Enemies" instance=ExtResource("4_soswa")]
+position = Vector2(887, 420)
+scale = Vector2(2.08888, 2.08888)
+
+[node name="TBEnemy4" parent="Enemies" instance=ExtResource("4_soswa")]
+position = Vector2(899, 500)
+scale = Vector2(2.08888, 2.08888)
+
+[node name="TBEnemy5" parent="Enemies" instance=ExtResource("4_soswa")]
+position = Vector2(877, 571)
+scale = Vector2(2.08888, 2.08888)
+
+[node name="PartyMembers" type="Node" parent="."]
+
+[node name="PlayerParty2" parent="PartyMembers" instance=ExtResource("3_oc4ry")]
+position = Vector2(363, 524)
+scale = Vector2(0.321063, 0.321063)
+
+[node name="PlayerParty3" parent="PartyMembers" instance=ExtResource("3_oc4ry")]
+position = Vector2(462, 528)
+scale = Vector2(0.321063, 0.321063)
+
+[node name="Panel" type="Panel" parent="PartyMembers"]
+offset_left = 389.0
+offset_top = 408.0
+offset_right = 429.0
+offset_bottom = 448.0
+scale = Vector2(1.40179, 1.21611)
+theme_override_styles/panel = SubResource("StyleBoxFlat_04y1d")
+
+[node name="PlayerParty1" parent="PartyMembers/Panel" instance=ExtResource("3_oc4ry")]
+position = Vector2(19.9745, 19.735)
+scale = Vector2(0.283856, 0.273335)
+
+[node name="ArrowIndicator" parent="." instance=ExtResource("5_ha75c")]
+z_index = 1
+position = Vector2(830, 539)
+scale = Vector2(0.208272, 0.142798)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 828.0
+offset_bottom = 414.0
+scale = Vector2(1.38934, 1.56245)
+texture = ExtResource("2_bh4vk")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -1.19209e-07)
+scale = Vector2(3255.73, -10917)
+anchor_mode = 0
+zoom = Vector2(0.9, 0.9)
+
+[node name="SpawnLocation" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 709.0
+offset_top = 352.0
+offset_right = 749.0
+offset_bottom = 392.0
+scale = Vector2(6.15243, 7.39728)
+
+[node name="Button1" type="Button" parent="SpawnLocation"]
+layout_mode = 0
+offset_left = 5.68881
+offset_top = 11.4907
+offset_right = 13.6888
+offset_bottom = 19.4907
+
+[node name="Button2" type="Button" parent="SpawnLocation"]
+layout_mode = 0
+offset_left = 6.98911
+offset_top = 22.0351
+offset_right = 14.9891
+offset_bottom = 30.0351
+
+[node name="Button3" type="Button" parent="SpawnLocation"]
+layout_mode = 0
+offset_left = 25.0308
+offset_top = 6.89442
+offset_right = 33.0308
+offset_bottom = 14.8944
+
+[node name="Button4" type="Button" parent="SpawnLocation"]
+layout_mode = 0
+offset_left = 27.1437
+offset_top = 17.8444
+offset_right = 35.1437
+offset_bottom = 25.8444
+
+[node name="Button5" type="Button" parent="SpawnLocation"]
+layout_mode = 0
+offset_left = 23.4054
+offset_top = 27.1721
+offset_right = 31.4054
+offset_bottom = 35.1721
+
+[connection signal="pressed" from="CanvasLayer/ActionPanel/ActionContainer/Attack" to="CanvasLayer/ActionPanel" method="_on_attack_pressed"]
+[connection signal="pressed" from="CanvasLayer/ActionPanel/ActionContainer/Evasion" to="CanvasLayer/ActionPanel" method="_on_evasion_pressed"]
+[connection signal="pressed" from="CanvasLayer/ActionPanel/AttackContainer/Default" to="CanvasLayer/ActionPanel" method="_on_default_pressed"]
+[connection signal="pressed" from="CanvasLayer/ActionPanel/AttackContainer/Back" to="CanvasLayer/ActionPanel" method="_on_back_pressed"]
+[connection signal="pressed" from="CanvasLayer/ActionPanel/EvasionContainer/Back" to="CanvasLayer/ActionPanel" method="_on_back_pressed"]

@@ -1,0 +1,57 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmi0fr63aixlc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ysj6v"]
+bg_color = Color(0, 0, 0, 0.643137)
+
+[node name="AttackMenuOptions" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ActionPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -641.0
+offset_right = 20.0
+offset_bottom = -595.0
+grow_vertical = 0
+scale = Vector2(13.4763, 3.64089)
+theme_override_styles/panel = SubResource("StyleBoxFlat_ysj6v")
+
+[node name="HFlowContainer" type="VBoxContainer" parent="ActionPanel"]
+layout_mode = 1
+offset_left = 0.0742041
+offset_top = 0.274658
+offset_right = 65.0742
+offset_bottom = 136.275
+scale = Vector2(0.178989, 0.335581)
+localize_numeral_system = false
+
+[node name="Default" type="Button" parent="ActionPanel/HFlowContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Default"
+
+[node name="Skill 1" type="Button" parent="ActionPanel/HFlowContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Skill 1
+"
+
+[node name="Skill 2" type="Button" parent="ActionPanel/HFlowContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Skill 2
+"
+
+[node name="Skill 3" type="Button" parent="ActionPanel/HFlowContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Back
+"

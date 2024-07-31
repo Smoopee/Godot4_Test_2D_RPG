@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://dmiwbqkcebv68"]
 
 [ext_resource type="Texture2D" uid="uid://dancethlhq5er" path="res://art/TBSkillsAndAttacks/fireball_0.png" id="1_jnnrq"]
-[ext_resource type="Script" path="res://scripts/turn_based/SkillsAndAttacks/fireball_tb.gd" id="2_u820s"]
+[ext_resource type="Script" path="res://scripts/TurnBased/SkillsAndAttacks/fireball_tb.gd" id="2_u820s"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wp14f"]
 atlas = ExtResource("1_jnnrq")

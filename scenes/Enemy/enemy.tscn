@@ -230,8 +230,8 @@ z_index = 1
 y_sort_enabled = true
 offset_left = -9.0
 offset_top = -15.0
-offset_right = 31.0
-offset_bottom = 25.0
+offset_right = 9.0
+offset_bottom = -11.0
 texture_under = ExtResource("3_honbp")
 texture_progress = ExtResource("4_3wabo")
 

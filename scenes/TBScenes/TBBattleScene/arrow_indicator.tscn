@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=3 uid="uid://b2psi27f14s5u"]
+
+[ext_resource type="Texture2D" uid="uid://biepttir0d6eq" path="res://art/UI/TBBattleArena/arrowIndicator.png" id="1_d5jqa"]
+[ext_resource type="Script" path="res://scripts/TurnBased/arrow_indicator.gd" id="2_6k3nk"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_c2f7k"]
+
+[sub_resource type="Animation" id="Animation_mbved"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_uoge6"]
+resource_name = "arrow_blink"
+length = 0.3
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hdc3c"]
+_data = {
+"RESET": SubResource("Animation_mbved"),
+"arrow_blink": SubResource("Animation_uoge6")
+}
+
+[node name="ArrowIndicator" type="Sprite2D"]
+material = SubResource("CanvasItemMaterial_c2f7k")
+scale = Vector2(1.01021, 0.992844)
+texture = ExtResource("1_d5jqa")
+script = ExtResource("2_6k3nk")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hdc3c")
+}

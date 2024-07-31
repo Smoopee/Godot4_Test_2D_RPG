@@ -1,0 +1,50 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkfvkrduy28ow"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m8eb1"]
+bg_color = Color(0, 0, 0, 0.643137)
+
+[node name="EvasionMenuOptions" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ActionPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -641.0
+offset_right = 20.0
+offset_bottom = -595.0
+grow_vertical = 0
+scale = Vector2(13.4017, 3.64089)
+theme_override_styles/panel = SubResource("StyleBoxFlat_m8eb1")
+
+[node name="HFlowContainer" type="VBoxContainer" parent="ActionPanel"]
+layout_mode = 1
+offset_left = 0.0742041
+offset_top = 0.274658
+offset_right = 67.0742
+offset_bottom = 136.275
+scale = Vector2(0.1744, 0.331194)
+
+[node name="Sprint" type="Button" parent="ActionPanel/HFlowContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Sprint"
+
+[node name="Dodge" type="Button" parent="ActionPanel/HFlowContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Dodge
+"
+
+[node name="Back" type="Button" parent="ActionPanel/HFlowContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Back
+"

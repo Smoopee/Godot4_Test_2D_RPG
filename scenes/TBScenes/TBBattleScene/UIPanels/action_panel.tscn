@@ -1,0 +1,139 @@
+[gd_scene load_steps=3 format=3 uid="uid://cexgdomo7lkqn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xc2wg"]
+bg_color = Color(0, 0, 0, 0.643137)
+
+[sub_resource type="GDScript" id="GDScript_pj3vo"]
+script/source = "extends Panel
+
+@onready var attack = $ActionContainer/Attack
+@onready var attack_container = $AttackContainer
+@onready var action_container = $ActionContainer
+@onready var evasion_container = $EvasionContainer
+
+
+func _ready():
+	pass
+
+func _process(delta):
+	pass
+	
+
+func _on_attack_pressed():
+	action_container.visible = false
+	attack_container.visible = true
+
+func _on_default_pressed():
+	attack_container.visible = false
+
+
+func _on_evasion_pressed():
+	action_container.visible = false
+	evasion_container.visible = true
+
+
+func _on_back_button_down():
+	attack_container.visible = false
+	action_container.visible = true
+	evasion_container.visible = false
+"
+
+[node name="ActionPanel" type="Panel"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -156.0
+offset_right = 14.0
+offset_bottom = -110.0
+grow_vertical = 0
+scale = Vector2(13.4162, 3.45031)
+theme_override_styles/panel = SubResource("StyleBoxFlat_xc2wg")
+script = SubResource("GDScript_pj3vo")
+
+[node name="ActionContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+offset_left = 0.496462
+offset_top = 0.882555
+offset_right = 67.4965
+offset_bottom = 105.883
+scale = Vector2(0.167768, 0.415)
+
+[node name="Attack" type="Button" parent="ActionContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Attack"
+
+[node name="Evasion" type="Button" parent="ActionContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Evasion"
+
+[node name="Item" type="Button" parent="ActionContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Item
+"
+
+[node name="AttackContainer" type="VBoxContainer" parent="."]
+visible = false
+offset_left = 0.0742041
+offset_top = 0.274658
+offset_right = 65.0742
+offset_bottom = 136.275
+scale = Vector2(0.178989, 0.335581)
+localize_numeral_system = false
+
+[node name="Default" type="Button" parent="AttackContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Default"
+
+[node name="Skill 1" type="Button" parent="AttackContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Skill 1
+"
+
+[node name="Skill 2" type="Button" parent="AttackContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Skill 2
+"
+
+[node name="Back" type="Button" parent="AttackContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Back
+"
+
+[node name="EvasionContainer" type="VBoxContainer" parent="."]
+visible = false
+offset_left = 0.0742041
+offset_top = 0.274658
+offset_right = 67.0742
+offset_bottom = 136.275
+scale = Vector2(0.1744, 0.331194)
+
+[node name="Sprint" type="Button" parent="EvasionContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Sprint"
+
+[node name="Dodge" type="Button" parent="EvasionContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Dodge
+"
+
+[node name="Back" type="Button" parent="EvasionContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Back
+"
+
+[connection signal="pressed" from="ActionContainer/Attack" to="." method="_on_attack_pressed"]
+[connection signal="pressed" from="ActionContainer/Evasion" to="." method="_on_evasion_pressed"]
+[connection signal="pressed" from="AttackContainer/Default" to="." method="_on_default_pressed"]
+[connection signal="button_down" from="AttackContainer/Back" to="." method="_on_back_button_down"]
+[connection signal="button_down" from="EvasionContainer/Back" to="." method="_on_back_button_down"]

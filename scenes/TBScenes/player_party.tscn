@@ -21,7 +21,3 @@ animations = [{
 
 [node name="PartyMember1" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_w0ufd")
-
-[node name="PartyMember2" type="AnimatedSprite2D" parent="."]
-position = Vector2(-1, 136)
-sprite_frames = SubResource("SpriteFrames_w0ufd")
