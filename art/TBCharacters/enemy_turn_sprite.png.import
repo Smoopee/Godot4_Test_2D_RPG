@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmmtk76lng52j"
-path="res://.godot/imported/Gobuss.png-d4ad67f454de9e4a6f601ed49c9caa49.ctex"
+uid="uid://bwvlmucnuk0y5"
+path="res://.godot/imported/enemy_turn_sprite.png-c03ccfe439b3e54b01581b18a3ee4a7b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/characters/Enemy/Characters/Gobuss.png"
-dest_files=["res://.godot/imported/Gobuss.png-d4ad67f454de9e4a6f601ed49c9caa49.ctex"]
+source_file="res://art/TBCharacters/enemy_turn_sprite.png"
+dest_files=["res://.godot/imported/enemy_turn_sprite.png-c03ccfe439b3e54b01581b18a3ee4a7b.ctex"]
 
 [params]
 

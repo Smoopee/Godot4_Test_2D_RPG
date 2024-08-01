@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgslc2jrkvhsu"]
+
+[ext_resource type="Texture2D" uid="uid://bcexs8yfga78o" path="res://art/TBCharacters/player_turn_sprite.png" id="1_6rri7"]
+
+[node name="PlayerTurnSpritePanel" type="Panel"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TurnSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_6rri7")

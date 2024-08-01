@@ -330,11 +330,11 @@ text = "Turn1
 "
 
 [node name="CurrentTurnContainer" type="HBoxContainer" parent="CanvasLayer/TurnPanel"]
-layout_mode = 1
-offset_left = 8.83508
-offset_top = 7.88644
-offset_right = 58.8351
-offset_bottom = 31.8864
+layout_mode = 2
+offset_left = 5.59555
+offset_top = 0.876271
+offset_right = 55.5956
+offset_bottom = 40.8763
 scale = Vector2(0.330774, 1.08542)
 
 [node name="NextTurnLabel" type="Label" parent="CanvasLayer/TurnPanel"]
@@ -463,7 +463,6 @@ offset_bottom = 35.1721
 [connection signal="pressed" from="CanvasLayer/ActionPanel/AttackContainer/Default" to="CanvasLayer/ActionPanel" method="_on_default_pressed"]
 [connection signal="pressed" from="CanvasLayer/ActionPanel/AttackContainer/Back" to="CanvasLayer/ActionPanel" method="_on_back_pressed"]
 [connection signal="pressed" from="CanvasLayer/ActionPanel/EvasionContainer/Back" to="CanvasLayer/ActionPanel" method="_on_back_pressed"]
-[connection signal="ready" from="TurnQueue" to="CanvasLayer/TurnPanel" method="_on_turn_queue_ready"]
 [connection signal="pressed" from="SpawnLocation/SelectionEnemy1" to="CanvasLayer/ActionPanel" method="_on_selection_enemy_1_pressed"]
 [connection signal="pressed" from="SpawnLocation/SelectionEnemy2" to="CanvasLayer/ActionPanel" method="_on_selection_enemy_2_pressed"]
 [connection signal="pressed" from="SpawnLocation/SelectionEnemy3" to="CanvasLayer/ActionPanel" method="_on_selection_enemy_3_pressed"]

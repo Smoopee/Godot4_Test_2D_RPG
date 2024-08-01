@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dewfa7t27o7uy"]
+
+[ext_resource type="Texture2D" uid="uid://bwvlmucnuk0y5" path="res://art/TBCharacters/enemy_turn_sprite.png" id="1_1xskv"]
+
+[node name="EnemyTurnSpritePanel" type="Panel"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TurnSprite" type="Sprite2D" parent="."]
+position = Vector2(7, 4)
+texture = ExtResource("1_1xskv")

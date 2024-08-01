@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dmkbogp1yuhqh"]
+[gd_scene load_steps=11 format=3 uid="uid://dmkbogp1yuhqh"]
 
 [ext_resource type="Texture2D" uid="uid://ob51rnx42bgs" path="res://art/characters/player.png" id="1_tj4of"]
 [ext_resource type="Script" path="res://scripts/TurnBased/Player/player3_for_turn_base.gd" id="2_nckq6"]
+[ext_resource type="Texture2D" uid="uid://bcexs8yfga78o" path="res://art/TBCharacters/player_turn_sprite.png" id="3_e5m7t"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4v1u0"]
 atlas = ExtResource("1_tj4of")
@@ -58,3 +59,7 @@ sprite_frames = SubResource("SpriteFrames_vtrdt")
 autoplay = "default"
 frame_progress = 0.591092
 script = ExtResource("2_nckq6")
+
+[node name="TurnSprite" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("3_e5m7t")

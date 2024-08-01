@@ -26,8 +26,18 @@ extends Panel
 @onready var player_1 = $"../../PartyMembers/Player1ForTurnBase"
 @onready var player_2 = $"../../PartyMembers/Player2ForTurnBase"
 @onready var player_3 = $"../../PartyMembers/Player3ForTurnBase"
+@onready var active_character_highlighter1 = $"../PlayerPanel/PartyMember1/ActiveCharacterHighlighter"
+@onready var active_character_highlighter2 = $"../PlayerPanel/PartyMember2/ActiveCharacterHighlighter"
+@onready var active_character_highlighter3 = $"../PlayerPanel/PartyMember3/ActiveCharacterHighlighter"
+
+
 
 @onready var turn_queue = $"../../TurnQueue"
+@onready var party_members = $"../../PartyMembers"
+
+
+@onready var turn_panel = $"../TurnPanel"
+@onready var current_turn_container = $"../TurnPanel/CurrentTurnContainer"
 
 #DECLARING STATES---------------------------------------------------------------
 enum State{
@@ -49,7 +59,7 @@ func set_state(new_state):
 #SCRIPT WIDE VARIABLES----------------------------------------------------------
 var current_character 
 var target_confirmation_check = []
-
+var rng = RandomNumberGenerator.new()
 
 
 func _ready():
@@ -58,11 +68,37 @@ func _ready():
 	arrow_indicator.visible = false
 
 func _process(delta):
+	turn_queue.turn_cycle()
+	
+	if dead_checker(turn_queue.active_character):
+		current_turn_container.get_child(0).queue_free()
+		current_character = turn_queue.next_character()
+		action_counter()
+		return
 	current_character = turn_queue.active_character
 	
-	if current_character == enemies:
+	if current_character.get_parent() == enemies:
+		action_counter()
 		enemy_ai()
 	
+	match current_character:
+		player_1:
+			active_character_highlighter1.visible = true
+			active_character_highlighter2.visible = false
+			active_character_highlighter3.visible = false
+		player_2:
+			active_character_highlighter1.visible = false
+			active_character_highlighter2.visible = true
+			active_character_highlighter3.visible = false
+		player_3:
+			active_character_highlighter1.visible = false
+			active_character_highlighter2.visible = false
+			active_character_highlighter3.visible = true
+		_:
+			active_character_highlighter1.visible = false
+			active_character_highlighter2.visible = false
+			active_character_highlighter3.visible = false
+			
 	match current_state:
 		State.SELECTING:
 			pass
@@ -97,26 +133,31 @@ func _on_default_pressed():
 
 
 func _on_selection_enemy_1_pressed():
+	if dead_checker(tb_enemy_1): return
 	arrow_repositioner(tb_enemy_1.global_position)
 	if target_confirmation_checker(1): 
 		the_attack_step(tb_enemy_1)
 
 func _on_selection_enemy_2_pressed():
+	if dead_checker(tb_enemy_2): return
 	arrow_repositioner(tb_enemy_2.global_position)
 	if target_confirmation_checker(2): 
 		the_attack_step(tb_enemy_2)
 
 func _on_selection_enemy_3_pressed():
+	if dead_checker(tb_enemy_3): return
 	arrow_repositioner(tb_enemy_3.global_position)
 	if target_confirmation_checker(3): 
 		the_attack_step(tb_enemy_3)
 
 func _on_selection_enemy_4_pressed():
+	if dead_checker(tb_enemy_4): return
 	arrow_repositioner(tb_enemy_4.global_position)
 	if target_confirmation_checker(4): 
 		the_attack_step(tb_enemy_4)
 
 func _on_selection_enemy_5_pressed():
+	if dead_checker(tb_enemy_5): return
 	arrow_repositioner(tb_enemy_5.global_position)
 	if target_confirmation_checker(5): 
 		the_attack_step(tb_enemy_5)
@@ -148,7 +189,7 @@ func the_attack_step(defender):
 		State.SELECTING:
 			pass
 		State.DEFAULT:
-			defender.tb_enemy_health_bar.value -= current_character.attack
+			defender.change_health(-current_character.attack)
 			current_character = turn_queue.next_character()
 			print("current character is: " + str(current_character))
 			evasion_container.visible = false
@@ -156,12 +197,26 @@ func the_attack_step(defender):
 			action_container.visible = true
 			spawn_location.visible = false
 			arrow_indicator.visible = false
+			action_counter()
+			current_turn_container.get_child(0).queue_free()
 			set_state(State.SELECTING)
 		State.SKILLONE:
 			pass
 		State.SKILLTWO:
 			pass
 	
-	
 func enemy_ai():
-	pass
+	var random = rng.randi_range(0, party_members.get_child_count()-1)
+	var enemy_target = party_members.get_children()[random]
+	print("The enemy target is: " + str(enemy_target))
+	enemy_target.change_health(-current_character.attack)
+	current_turn_container.get_child(0).queue_free()
+	current_character = turn_queue.next_character()
+	
+func dead_checker(body):
+	if body.current_state == 0:
+		return true
+	false
+	
+func action_counter():
+	turn_queue.action_counter += 1
