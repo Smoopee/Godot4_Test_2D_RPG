@@ -7,5 +7,5 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="TurnSprite" type="Sprite2D" parent="."]
-position = Vector2(7, 4)
+position = Vector2(20, 15)
 texture = ExtResource("1_1xskv")

@@ -6,5 +6,6 @@ extends Sprite2D
 func arrow_blink():
 	animation_player.play("arrow_blink")
 
-func arrow_blink_stop():
+func arrow_stop():
 	animation_player.stop()
+	print("Why wont you stop")

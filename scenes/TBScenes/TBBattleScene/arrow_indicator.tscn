@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b2psi27f14s5u"]
+[gd_scene load_steps=8 format=3 uid="uid://b2psi27f14s5u"]
 
 [ext_resource type="Texture2D" uid="uid://biepttir0d6eq" path="res://art/UI/TBBattleArena/arrowIndicator.png" id="1_d5jqa"]
 [ext_resource type="Script" path="res://scripts/TurnBased/arrow_indicator.gd" id="2_6k3nk"]
@@ -38,10 +38,14 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
+[sub_resource type="Animation" id="Animation_j16p1"]
+resource_name = "stopped"
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hdc3c"]
 _data = {
 "RESET": SubResource("Animation_mbved"),
-"arrow_blink": SubResource("Animation_uoge6")
+"arrow_blink": SubResource("Animation_uoge6"),
+"stopped": SubResource("Animation_j16p1")
 }
 
 [node name="ArrowIndicator" type="Sprite2D"]

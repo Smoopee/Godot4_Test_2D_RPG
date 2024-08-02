@@ -140,4 +140,4 @@ func change_stamina_player3(value):
 	if player3_stamina <= 0: player3_stamina = 0
 	if player3_stamina > max_player3_stamina: player3_stamina = max_player3_stamina
 	
-	
+

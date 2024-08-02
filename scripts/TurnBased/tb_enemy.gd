@@ -2,9 +2,11 @@ extends Node2D
 
 @onready var tb_enemy_health_bar = $TBEnemyHealthBar
 
-var speed: int = 2
-var attack: int = 100
-var health: int = 100
+var speed: int = 29
+var attack: int = 20
+var health: int = 1000
+var is_sprinting: bool = false
+var is_dodging: bool = false
 
 #DECLARES AND SETS STATES-------------------------------------------------------
 enum State{

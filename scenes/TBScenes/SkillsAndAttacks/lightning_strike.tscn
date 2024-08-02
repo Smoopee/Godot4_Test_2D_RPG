@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://b1dqbehjalm7y"]
+
+[ext_resource type="Script" path="res://scripts/TurnBased/SkillsAndAttacks/lightning_strike.gd" id="1_df6qg"]
+[ext_resource type="Texture2D" uid="uid://cdkmusvkj07s2" path="res://art/TBSkillsAndAttacks/LightningStrike/lightning_line5a1.png" id="2_btmgy"]
+[ext_resource type="Texture2D" uid="uid://clg16coqvhla0" path="res://art/TBSkillsAndAttacks/LightningStrike/lightning_line5a4.png" id="3_ykkfa"]
+[ext_resource type="Texture2D" uid="uid://dyhnlkbplp223" path="res://art/TBSkillsAndAttacks/LightningStrike/lightning_line5a7.png" id="4_f1p65"]
+[ext_resource type="Texture2D" uid="uid://bs836f6mx27cb" path="res://art/TBSkillsAndAttacks/LightningStrike/lightning_line5a10.png" id="5_v5o22"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nblo5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_btmgy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ykkfa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_f1p65")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_v5o22")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ghk4v"]
+
+[node name="LightningStrike" type="CharacterBody2D"]
+z_index = 1
+position = Vector2(0, -6)
+script = ExtResource("1_df6qg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
+position = Vector2(39, -37)
+scale = Vector2(1.125, 1.04464)
+sprite_frames = SubResource("SpriteFrames_nblo5")
+animation = &"new_animation"
+frame_progress = 0.199618
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ghk4v")

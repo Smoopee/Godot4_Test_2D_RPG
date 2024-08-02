@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c45ug2k55xtqc" path="res://art/UI/tb_background/forest_of_pixels_by_bunnsp_ddxkac6-414w-2x.jpg" id="2_bh4vk"]
 [ext_resource type="Script" path="res://scripts/TurnBased/UI/PlayerPanel.gd" id="2_mnwqx"]
 [ext_resource type="PackedScene" uid="uid://by2qyvemev4se" path="res://scenes/TBScenes/Enemy/tb_enemy.tscn" id="4_soswa"]
+[ext_resource type="PackedScene" uid="uid://b2psi27f14s5u" path="res://scenes/TBScenes/TBBattleScene/arrow_indicator.tscn" id="5_ha75c"]
 [ext_resource type="Texture2D" uid="uid://chewicsrv2m66" path="res://art/UI/PlayerElements/LifeBarMiniUnder.png" id="6_wg7b6"]
 [ext_resource type="Texture2D" uid="uid://qsdtsxe6cs0a" path="res://art/UI/PlayerElements/LifeBarMiniProgress.png" id="7_3kroo"]
 [ext_resource type="Script" path="res://scripts/TurnBased/UI/TurnPanel.gd" id="7_6tp2l"]
@@ -12,7 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://kfiqdsbxtkh2" path="res://art/UI/PlayerElements/player_stamina_bar.png" id="11_2dv0h"]
 [ext_resource type="PackedScene" uid="uid://bngjrj485gceu" path="res://scenes/TBScenes/Player/player1_for_turn_base.tscn" id="12_pink3"]
 [ext_resource type="PackedScene" uid="uid://ds5lklr0wjo2o" path="res://scenes/TBScenes/Player/player2_for_turn_base.tscn" id="13_52r2e"]
-[ext_resource type="Script" path="res://scripts/TurnBased/UI/ArrowLogic.gd" id="13_ee0yq"]
 [ext_resource type="PackedScene" uid="uid://dmkbogp1yuhqh" path="res://scenes/TBScenes/Player/player3_for_turn_base.tscn" id="14_ukkdm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j8i0i"]
@@ -375,25 +375,25 @@ script = ExtResource("1_kroxe")
 
 [node name="Enemies" type="Node" parent="."]
 
-[node name="TBEnemy1" parent="Enemies" groups=["enemy"] instance=ExtResource("4_soswa")]
+[node name="TBEnemy1" parent="Enemies" instance=ExtResource("4_soswa")]
 z_index = 1
 position = Vector2(767, 454)
 scale = Vector2(2.08888, 2.03713)
 
-[node name="TBEnemy2" parent="Enemies" groups=["enemy"] instance=ExtResource("4_soswa")]
+[node name="TBEnemy2" parent="Enemies" instance=ExtResource("4_soswa")]
 position = Vector2(775, 533)
 scale = Vector2(2.08888, 2.08888)
 
-[node name="TBEnemy3" parent="Enemies" groups=["enemy"] instance=ExtResource("4_soswa")]
-position = Vector2(877, 573)
+[node name="TBEnemy3" parent="Enemies" instance=ExtResource("4_soswa")]
+position = Vector2(887, 420)
 scale = Vector2(2.08888, 2.08888)
 
-[node name="TBEnemy4" parent="Enemies" groups=["enemy"] instance=ExtResource("4_soswa")]
+[node name="TBEnemy4" parent="Enemies" instance=ExtResource("4_soswa")]
 position = Vector2(899, 500)
 scale = Vector2(2.08888, 2.08888)
 
-[node name="TBEnemy5" parent="Enemies" groups=["enemy"] instance=ExtResource("4_soswa")]
-position = Vector2(884, 421)
+[node name="TBEnemy5" parent="Enemies" instance=ExtResource("4_soswa")]
+position = Vector2(877, 571)
 scale = Vector2(2.08888, 2.08888)
 
 [node name="PartyMembers" type="Node2D" parent="."]
@@ -410,14 +410,10 @@ position = Vector2(20.6667, 61.3333)
 [node name="Player3ForTurnBase" parent="PartyMembers" instance=ExtResource("14_ukkdm")]
 position = Vector2(52, 86)
 
-[node name="ArrowLogic" type="Control" parent="."]
+[node name="ArrowIndicator" parent="." instance=ExtResource("5_ha75c")]
 z_index = 1
-layout_mode = 3
-anchors_preset = 0
-offset_left = 6.10352e-05
-offset_right = 40.0001
-offset_bottom = 40.0
-script = ExtResource("13_ee0yq")
+position = Vector2(830, 539)
+scale = Vector2(0.208272, 0.142798)
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
@@ -433,6 +429,7 @@ anchor_mode = 0
 zoom = Vector2(0.9, 0.9)
 
 [node name="SpawnLocation" type="Panel" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 709.0
 offset_top = 352.0
@@ -462,10 +459,10 @@ flat = true
 
 [node name="SelectionEnemy3" type="Button" parent="SpawnLocation"]
 layout_mode = 0
-offset_left = 23.0803
-offset_top = 27.3073
-offset_right = 31.0803
-offset_bottom = 35.3073
+offset_left = 25.0308
+offset_top = 6.89442
+offset_right = 33.0308
+offset_bottom = 14.8944
 theme_override_styles/focus = SubResource("StyleBoxEmpty_fogrl")
 flat = true
 
@@ -480,10 +477,10 @@ flat = true
 
 [node name="SelectionEnemy5" type="Button" parent="SpawnLocation"]
 layout_mode = 0
-offset_left = 24.3806
-offset_top = 7.29998
-offset_right = 32.3806
-offset_bottom = 15.3
+offset_left = 23.4054
+offset_top = 27.1721
+offset_right = 31.4054
+offset_bottom = 35.1721
 focus_mode = 1
 theme_override_styles/focus = SubResource("StyleBoxEmpty_k13rw")
 flat = true
@@ -493,8 +490,6 @@ flat = true
 [connection signal="pressed" from="CanvasLayer/ActionPanel/AttackContainer/Default" to="CanvasLayer/ActionPanel" method="_on_default_pressed"]
 [connection signal="pressed" from="CanvasLayer/ActionPanel/AttackContainer/Skill 1" to="CanvasLayer/ActionPanel" method="_on_skill_1_pressed"]
 [connection signal="pressed" from="CanvasLayer/ActionPanel/AttackContainer/Back" to="CanvasLayer/ActionPanel" method="_on_back_pressed"]
-[connection signal="pressed" from="CanvasLayer/ActionPanel/EvasionContainer/Sprint" to="CanvasLayer/ActionPanel" method="_on_sprint_pressed"]
-[connection signal="pressed" from="CanvasLayer/ActionPanel/EvasionContainer/Dodge" to="CanvasLayer/ActionPanel" method="_on_dodge_pressed"]
 [connection signal="pressed" from="CanvasLayer/ActionPanel/EvasionContainer/Back" to="CanvasLayer/ActionPanel" method="_on_back_pressed"]
 [connection signal="ready" from="TurnQueue" to="CanvasLayer/TurnPanel" method="_on_turn_queue_ready"]
 [connection signal="pressed" from="SpawnLocation/SelectionEnemy1" to="CanvasLayer/ActionPanel" method="_on_selection_enemy_1_pressed"]
