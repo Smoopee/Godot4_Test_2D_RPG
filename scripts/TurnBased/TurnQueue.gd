@@ -16,12 +16,10 @@ var turn_size: int = 0
 
 
 func _ready():
-	#GETS AND SORTS ARRAY------------------------------------------------------
 	turn_order_array_creator()
 	next_turn_creator()
 	initialize()
 	turn_size = enemies.get_children().size() + party_members.get_children().size()
-
 
 func custom_sorter(a, b):
 	if a.speed > b.speed:
@@ -87,3 +85,5 @@ func dodge_checker():
 	for i in characters_array.size():
 		if characters_array[i].is_dodging:
 			characters_array[i].stop_dodge()
+
+

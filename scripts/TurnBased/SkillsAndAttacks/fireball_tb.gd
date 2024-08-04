@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 var power: int = 10
+var multi_attack_power = 0
 var mana_cost: int = 50
 var hit_rate: float = .95
 var target_selection: String = "Single"
@@ -16,10 +17,6 @@ func _ready():
 func _process(delta):
 	start_cast_path()
 
-func attack_initializer(attack_value):
-	visible = true
-	print("Fire ball hit for " + str(attack_value * power))
-	return attack_value * power
 
 func start_cast_path():
 	var current_position = global_position

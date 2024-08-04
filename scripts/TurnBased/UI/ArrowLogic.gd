@@ -4,6 +4,8 @@ var arrow_inicator_scene = load("res://scenes/TBScenes/TBBattleScene/arrow_indic
 
 @onready var party_members = $"../PartyMembers"
 @onready var enemies = $"../Enemies"
+@onready var spawn_location = $"../SpawnLocation"
+
 
 #DECLARES AND SETS STATES-------------------------------------------------------
 enum State{
@@ -26,8 +28,6 @@ func set_state(new_state):
 var arrow_indicator
 var first_alive_enemy
 
-func _ready():
-	pass
 
 func arrow_initializer(targeting):
 	for i in enemies.get_children().size():
@@ -41,7 +41,7 @@ func arrow_initializer(targeting):
 			arrow_indicator = arrow_inicator_scene.instantiate()
 			add_child(arrow_indicator)
 			arrow_indicator.scale = Vector2(.2, .2)
-			arrow_indicator.position = enemies.get_child(first_alive_enemy).global_position + Vector2(55,5)
+			arrow_indicator.global_position = spawn_location.get_child(first_alive_enemy).global_position + Vector2(55,5)
 		"Multi":
 			set_state(State.MULTI)
 			arrow_multi()

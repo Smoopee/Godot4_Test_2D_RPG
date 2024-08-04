@@ -8,6 +8,7 @@ var elemental_typing: String = "Lightning"
 var elemental_intensity: int = 1
 var attack_type: String = "Bolt"
 var animation_lok = true
+var multi_attack_power = 5
 
 var target = self
 
@@ -16,11 +17,6 @@ func _ready():
 
 func _process(delta):
 	start_cast_path()
-
-func attack_initializer(attack_value):
-	visible = true
-	print("Lightning Strike hit for " + str(attack_value * power))
-	return attack_value * power
 
 func start_cast_path():
 	

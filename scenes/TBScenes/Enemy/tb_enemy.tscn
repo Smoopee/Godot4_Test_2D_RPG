@@ -117,7 +117,7 @@ animations = [{
 "speed": 9.0
 }]
 
-[node name="TBEnemy" type="Node2D"]
+[node name="TBEnemy" type="Node2D" groups=["enemy"]]
 script = ExtResource("1_r8u4j")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

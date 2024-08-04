@@ -25,18 +25,32 @@ func _ready():
 	player_stamina_bar1.value = Global.player1_stamina
 	player_stamina_bar2.value = Global.player2_stamina
 	player_stamina_bar3.value = Global.player3_stamina
-	
-	print("My stamina is: " + str(Global.player1_stamina))
 
-func _process(delta):
-	player_health_bar1.value = Global.player1_health
-	player_health_bar2.value = Global.player2_health
-	player_health_bar3.value = Global.player3_health
-	
-	player_mana_bar1.value = Global.player1_mana
-	player_mana_bar2.value = Global.player2_mana
-	player_mana_bar3.value = Global.player3_mana
-	
-	player_stamina_bar1.value = Global.player1_stamina
-	player_stamina_bar2.value = Global.player2_stamina
-	player_stamina_bar3.value = Global.player3_stamina
+
+
+func change_health(player):
+	match player:
+		1: 
+			player_health_bar1.value = Global.player1_health
+		2:
+			player_health_bar2.value = Global.player2_health
+		3:
+			player_health_bar3.value = Global.player3_health
+
+func change_mana(player):
+	match player:
+		1:
+			player_mana_bar1.value = Global.player1_mana
+		2:
+			player_mana_bar2.value = Global.player2_mana
+		3:
+			player_mana_bar3.value = Global.player3_mana
+
+func change_stamina(player):
+	match player:
+		1:
+			player_stamina_bar1.value = Global.player1_stamina
+		2:
+			player_stamina_bar2.value = Global.player2_stamina
+		3:
+			player_stamina_bar3.value = Global.player3_stamina

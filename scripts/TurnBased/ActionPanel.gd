@@ -6,20 +6,6 @@ extends Panel
 @onready var evasion_container = $EvasionContainer
 @onready var arrow_logic = $"../../ArrowLogic"
 
-
-#ENEMIES------------------------------------------------------------------------
-@onready var selection_enemy_1 = $"../../SpawnLocation/SelectionEnemy1"
-@onready var selection_enemy_2 = $"../../SpawnLocation/SelectionEnemy2"
-@onready var selection_enemy_3 = $"../../SpawnLocation/SelectionEnemy3"
-@onready var selection_enemy_4 = $"../../SpawnLocation/SelectionEnemy4"
-@onready var selection_enemy_5 = $"../../SpawnLocation/SelectionEnemy5"
-
-@onready var tb_enemy_1 = $"../../Enemies/TBEnemy1"
-@onready var tb_enemy_2 = $"../../Enemies/TBEnemy2"
-@onready var tb_enemy_3 = $"../../Enemies/TBEnemy3"
-@onready var tb_enemy_4 = $"../../Enemies/TBEnemy4"
-@onready var tb_enemy_5 = $"../../Enemies/TBEnemy5"
-
 @onready var enemies = $"../../Enemies"
 
 #PLAYERS PARTY------------------------------------------------------------------
@@ -29,7 +15,6 @@ extends Panel
 @onready var active_character_highlighter1 = $"../PlayerPanel/PartyMember1/ActiveCharacterHighlighter"
 @onready var active_character_highlighter2 = $"../PlayerPanel/PartyMember2/ActiveCharacterHighlighter"
 @onready var active_character_highlighter3 = $"../PlayerPanel/PartyMember3/ActiveCharacterHighlighter"
-
 
 
 @onready var turn_queue = $"../../TurnQueue"
@@ -66,25 +51,18 @@ var rng = RandomNumberGenerator.new()
 
 
 func _ready():
-	set_state(State.SELECTING)
+	turn_keeper()
 
-func _process(delta):
+func turn_keeper():
 	turn_queue.turn_cycle()
-	
-	if dead_checker(turn_queue.active_character):
-		current_turn_container.get_child(0).queue_free()
-		turn_queue.characters_array.pop_front()
-		current_character = turn_queue.next_character()
-		action_counter()
-		return
-		
 	current_character = turn_queue.active_character
-	
 	if current_character.is_in_group("enemy"):
 		action_counter()
 		enemy_ai()
 		
-	
+	active_player_highlighter()
+
+func active_player_highlighter():
 	match current_character:
 		player_1:
 			active_character_highlighter1.visible = true
@@ -102,16 +80,6 @@ func _process(delta):
 			active_character_highlighter1.visible = false
 			active_character_highlighter2.visible = false
 			active_character_highlighter3.visible = false
-			
-	match current_state:
-		State.SELECTING:
-			pass
-		State.DEFAULT:
-			pass
-		State.SKILLONE:
-			pass
-		State.SKILLTWO:
-			pass
 
 func _on_attack_pressed():
 	action_container.visible = false
@@ -138,6 +106,7 @@ func _on_dodge_pressed():
 	action_container.visible = true
 
 func _on_back_pressed():
+	target_confirmation_check.clear()
 	arrow_logic.arrow_clear()
 	evasion_container.visible = false
 	attack_container.visible = false
@@ -145,47 +114,38 @@ func _on_back_pressed():
 
 
 func _on_default_pressed():
+	target_confirmation_check.clear()
 	arrow_logic.arrow_clear()
 	arrow_logic.arrow_initializer(current_character.default_attack_targeting)
 	set_state(State.DEFAULT)
 
 func _on_skill_1_pressed():
+	target_confirmation_check.clear()
 	arrow_logic.arrow_clear()
 	arrow_logic.arrow_initializer(current_character.skill_one_targeting)
 	set_state(State.SKILLONE)
+
+func enemy_button_handler(body):
+	if target_confirmation_checker(body):
+		the_attack_step(body)
 	
-	
-func _on_selection_enemy_1_pressed():
-	if dead_checker(tb_enemy_1): return
-	arrow_logic.arrow_repositioner(tb_enemy_1)
-	if target_confirmation_checker(1): 
-		the_attack_step(tb_enemy_1)
+func _on_button_pressed():
+	enemy_button_handler(enemies.get_child(0))
 
-func _on_selection_enemy_2_pressed():
-	if dead_checker(tb_enemy_2): return
-	arrow_logic.arrow_repositioner(tb_enemy_2)
-	if target_confirmation_checker(2): 
-		the_attack_step(tb_enemy_2)
-
-func _on_selection_enemy_3_pressed():
-	if dead_checker(tb_enemy_3): return
-	arrow_logic.arrow_repositioner(tb_enemy_3)
-	if target_confirmation_checker(3): 
-		the_attack_step(tb_enemy_3)
-
-func _on_selection_enemy_4_pressed():
-	if dead_checker(tb_enemy_4): return
-	arrow_logic.arrow_repositioner(tb_enemy_4)
-	if target_confirmation_checker(4): 
-		the_attack_step(tb_enemy_4)
-
-func _on_selection_enemy_5_pressed():
-	if dead_checker(tb_enemy_5): return
-	arrow_logic.arrow_repositioner(tb_enemy_5)
-	if target_confirmation_checker(5): 
-		the_attack_step(tb_enemy_5)
+func _on_button_2_pressed():
+	enemy_button_handler(enemies.get_child(1))
 
 
+func _on_button_3_pressed():
+	enemy_button_handler(enemies.get_child(2))
+
+
+func _on_button_4_pressed():
+	enemy_button_handler(enemies.get_child(3))
+
+
+func _on_button_5_pressed():
+	enemy_button_handler(enemies.get_child(4))
 
 func target_confirmation_checker(test):
 	
@@ -193,31 +153,24 @@ func target_confirmation_checker(test):
 	if target_confirmation_check.size() > 2:
 		target_confirmation_check.resize(0)
 		target_confirmation_check.append(test)
-		arrow_logic.arrow_start()
-		return
 	if target_confirmation_check.size() == 2:
 		if target_confirmation_check[0] == target_confirmation_check [1]:
 			arrow_logic.arrow_clear()
-			
 			return true
 		else: 
-			target_confirmation_check.clear()
+			target_confirmation_check.pop_front()
+			arrow_logic.arrow_repositioner(test)
+			arrow_logic.arrow_start()
 			return false
+	arrow_logic.arrow_repositioner(test)
 	arrow_logic.arrow_start()
 
 func the_attack_step(defender):
-	
-	
-	
 	match current_state:
 		State.SELECTING:
 			pass
 		State.DEFAULT:
 			defender.change_health(-current_character.attack)
-			
-			if dead_checker(defender):
-				queue_and_array_remover(defender)
-			
 			evasion_container.visible = false
 			attack_container.visible = false
 			action_container.visible = true
@@ -227,13 +180,7 @@ func the_attack_step(defender):
 			set_state(State.SELECTING)
 			turn_queue.next_character()
 		State.SKILLONE:
-			current_character.instantiate_skill_one()
-			current_character.skill_one.target = defender
-			print("Drizzle actually hit for: " + str(defender.change_health(-current_character.cast_skill_one())))
-			defender.change_health(-current_character.cast_skill_one())
-			if dead_checker(defender):
-				queue_and_array_remover(defender)
-			
+			skill_one_attack_step(defender)
 			evasion_container.visible = false
 			attack_container.visible = false
 			action_container.visible = true
@@ -242,24 +189,29 @@ func the_attack_step(defender):
 			turn_queue.characters_array.pop_front()
 			set_state(State.SELECTING)
 			turn_queue.next_character()
+			
 		State.SKILLTWO:
 			pass
-	
+	turn_keeper()
+
 func enemy_ai():
 	var random = rng.randi_range(0, party_members.get_child_count()-1)
 	var enemy_target = party_members.get_children()[random]
-	print("The enemy target is: " + str(enemy_target))
 	if enemy_target.is_dodging == false:
 		enemy_target.change_health(-current_character.attack)
-	current_turn_container.get_child(0).queue_free()
+	
+	#current_turn_container.remove_child(current_turn_container.get_child(0))
+	current_turn_container.get_child(0).free()
 
 	turn_queue.characters_array.pop_front()
-
 	turn_queue.next_character()
-	
+	print(current_turn_container.get_children())
+	turn_keeper()
+
 func dead_checker(body):
 	if body.current_state == 0:
 		return true
+
 
 
 func action_counter():
@@ -273,13 +225,65 @@ func next_turn_index(body):
 
 func queue_and_array_remover(body):
 	if current_index(body) == -1:
-		next_turn_container.get_child(next_turn_index(body)).queue_free()
-		return
+		if next_turn_index(body) != -1:
+			next_turn_container.get_child(next_turn_index(body)).queue_free()
+			return
 		
 	turn_queue.characters_array.remove_at(turn_queue.characters_array.find(body))
+	#current_turn_container.remove_child(current_turn_container.get_child(current_index(body)))
 	current_turn_container.get_child(current_index(body)).queue_free()
+	
+	
 	next_turn_container.get_child(next_turn_index(body)-1).queue_free()
 	action_counter()
+
+func skill_one_attack_step(defender):
+	match current_character.skill_one_targeting:
+		"Single":
+			current_character.instantiate_skill_one()
+			
+			if mana_checker(): the_attack_step(defender)
+			
+			current_character.skill_one.target = defender
+			defender.change_health(-current_character.skill_one_single_damage)
+		"Multi":
+			var current_enemy_index = defender.get_index()
+			var right_enemy_index = current_enemy_index + 1
+			var left_enemy_index = current_enemy_index - 1
+			
+			if right_enemy_index + 1 > enemies.get_children().size():
+				right_enemy_index = 0
+			
+			if current_enemy_index - 1 < 0:
+				left_enemy_index = enemies.get_children().size()-1
+				
+			current_character.instantiate_skill_one()
+			
+			if mana_checker(): return
+			
+			enemies.get_child(current_enemy_index).change_health(-current_character.skill_one_single_damage)
+			enemies.get_child(right_enemy_index).change_health(-current_character.skill_one_multi_damage)
+			enemies.get_child(left_enemy_index).change_health(-current_character.skill_one_multi_damage)
+			
+		"AOE":
+			
+			current_character.instantiate_skill_one()
+			
+			if mana_checker(): return
+			
+			for i in enemies.get_children().size():
+			
+			#SKIPS DEAD ENEMIES
+				if enemies.get_child(i).current_state == 0:
+					continue
+				
+				enemies.get_child(i).change_health(-current_character.skill_one_single_damage)
+
+func mana_checker():
+	if current_character.skill_one_mana_cost > current_character.mana:
+		return false
+	current_character.change_mana(-current_character.skill_one_mana_cost)
+
 
 
 

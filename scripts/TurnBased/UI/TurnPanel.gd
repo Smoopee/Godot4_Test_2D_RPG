@@ -17,7 +17,7 @@ var next_turn_list_array = []
 var turn_sprite
 var zindex_setter = 9
 
-func _on_turn_queue_ready():
+func _ready():
 	#CURRENT TURN CREATOR ON STARTUP--------------------------------------------
 	turn_list_array = turn_queue.characters_array
 	for i in turn_list_array.size():

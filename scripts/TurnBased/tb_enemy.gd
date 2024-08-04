@@ -1,10 +1,12 @@
 extends Node2D
 
+signal dead(body)
+
 @onready var tb_enemy_health_bar = $TBEnemyHealthBar
 
-var speed: int = 29
+var speed: int = 30
 var attack: int = 20
-var health: int = 1000
+var health: int = 100
 var is_sprinting: bool = false
 var is_dodging: bool = false
 
@@ -34,3 +36,4 @@ func change_health(value):
 	if health <= 0:
 		health = 0
 		set_state(State.DEAD)
+		dead.emit(self)

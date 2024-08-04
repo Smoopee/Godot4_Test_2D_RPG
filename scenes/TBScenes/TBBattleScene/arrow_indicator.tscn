@@ -49,6 +49,7 @@ _data = {
 }
 
 [node name="ArrowIndicator" type="Sprite2D"]
+z_index = 1
 material = SubResource("CanvasItemMaterial_c2f7k")
 scale = Vector2(1.01021, 0.992844)
 texture = ExtResource("1_d5jqa")

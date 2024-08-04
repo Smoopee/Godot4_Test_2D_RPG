@@ -1,7 +1,8 @@
 extends CharacterBody2D
 
-var power: int = 10
-var mana_cost: int = 30
+var power: int = 2
+var multi_attack_power = 0
+var mana_cost: int = 300
 var hit_rate: float = .95
 var target_selection: String = "AOE"
 var elemental_typing: String = "Water"
@@ -17,9 +18,6 @@ func _ready():
 func _process(delta):
 	start_cast_path()
 
-func attack_initializer(attack_value):
-	print("Drizzle hit for " + str(attack_value * power))
-	return attack_value * power
 
 func start_cast_path():
 	

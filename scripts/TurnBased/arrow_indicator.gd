@@ -8,4 +8,3 @@ func arrow_blink():
 
 func arrow_stop():
 	animation_player.stop()
-	print("Why wont you stop")
