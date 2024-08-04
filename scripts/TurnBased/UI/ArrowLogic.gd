@@ -27,6 +27,7 @@ func set_state(new_state):
 
 var arrow_indicator
 var first_alive_enemy
+var first_alive_friendly
 
 
 func arrow_initializer(targeting):
@@ -34,6 +35,12 @@ func arrow_initializer(targeting):
 		if enemies.get_child(i).current_state == 1:
 			first_alive_enemy = i
 			break
+			
+	for i in party_members.get_children().size():
+		if party_members.get_child(i).current_state == 1:
+			first_alive_friendly = i
+			break
+	
 	
 	match targeting:
 		"Single":
@@ -47,15 +54,16 @@ func arrow_initializer(targeting):
 			arrow_multi()
 		"AOE":
 			set_state(State.AOE)
-			arrow_duplicator()
+			arrow_duplicator_enemy()
 		"Friendly_Single":
 			set_state(State.FRIENDLY_SINGLE)
 		"Friendly_Multi":
 			set_state(State.FRIENDLY_MULTI)
 		"Friendly_AOE":
 			set_state(State.FRIENDLY_AOE)
+			arrow_duplicator_friendly()
 			
-func arrow_duplicator():
+func arrow_duplicator_enemy():
 	for i in enemies.get_children().size():
 		
 		#SKIPS DEAD ENEMIES
@@ -67,7 +75,20 @@ func arrow_duplicator():
 		add_child(arrow_indicator)
 		arrow_indicator.scale = Vector2(.2, .2)
 		arrow_indicator.position = enemies.get_child(i).global_position + Vector2(55,5)
+
+func arrow_duplicator_friendly():
+	for i in party_members.get_children().size():
 		
+		#SKIPS DEAD PLAYERS
+		if party_members.get_child(i).current_state == 0:
+			continue
+		
+		#RESUMES MAKING REST OF ARROWS
+		arrow_indicator = arrow_inicator_scene.instantiate()
+		add_child(arrow_indicator)
+		arrow_indicator.scale = Vector2(.2, .2)
+		arrow_indicator.position = party_members.get_child(i).global_position + Vector2(55,25)
+
 func arrow_multi(current_enemy_index = first_alive_enemy):
 	var right_enemy_index = current_enemy_index + 1
 	var left_enemy_index = current_enemy_index - 1
@@ -129,7 +150,8 @@ func arrow_start():
 		State.MULTI:
 			arrow_indicator.arrow_blink()
 		State.FRIENDLY_AOE:
-			arrow_indicator.arrow_blink()
+			for i in get_children().size():
+				get_child(i).arrow_blink()
 
 func arrow_stop():
 	match current_state:
@@ -146,7 +168,8 @@ func arrow_stop():
 		State.MULTI:
 			arrow_indicator.arrow_stop()
 		State.FRIENDLY_AOE:
-			arrow_indicator.arrow_stop()
+			for i in get_children().size():
+				get_child(i).arrow_stop()
 
 
 func arrow_clear():

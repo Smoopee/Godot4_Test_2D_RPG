@@ -5,7 +5,7 @@ signal dead(body)
 @onready var tb_enemy_health_bar = $TBEnemyHealthBar
 
 var speed: int = 30
-var attack: int = 20
+var attack: int = 10
 var health: int = 100
 var is_sprinting: bool = false
 var is_dodging: bool = false

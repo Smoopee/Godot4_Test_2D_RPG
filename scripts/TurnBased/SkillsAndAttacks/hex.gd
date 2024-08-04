@@ -1,15 +1,15 @@
 extends CharacterBody2D
 
-var power: int = 10
-var mana_cost: int = 30
+var power: int = 0
+var multi_attack_power = 0
+var mana_cost: int = 300
 var hit_rate: float = .95
-var target_selection: String = "Multi"
-var elemental_typing: String = "Lightning"
+var target_selection: String = "AOE"
+var elemental_typing: String = "Water"
 var elemental_intensity: int = 1
-var attack_type: String = "Bolt"
+var attack_type: String = "Pool"
 var animation_lok = true
-var multi_attack_power = 5
-var spell_name = "Lightning Strike"
+var spell_name = "Hex"
 
 var target = self
 
@@ -19,6 +19,7 @@ func _ready():
 func _process(delta):
 	start_cast_path()
 
+
 func start_cast_path():
 	
 	if animation_lok:
@@ -27,7 +28,6 @@ func start_cast_path():
 		move_and_slide()
 		animation_lok = false
 		await get_tree().create_timer(1).timeout
-		queue_free()
 
 func cast_skill(caster = null, target = null):
 	target.attack -= 10

@@ -1,6 +1,7 @@
 extends AnimatedSprite2D
 
-var fireball_scene = load("res://scenes/TBScenes/SkillsAndAttacks/fireball_tb.tscn")
+var skill_one_scene = load("res://scenes/TBScenes/SkillsAndAttacks/fireball_tb.tscn")
+var skill_two_scene = load("res://scenes/TBScenes/SkillsAndAttacks/hex.tscn")
 
 @onready var player_panel = $"../../CanvasLayer/PlayerPanel"
 
@@ -25,7 +26,7 @@ var max_stamina: int = 100
 var health: int = max_health
 var mana: int = max_mana
 var stamina: int = max_stamina
-var attack = 100
+var attack = 10
 var speed = 22
 var base_speed = 12
 
@@ -40,6 +41,14 @@ var skill_one_single_damage: int
 var skill_one_mana_cost: int
 var skill_one
 
+#SKILL TWO SETUP----------------------------------------------------------------
+var skill_two_spellname: String
+var skill_two_targeting: String
+var skill_two_multi_damage: int
+var skill_two_single_damage: int
+var skill_two_mana_cost: int
+var skill_two
+
 #DEFAULT ATTACK SETUP-----------------------------------------------------------
 var default_attack_targeting: String = "Single"
 
@@ -49,6 +58,7 @@ func _ready():
 	Global.change_max_player2_mana(max_mana)
 	Global.change_max_player2_stamina(max_stamina)
 	instantiate_skill_one()
+	instantiate_skill_two()
 	
 
 func get_speed():
@@ -69,13 +79,22 @@ func change_mana(value):
 	mana += value
 
 func instantiate_skill_one():
-	skill_one = fireball_scene.instantiate()
+	skill_one = skill_one_scene.instantiate()
 	add_child(skill_one)
 	skill_one_targeting = skill_one.target_selection
-	skill_one_spellname = skill_one.get_spell_name()
+	skill_one_spellname = skill_one.spell_name
 	skill_one_multi_damage = skill_one.multi_attack_power * attack
 	skill_one_single_damage = skill_one.power * attack
 	skill_one_mana_cost = skill_one.mana_cost
+
+func instantiate_skill_two():
+	skill_two = skill_two_scene.instantiate()
+	add_child(skill_two)
+	skill_two_targeting = skill_two.target_selection
+	skill_two_spellname = skill_two.spell_name
+	skill_two_multi_damage = skill_two.multi_attack_power * attack
+	skill_two_single_damage = skill_two.power * attack
+	skill_two_mana_cost = skill_two.mana_cost
 
 func cast_sprint():
 	Global.change_stamina_player2(-50)
@@ -96,3 +115,9 @@ func cast_dodge():
 
 func stop_dodge():
 	is_dodging = false
+
+func cast_skill_one(caster = self, target = null):
+	skill_one.cast_skill(caster, target)
+
+func cast_skill_two(caster = self, target = null):
+	skill_two.cast_skill(caster, target)

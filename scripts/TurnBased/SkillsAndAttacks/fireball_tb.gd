@@ -8,6 +8,7 @@ var target_selection: String = "Single"
 var elemental_typing: String = "Fire"
 var elemental_intensity: int = 1
 var attack_type: String = "Projectile"
+var spell_name = "Fireball"
 
 var target = self
 
@@ -25,5 +26,5 @@ func start_cast_path():
 	await get_tree().create_timer(1).timeout
 	queue_free()
 
-func get_spell_name():
-	return "Fireball"
+func cast_skill(caster = null, target = null):
+	target.attack -= 10

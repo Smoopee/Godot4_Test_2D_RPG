@@ -495,7 +495,7 @@ offset_right = 40.0001
 offset_bottom = 40.0
 script = ExtResource("13_ee0yq")
 
-[node name="EnemyButtonPanel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="."]
 layout_mode = 0
 offset_left = 676.0
 offset_top = 392.0
@@ -503,7 +503,7 @@ offset_right = 716.0
 offset_bottom = 432.0
 scale = Vector2(7.78083, 5.91751)
 
-[node name="Button" type="Button" parent="EnemyButtonPanel"]
+[node name="Button" type="Button" parent="Panel"]
 layout_mode = 0
 offset_left = 4.62675
 offset_top = 5.23869
@@ -511,80 +511,44 @@ offset_right = 12.6268
 offset_bottom = 13.2387
 scale = Vector2(1.04869, 1.12127)
 
-[node name="Button2" type="Button" parent="EnemyButtonPanel"]
+[node name="Button2" type="Button" parent="Panel"]
 layout_mode = 0
 offset_left = 5.65492
 offset_top = 19.6028
 offset_right = 13.6549
 offset_bottom = 27.6028
 
-[node name="Button3" type="Button" parent="EnemyButtonPanel"]
+[node name="Button3" type="Button" parent="Panel"]
 layout_mode = 0
 offset_left = 18.8926
 offset_top = 26.0245
 offset_right = 26.8926
 offset_bottom = 34.0245
 
-[node name="Button4" type="Button" parent="EnemyButtonPanel"]
+[node name="Button4" type="Button" parent="Panel"]
 layout_mode = 0
 offset_left = 22.3626
 offset_top = 13.0122
 offset_right = 30.3626
 offset_bottom = 21.0122
 
-[node name="Button5" type="Button" parent="EnemyButtonPanel"]
+[node name="Button5" type="Button" parent="Panel"]
 layout_mode = 0
 offset_left = 18.1214
 offset_top = 1.52091
 offset_right = 26.1214
 offset_bottom = 9.52091
 
-[node name="FriendlyButtonPanel" type="Panel" parent="."]
-layout_mode = 0
-offset_left = 263.0
-offset_top = 390.0
-offset_right = 303.0
-offset_bottom = 430.0
-scale = Vector2(5.60211, 6.26508)
-
-[node name="Player1Button" type="Button" parent="FriendlyButtonPanel"]
-layout_mode = 0
-offset_left = 3.21308
-offset_top = 16.5999
-offset_right = 11.2131
-offset_bottom = 24.5999
-scale = Vector2(1.20314, 1.30217)
-
-[node name="Player2Button" type="Button" parent="FriendlyButtonPanel"]
-layout_mode = 0
-offset_left = 20.3495
-offset_top = 4.14998
-offset_right = 28.3495
-offset_bottom = 12.15
-scale = Vector2(1.13004, 1.29083)
-
-[node name="Player3Button" type="Button" parent="FriendlyButtonPanel"]
-layout_mode = 0
-offset_left = 19.9925
-offset_top = 28.2518
-offset_right = 27.9925
-offset_bottom = 36.2518
-scale = Vector2(1.37133, 1.37133)
-
 [connection signal="pressed" from="CanvasLayer/ActionPanel/ActionContainer/Attack" to="CanvasLayer/ActionPanel" method="_on_attack_pressed"]
 [connection signal="pressed" from="CanvasLayer/ActionPanel/ActionContainer/Evasion" to="CanvasLayer/ActionPanel" method="_on_evasion_pressed"]
 [connection signal="pressed" from="CanvasLayer/ActionPanel/AttackContainer/Default" to="CanvasLayer/ActionPanel" method="_on_default_pressed"]
 [connection signal="pressed" from="CanvasLayer/ActionPanel/AttackContainer/Skill 1" to="CanvasLayer/ActionPanel" method="_on_skill_1_pressed"]
-[connection signal="pressed" from="CanvasLayer/ActionPanel/AttackContainer/Skill 2" to="CanvasLayer/ActionPanel" method="_on_skill_2_pressed"]
 [connection signal="pressed" from="CanvasLayer/ActionPanel/AttackContainer/Back" to="CanvasLayer/ActionPanel" method="_on_back_pressed"]
 [connection signal="pressed" from="CanvasLayer/ActionPanel/EvasionContainer/Sprint" to="CanvasLayer/ActionPanel" method="_on_sprint_pressed"]
 [connection signal="pressed" from="CanvasLayer/ActionPanel/EvasionContainer/Dodge" to="CanvasLayer/ActionPanel" method="_on_dodge_pressed"]
 [connection signal="pressed" from="CanvasLayer/ActionPanel/EvasionContainer/Back" to="CanvasLayer/ActionPanel" method="_on_back_pressed"]
-[connection signal="pressed" from="EnemyButtonPanel/Button" to="CanvasLayer/ActionPanel" method="_on_button_pressed"]
-[connection signal="pressed" from="EnemyButtonPanel/Button2" to="CanvasLayer/ActionPanel" method="_on_button_2_pressed"]
-[connection signal="pressed" from="EnemyButtonPanel/Button3" to="CanvasLayer/ActionPanel" method="_on_button_3_pressed"]
-[connection signal="pressed" from="EnemyButtonPanel/Button4" to="CanvasLayer/ActionPanel" method="_on_button_4_pressed"]
-[connection signal="pressed" from="EnemyButtonPanel/Button5" to="CanvasLayer/ActionPanel" method="_on_button_5_pressed"]
-[connection signal="pressed" from="FriendlyButtonPanel/Player1Button" to="CanvasLayer/ActionPanel" method="_on_player_1_button_pressed"]
-[connection signal="pressed" from="FriendlyButtonPanel/Player2Button" to="CanvasLayer/ActionPanel" method="_on_player_2_button_pressed"]
-[connection signal="pressed" from="FriendlyButtonPanel/Player3Button" to="CanvasLayer/ActionPanel" method="_on_player_3_button_pressed"]
+[connection signal="pressed" from="Panel/Button" to="CanvasLayer/ActionPanel" method="_on_button_pressed"]
+[connection signal="pressed" from="Panel/Button2" to="CanvasLayer/ActionPanel" method="_on_button_2_pressed"]
+[connection signal="pressed" from="Panel/Button3" to="CanvasLayer/ActionPanel" method="_on_button_3_pressed"]
+[connection signal="pressed" from="Panel/Button4" to="CanvasLayer/ActionPanel" method="_on_button_4_pressed"]
+[connection signal="pressed" from="Panel/Button5" to="CanvasLayer/ActionPanel" method="_on_button_5_pressed"]

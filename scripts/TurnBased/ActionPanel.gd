@@ -26,6 +26,7 @@ extends Panel
 @onready var next_turn_container = $"../TurnPanel/NextTurnContainer"
 
 @onready var skill_1 = $"AttackContainer/Skill 1"
+@onready var skill_2 = $"AttackContainer/Skill 2"
 
 
 #DECLARING STATES---------------------------------------------------------------
@@ -85,6 +86,7 @@ func _on_attack_pressed():
 	action_container.visible = false
 	attack_container.visible = true
 	skill_1.text = current_character.skill_one_spellname
+	skill_2.text = current_character.skill_two_spellname
 
 
 func _on_evasion_pressed():
@@ -125,27 +127,52 @@ func _on_skill_1_pressed():
 	arrow_logic.arrow_initializer(current_character.skill_one_targeting)
 	set_state(State.SKILLONE)
 
-func enemy_button_handler(body):
+func _on_skill_2_pressed():
+	target_confirmation_check.clear()
+	arrow_logic.arrow_clear()
+	arrow_logic.arrow_initializer(current_character.skill_two_targeting)
+	set_state(State.SKILLTWO)
+
+#ENEMY BUTTONS------------------------------------------------------------------
+func button_handler(body):
 	if target_confirmation_checker(body):
 		the_attack_step(body)
-	
+
+
 func _on_button_pressed():
-	enemy_button_handler(enemies.get_child(0))
+	button_handler(enemies.get_child(0))
 
 func _on_button_2_pressed():
-	enemy_button_handler(enemies.get_child(1))
+	button_handler(enemies.get_child(1))
 
 
 func _on_button_3_pressed():
-	enemy_button_handler(enemies.get_child(2))
+	button_handler(enemies.get_child(2))
 
 
 func _on_button_4_pressed():
-	enemy_button_handler(enemies.get_child(3))
+	button_handler(enemies.get_child(3))
 
 
 func _on_button_5_pressed():
-	enemy_button_handler(enemies.get_child(4))
+	button_handler(enemies.get_child(4))
+
+
+#PARTY MEMBER BUTTONS-----------------------------------------------------------
+
+func _on_player_1_button_pressed():
+	button_handler(party_members.get_child(0))
+
+
+func _on_player_2_button_pressed():
+	button_handler(party_members.get_child(1))
+
+
+func _on_player_3_button_pressed():
+	button_handler(party_members.get_child(2))
+
+
+
 
 func target_confirmation_checker(test):
 	
@@ -213,7 +240,6 @@ func dead_checker(body):
 		return true
 
 
-
 func action_counter():
 	turn_queue.action_counter += 1
 
@@ -278,13 +304,63 @@ func skill_one_attack_step(defender):
 					continue
 				
 				enemies.get_child(i).change_health(-current_character.skill_one_single_damage)
-
+		"Friendly_Single":
+			pass
+		"Friendly_Multi":
+			pass
+		"Friendly":
+			pass
+	
+func skill_two_attack_step(defender):
+	match current_character.skill_two_targeting:
+		"Single":
+			current_character.instantiate_skill_two()
+			
+			if mana_checker(): the_attack_step(defender)
+			
+			current_character.skill_two.target = defender
+			defender.change_health(-current_character.skill_two_single_damage)
+		"Multi":
+			var current_enemy_index = defender.get_index()
+			var right_enemy_index = current_enemy_index + 1
+			var left_enemy_index = current_enemy_index - 1
+			
+			if right_enemy_index + 1 > enemies.get_children().size():
+				right_enemy_index = 0
+			
+			if current_enemy_index - 1 < 0:
+				left_enemy_index = enemies.get_children().size()-1
+				
+			current_character.instantiate_skill_two()
+			
+			if mana_checker(): return
+			
+			enemies.get_child(current_enemy_index).change_health(-current_character.skill_two_single_damage)
+			enemies.get_child(right_enemy_index).change_health(-current_character.skill_two_multi_damage)
+			enemies.get_child(left_enemy_index).change_health(-current_character.skill_two_multi_damage)
+			
+		"AOE":
+			
+			current_character.instantiate_skill_two()
+			
+			if mana_checker(): return
+			
+			for i in enemies.get_children().size():
+			
+			#SKIPS DEAD ENEMIES
+				if enemies.get_child(i).current_state == 0:
+					continue
+				
+				current_character.cast_skill_two(self, enemies.get_child(i))
+		"Friendly_Single":
+			pass
+		"Friendly_Multi":
+			pass
+		"Friendly":
+			pass
+	
 func mana_checker():
 	if current_character.skill_one_mana_cost > current_character.mana:
 		return false
 	current_character.change_mana(-current_character.skill_one_mana_cost)
-
-
-
-
 

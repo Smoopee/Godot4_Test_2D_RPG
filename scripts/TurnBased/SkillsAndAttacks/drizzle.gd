@@ -9,6 +9,7 @@ var elemental_typing: String = "Water"
 var elemental_intensity: int = 1
 var attack_type: String = "Pool"
 var animation_lok = true
+var spell_name = "Drizzle"
 
 var target = self
 
@@ -28,6 +29,5 @@ func start_cast_path():
 		animation_lok = false
 		await get_tree().create_timer(1).timeout
 
-	
-func get_spell_name():
-	return "Drizzle"
+func cast_skill(caster = null, target = null):
+	target.attack -= 10

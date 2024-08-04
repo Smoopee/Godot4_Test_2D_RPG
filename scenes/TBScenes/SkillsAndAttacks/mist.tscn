@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://c0egp38ftug8v"]
+
+[ext_resource type="Script" path="res://scripts/TurnBased/SkillsAndAttacks/mist.gd" id="1_hr5i6"]
+[ext_resource type="Texture2D" uid="uid://bd01ftmhnnf53" path="res://art/TBSkillsAndAttacks/mist.png" id="2_lsbol"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_niepk"]
+atlas = ExtResource("2_lsbol")
+region = Rect2(0, 0, 100, 72)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4r487"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_niepk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_srb8w"]
+
+[node name="Mist" type="CharacterBody2D"]
+script = ExtResource("1_hr5i6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_4r487")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_srb8w")
