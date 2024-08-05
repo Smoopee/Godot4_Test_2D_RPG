@@ -33,6 +33,7 @@ func next_character():
 	if characters_array.size() == 0:
 		turn_order_array_creator()
 	active_character = characters_array[0]
+	print("Active Character is: " + str(active_character))
 	return characters_array[0]
 	
 func turn_order_array_creator():

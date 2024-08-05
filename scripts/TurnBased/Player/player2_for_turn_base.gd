@@ -21,14 +21,16 @@ func set_state(new_state):
 
 #Generic Stats------------------------------------------------------------------
 var max_health: int = 100
-var max_mana: int = 100
+var max_mana: int = 110
 var max_stamina: int = 100
 var health: int = max_health
 var mana: int = max_mana
 var stamina: int = max_stamina
-var attack = 10
-var speed = 22
+var attack = 9
+var speed = 220
 var base_speed = 12
+var intellect = 10
+var reaction_power = 5
 
 var is_sprinting: bool = false
 var is_dodging: bool = false
@@ -78,6 +80,15 @@ func change_mana(value):
 	player_panel.change_mana(2)
 	mana += value
 
+func change_stamina(value):
+	Global.change_stamina_player2(value)
+	player_panel.change_stamina(2)
+	stamina += value
+
+func default_attack(defender):
+	defender.change_health(-attack)
+	self.change_mana(20)
+	self.change_stamina(20)
 func instantiate_skill_one():
 	skill_one = skill_one_scene.instantiate()
 	add_child(skill_one)

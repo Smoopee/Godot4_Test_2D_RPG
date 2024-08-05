@@ -119,6 +119,7 @@ func arrow_multi(current_enemy_index = first_alive_enemy):
 
 
 func arrow_repositioner(enemy):
+
 	match current_state:
 		State.SINGLE:
 			arrow_indicator.position = enemy.global_position + Vector2(55,5)

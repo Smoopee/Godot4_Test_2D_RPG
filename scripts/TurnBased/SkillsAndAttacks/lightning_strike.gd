@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
-var power: int = 10
+
+var power: int = 1
+var multi_attack_power = 1
 var mana_cost: int = 30
 var hit_rate: float = .95
 var target_selection: String = "Multi"
@@ -8,26 +10,41 @@ var elemental_typing: String = "Lightning"
 var elemental_intensity: int = 1
 var attack_type: String = "Bolt"
 var animation_lok = true
-var multi_attack_power = 5
 var spell_name = "Lightning Strike"
-
-var target = self
 
 func _ready():
 	visible = false
 
-func _process(delta):
+func _process(_delta):
 	start_cast_path()
 
 func start_cast_path():
 	
 	if animation_lok:
-		global_position = target.global_position
-		velocity = global_position.direction_to(target.global_position) * 600
+		velocity = global_position.direction_to(global_position) * 600
 		move_and_slide()
 		animation_lok = false
 		await get_tree().create_timer(1).timeout
 		queue_free()
 
 func cast_skill(caster = null, target = null):
-	target.attack -= 10
+	var elemental_reaction_power = caster.reaction_power
+	var current_enemy_index = target.get_index()
+	var right_enemy_index = current_enemy_index + 1
+	var left_enemy_index = current_enemy_index - 1
+	
+	if right_enemy_index + 1 > target.get_parent().get_children().size():
+		right_enemy_index = 0
+	
+	if current_enemy_index - 1 < 0:
+		left_enemy_index = target.get_parent().get_children().size()-1
+	
+	target.get_parent().get_child(current_enemy_index).change_health(-caster.skill_one_single_damage)
+	target.get_parent().get_child(current_enemy_index).add_electric_application(elemental_intensity, elemental_reaction_power)
+	if right_enemy_index != current_enemy_index:
+		target.get_parent().get_child(right_enemy_index).change_health(-caster.skill_one_multi_damage)
+		target.get_parent().get_child(right_enemy_index).add_electric_application(elemental_intensity, elemental_reaction_power)
+	if left_enemy_index != current_enemy_index:
+		target.get_parent().get_child(left_enemy_index).change_health(-caster.skill_one_multi_damage)
+		target.get_parent().get_child(left_enemy_index).add_electric_application(elemental_intensity, elemental_reaction_power)
+

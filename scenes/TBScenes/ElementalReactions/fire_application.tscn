@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxyntyeh424bl"]
+
+[ext_resource type="Script" path="res://scripts/TurnBased/ElementalReactions/fire_application.gd" id="1_316v0"]
+
+[node name="FireApplication" type="Node"]
+script = ExtResource("1_316v0")

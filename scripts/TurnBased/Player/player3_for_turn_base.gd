@@ -26,8 +26,10 @@ var health: int = max_health
 var mana: int = max_mana
 var stamina: int = max_stamina
 var attack = 10
-var speed = 30
+var speed = 230
 var base_speed = 10
+var intellect = 20
+var reaction_power = 5
 
 var is_sprinting: bool = false
 var is_dodging: bool = false
@@ -74,6 +76,16 @@ func change_mana(value):
 	Global.change_mana_player3(value)
 	player_panel.change_mana(3)
 	mana += value
+
+func change_stamina(value):
+	Global.change_stamina_player3(value)
+	player_panel.change_stamina(3)
+	stamina += value
+
+func default_attack(defender):
+	defender.change_health(-attack)
+	self.change_mana(20)
+	self.change_stamina(20)
 
 func instantiate_skill_one():
 	skill_one = drizzle_scene.instantiate()

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://g8g77s1l1o5c"]
+
+[ext_resource type="Script" path="res://scripts/TurnBased/SkillsAndAttacks/Debuffs/hex_debuff.gd" id="1_xij3b"]
+
+[node name="HexDebuff" type="Node" groups=["debuff"]]
+script = ExtResource("1_xij3b")

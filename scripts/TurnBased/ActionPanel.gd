@@ -59,7 +59,9 @@ func turn_keeper():
 	current_character = turn_queue.active_character
 	if current_character.is_in_group("enemy"):
 		action_counter()
-		enemy_ai()
+		current_character.shield_turn_tracker()
+		current_character.stagger_turn_tracker()
+		enemy_ai(current_character)
 		
 	active_player_highlighter()
 
@@ -94,6 +96,8 @@ func _on_evasion_pressed():
 	evasion_container.visible = true
 
 func _on_sprint_pressed():
+	if stamina_checker(): return
+	stamina_checker()
 	current_character.cast_sprint()
 	turn_queue.next_turn_creator()
 	turn_panel.create_next_turn_panel()
@@ -102,6 +106,7 @@ func _on_sprint_pressed():
 	action_container.visible = true
 
 func _on_dodge_pressed():
+	if stamina_checker(): return
 	current_character.cast_dodge()
 	evasion_container.visible = false
 	attack_container.visible = false
@@ -135,6 +140,7 @@ func _on_skill_2_pressed():
 
 #ENEMY BUTTONS------------------------------------------------------------------
 func button_handler(body):
+	if dead_checker(body): return
 	if target_confirmation_checker(body):
 		the_attack_step(body)
 
@@ -172,15 +178,18 @@ func _on_player_3_button_pressed():
 	button_handler(party_members.get_child(2))
 
 
-
-
 func target_confirmation_checker(test):
 	
+	if mana_checker():
+		arrow_logic.arrow_stop()
+		return
+
 	target_confirmation_check.append(test)
 	if target_confirmation_check.size() > 2:
 		target_confirmation_check.resize(0)
 		target_confirmation_check.append(test)
 	if target_confirmation_check.size() == 2:
+		
 		if target_confirmation_check[0] == target_confirmation_check [1]:
 			arrow_logic.arrow_clear()
 			return true
@@ -189,6 +198,7 @@ func target_confirmation_checker(test):
 			arrow_logic.arrow_repositioner(test)
 			arrow_logic.arrow_start()
 			return false
+			
 	arrow_logic.arrow_repositioner(test)
 	arrow_logic.arrow_start()
 
@@ -197,12 +207,12 @@ func the_attack_step(defender):
 		State.SELECTING:
 			pass
 		State.DEFAULT:
-			defender.change_health(-current_character.attack)
+			default_attack_step(defender)
 			evasion_container.visible = false
 			attack_container.visible = false
 			action_container.visible = true
 			action_counter()
-			current_turn_container.get_child(0).queue_free()
+			current_turn_container.get_child(0).free()
 			turn_queue.characters_array.pop_front()
 			set_state(State.SELECTING)
 			turn_queue.next_character()
@@ -216,29 +226,36 @@ func the_attack_step(defender):
 			turn_queue.characters_array.pop_front()
 			set_state(State.SELECTING)
 			turn_queue.next_character()
-			
 		State.SKILLTWO:
-			pass
+			skill_two_attack_step(defender)
+			evasion_container.visible = false
+			attack_container.visible = false
+			action_container.visible = true
+			action_counter()
+			current_turn_container.get_child(0).queue_free()
+			turn_queue.characters_array.pop_front()
+			set_state(State.SELECTING)
+			turn_queue.next_character()
 	turn_keeper()
 
-func enemy_ai():
+func enemy_ai(body):
+	body.debuff_incrementer(body)
 	var random = rng.randi_range(0, party_members.get_child_count()-1)
 	var enemy_target = party_members.get_children()[random]
 	if enemy_target.is_dodging == false:
 		enemy_target.change_health(-current_character.attack)
-	
-	#current_turn_container.remove_child(current_turn_container.get_child(0))
+
 	current_turn_container.get_child(0).free()
 
 	turn_queue.characters_array.pop_front()
+	print("Current Turn Container is: " + str(current_turn_container.get_children()))
+	print("Character array is: " + str(turn_queue.characters_array))
 	turn_queue.next_character()
-	print(current_turn_container.get_children())
 	turn_keeper()
 
 func dead_checker(body):
 	if body.current_state == 0:
 		return true
-
 
 func action_counter():
 	turn_queue.action_counter += 1
@@ -250,52 +267,42 @@ func next_turn_index(body):
 	return turn_queue.next_turn_characters_array.find(body)
 
 func queue_and_array_remover(body):
-	if current_index(body) == -1:
-		if next_turn_index(body) != -1:
-			next_turn_container.get_child(next_turn_index(body)).queue_free()
+	var current_body_index = current_index(body)
+	var next_turn_body_index = next_turn_index(body)
+	
+	if current_body_index == -1:
+		if next_turn_body_index != -1:
+			turn_queue.next_turn_characters_array.remove_at(next_turn_body_index)
+			next_turn_container.get_child(next_turn_body_index).free()
 			return
-		
-	turn_queue.characters_array.remove_at(turn_queue.characters_array.find(body))
-	#current_turn_container.remove_child(current_turn_container.get_child(current_index(body)))
-	current_turn_container.get_child(current_index(body)).queue_free()
+		return
 	
+	turn_queue.characters_array.remove_at(current_body_index)
+	current_turn_container.get_child(current_body_index).free()
+
 	
-	next_turn_container.get_child(next_turn_index(body)-1).queue_free()
+	turn_queue.next_turn_characters_array.remove_at(next_turn_body_index)
+	next_turn_container.get_child(next_turn_body_index).free()
 	action_counter()
+
+func default_attack_step(defender):
+	current_character.default_attack(defender)
 
 func skill_one_attack_step(defender):
 	match current_character.skill_one_targeting:
 		"Single":
 			current_character.instantiate_skill_one()
-			
-			if mana_checker(): the_attack_step(defender)
-			
-			current_character.skill_one.target = defender
-			defender.change_health(-current_character.skill_one_single_damage)
+			current_character.change_mana(-current_character.skill_one_mana_cost)
+			current_character.cast_skill_one(current_character, defender)
+
 		"Multi":
-			var current_enemy_index = defender.get_index()
-			var right_enemy_index = current_enemy_index + 1
-			var left_enemy_index = current_enemy_index - 1
-			
-			if right_enemy_index + 1 > enemies.get_children().size():
-				right_enemy_index = 0
-			
-			if current_enemy_index - 1 < 0:
-				left_enemy_index = enemies.get_children().size()-1
-				
 			current_character.instantiate_skill_one()
-			
-			if mana_checker(): return
-			
-			enemies.get_child(current_enemy_index).change_health(-current_character.skill_one_single_damage)
-			enemies.get_child(right_enemy_index).change_health(-current_character.skill_one_multi_damage)
-			enemies.get_child(left_enemy_index).change_health(-current_character.skill_one_multi_damage)
-			
+			current_character.change_mana(-current_character.skill_one_mana_cost)
+			current_character.cast_skill_one(current_character, defender)
+		
 		"AOE":
-			
 			current_character.instantiate_skill_one()
-			
-			if mana_checker(): return
+			current_character.change_mana(-current_character.skill_one_mana_cost)
 			
 			for i in enemies.get_children().size():
 			
@@ -303,47 +310,41 @@ func skill_one_attack_step(defender):
 				if enemies.get_child(i).current_state == 0:
 					continue
 				
-				enemies.get_child(i).change_health(-current_character.skill_one_single_damage)
+				current_character.cast_skill_one(current_character, enemies.get_child(i))
+					
 		"Friendly_Single":
-			pass
+			current_character.instantiate_skill_one()
+			current_character.change_mana(-current_character.skill_one_mana_cost)
+			current_character.cast_skill_one(current_character, defender)
 		"Friendly_Multi":
-			pass
-		"Friendly":
-			pass
+			current_character.instantiate_skill_one()
+			current_character.change_mana(-current_character.skill_one_mana_cost)
+			current_character.cast_skill_one(current_character, defender)
+		"Friendly_AOE":
+			current_character.instantiate_skill_one()
+			current_character.change_mana(-current_character.skill_one_mana_cost)
+			
+			for i in party_members.get_children().size():
+				
+				if party_members.get_child(i).current_state == 0:
+					continue
+				current_character.cast_skill_one(current_character, party_members.get_child(i))
 	
+
 func skill_two_attack_step(defender):
 	match current_character.skill_two_targeting:
 		"Single":
 			current_character.instantiate_skill_two()
-			
-			if mana_checker(): the_attack_step(defender)
-			
-			current_character.skill_two.target = defender
-			defender.change_health(-current_character.skill_two_single_damage)
+			current_character.change_mana(-current_character.skill_two_mana_cost)
+			current_character.cast_skill_two(current_character, defender)
 		"Multi":
-			var current_enemy_index = defender.get_index()
-			var right_enemy_index = current_enemy_index + 1
-			var left_enemy_index = current_enemy_index - 1
-			
-			if right_enemy_index + 1 > enemies.get_children().size():
-				right_enemy_index = 0
-			
-			if current_enemy_index - 1 < 0:
-				left_enemy_index = enemies.get_children().size()-1
-				
 			current_character.instantiate_skill_two()
-			
-			if mana_checker(): return
-			
-			enemies.get_child(current_enemy_index).change_health(-current_character.skill_two_single_damage)
-			enemies.get_child(right_enemy_index).change_health(-current_character.skill_two_multi_damage)
-			enemies.get_child(left_enemy_index).change_health(-current_character.skill_two_multi_damage)
+			current_character.change_mana(-current_character.skill_two_mana_cost)
+			current_character.cast_skill_two(current_character, defender)
 			
 		"AOE":
-			
 			current_character.instantiate_skill_two()
-			
-			if mana_checker(): return
+			current_character.change_mana(-current_character.skill_two_mana_cost)
 			
 			for i in enemies.get_children().size():
 			
@@ -351,16 +352,47 @@ func skill_two_attack_step(defender):
 				if enemies.get_child(i).current_state == 0:
 					continue
 				
-				current_character.cast_skill_two(self, enemies.get_child(i))
+				current_character.cast_skill_two(current_character, enemies.get_child(i))
 		"Friendly_Single":
-			pass
+			current_character.instantiate_skill_two()
+			current_character.change_mana(-current_character.skill_two_mana_cost)
+			current_character.cast_skill_two(current_character, defender)
 		"Friendly_Multi":
-			pass
-		"Friendly":
-			pass
-	
-func mana_checker():
-	if current_character.skill_one_mana_cost > current_character.mana:
-		return false
-	current_character.change_mana(-current_character.skill_one_mana_cost)
+			current_character.instantiate_skill_two()
+			current_character.change_mana(-current_character.skill_two_mana_cost)
+			current_character.cast_skill_two(current_character, defender)
+		"Friendly_AOE":
+			current_character.instantiate_skill_two()
+			current_character.change_mana(-current_character.skill_two_mana_cost)
+			
+			for i in party_members.get_children().size():
+				
+				if party_members.get_child(i).current_state == 0:
+					continue
+				current_character.cast_skill_two(current_character, party_members.get_child(i))
 
+func mana_checker():
+	match current_state:
+		State.DEFAULT:
+			pass
+		State.SKILLONE:
+			if current_character.skill_one_mana_cost > current_character.mana:
+				print("Too much mana for skill one")
+				return true
+			else: 
+				return false
+		State.SKILLTWO:
+			if current_character.skill_two_mana_cost > current_character.mana:
+				print("Too much mana for skill two")
+				return true
+			else: 
+				return false
+
+func stamina_checker():
+	if current_character.stamina < 50:
+		print("Too much stamina")
+		return true
+
+func character_died(body):
+	print("a character has died")
+	queue_and_array_remover(body)
