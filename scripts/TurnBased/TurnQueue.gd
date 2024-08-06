@@ -32,6 +32,7 @@ func initialize():
 func next_character():
 	if characters_array.size() == 0:
 		turn_order_array_creator()
+		turn_counter -= 1
 	active_character = characters_array[0]
 	print("Active Character is: " + str(active_character))
 	return characters_array[0]
@@ -82,9 +83,12 @@ func sprint_checker():
 			next_turn_creator()
 			turn_panel.create_next_turn_panel()
 
+
 func dodge_checker():
 	for i in characters_array.size():
 		if characters_array[i].is_dodging:
 			characters_array[i].stop_dodge()
 
-
+func new_list():
+	characters_array.sort_custom(custom_sorter)
+	next_turn_characters_array.sort_custom(custom_sorter)

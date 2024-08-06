@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dlklm5fxobglb"]
+
+[ext_resource type="Script" path="res://scripts/TurnBased/SkillsAndAttacks/Buffs/momentum_buff.gd" id="1_j0ekj"]
+
+[node name="MomentumBuff" type="Node" groups=["buff"]]
+script = ExtResource("1_j0ekj")

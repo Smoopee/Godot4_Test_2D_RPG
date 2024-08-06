@@ -2,12 +2,16 @@
 
 [ext_resource type="Texture2D" uid="uid://bwvlmucnuk0y5" path="res://art/TBCharacters/enemy_turn_sprite.png" id="1_1xskv"]
 
-[node name="EnemyTurnSpritePanel" type="Panel"]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="EnemyTurnSpritePanel" type="CenterContainer"]
+offset_left = -23.0
+offset_top = -19.0
+offset_right = 17.0
+offset_bottom = 21.0
+scale = Vector2(1.19592, 1.04941)
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="TurnSprite" type="Sprite2D" parent="."]
-position = Vector2(20, 15)
+position = Vector2(19.2321, 17.0173)
+scale = Vector2(0.659666, 0.610068)
 texture = ExtResource("1_1xskv")

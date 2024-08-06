@@ -1,5 +1,6 @@
 extends Node2D
 
+var turn_sprite_scene = load("res://scenes/TBScenes/enemy_turn_sprite_panel.tscn")
 
 @onready var tb_enemy_health_bar = $TBEnemyHealthBar
 @onready var animated_sprite= $AnimatedSprite2D
@@ -19,6 +20,7 @@ var base_shield: int = 50
 var shield: int = 50
 var is_shielded: bool = true
 var stagger: int = 0
+var stagger_max: int = 300
 var is_staggered: bool = false
 var is_sprinting: bool = false
 var is_dodging: bool = false
@@ -61,23 +63,30 @@ func change_health(value):
 	tb_enemy_health_bar.value = health
 	
 	
-	print(str(self) + " health is " + str(health))
 	if health <= 0:
 		health = 0
 		set_state(State.DEAD)
 		tb_enemy_health_bar.visible = false
+		tb_enemy_shield_bar.visible = false
+		tb_enemy_stagger_bar.visible = false
 		animated_sprite.visible = false
 		dead_sprite.visible = true
 		var game_state = get_tree().get_nodes_in_group("game_state_tracker")
 		game_state[0].character_died(self)
 
+func change_speed(value):
+	speed += value
+	var game_state = get_tree().get_nodes_in_group("game_state_tracker")
+	game_state[0].character_speed_change(self)
+
 func change_stagger(value):
 	stagger -= value
 	tb_enemy_stagger_bar.value -= value
 	
-	if stagger >= 100:
-		stagger = 100
+	if stagger >= stagger_max:
+		stagger = stagger_max
 		is_staggered = true
+		speed -= 30
 
 
 func change_shield(value):
@@ -89,13 +98,14 @@ func change_shield(value):
 		is_shielded = false
 
 func stagger_turn_tracker():
-	if stagger == 100:
+	if stagger == stagger_max:
 		stagger_tracker += 1
 	
 	if stagger_tracker == 1:
-		change_stagger(100)
+		change_stagger(stagger_max)
 		is_staggered = false
 		stagger_tracker = 0
+		speed += 30
 	
 func shield_turn_tracker():
 	if shield == 0:
@@ -154,8 +164,7 @@ func add_fire_application(value, power, damage):
 	if water_application > 0:
 		water_application -= 1
 		fire_application -= 1
-	
-	boil(power, damage)
+		boil(power, damage)
 	
 	elemental_symbol_checker()
 
@@ -198,3 +207,9 @@ func boil(power, damage):
 	var boil_damage = damage + power * 10
 	change_health(-boil_damage)
 	print("You've been boiled for: " + str(boil_damage))
+
+
+func instantiate_turn_sprite(target, zSetter):
+	var turn_sprite = turn_sprite_scene.instantiate()
+	target.add_child(turn_sprite)
+	turn_sprite.z_index = zSetter

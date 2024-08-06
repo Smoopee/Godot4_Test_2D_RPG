@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var power: int = 2
+var power: int = 4
 var multi_attack_power = 0
 var mana_cost: int = 50
 var hit_rate: float = .95
@@ -29,3 +29,4 @@ func start_cast_path():
 
 func cast_skill(caster = null, target = null):
 	target.change_health(caster.intellect * power)
+	print("mist is: " + str(caster.intellect * power))

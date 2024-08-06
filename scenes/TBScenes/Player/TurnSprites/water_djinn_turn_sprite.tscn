@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://corhwyvoxjqup"]
+
+[ext_resource type="Texture2D" uid="uid://dntnew8jgl8ug" path="res://art/TBCharacters/PlayerCharacter/water_sprite.png" id="1_3bord"]
+
+[node name="TurnSpritePanel" type="CenterContainer"]
+offset_left = -25.0
+offset_top = -23.0
+offset_right = 15.0
+offset_bottom = 17.0
+scale = Vector2(1.2435, 1.17172)
+size_flags_horizontal = 3
+
+[node name="TurnSprite" type="Sprite2D" parent="."]
+position = Vector2(20.9087, 17.9223)
+scale = Vector2(0.275778, 0.262928)
+texture = ExtResource("1_3bord")

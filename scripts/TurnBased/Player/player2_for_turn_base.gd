@@ -2,6 +2,7 @@ extends AnimatedSprite2D
 
 var skill_one_scene = load("res://scenes/TBScenes/SkillsAndAttacks/fireball_tb.tscn")
 var skill_two_scene = load("res://scenes/TBScenes/SkillsAndAttacks/hex.tscn")
+var turn_sprite_scene = load("res://scenes/TBScenes/Player/TurnSprites/fire_djinn_turn_sprite.tscn")
 
 @onready var player_panel = $"../../CanvasLayer/PlayerPanel"
 
@@ -27,9 +28,9 @@ var health: int = max_health
 var mana: int = max_mana
 var stamina: int = max_stamina
 var attack = 9
-var speed = 220
+var speed = 29
 var base_speed = 12
-var intellect = 10
+var intellect = 15
 var reaction_power = 5
 
 var is_sprinting: bool = false
@@ -85,6 +86,11 @@ func change_stamina(value):
 	player_panel.change_stamina(2)
 	stamina += value
 
+func change_speed(value):
+	speed += value
+	var game_state = get_tree().get_nodes_in_group("game_state_tracker")
+	game_state[0].character_speed_change(self)
+
 func default_attack(defender):
 	defender.change_health(-attack)
 	self.change_mana(20)
@@ -107,15 +113,20 @@ func instantiate_skill_two():
 	skill_two_single_damage = skill_two.power * attack
 	skill_two_mana_cost = skill_two.mana_cost
 
+func instantiate_turn_sprite(target, zSetter):
+	var turn_sprite = turn_sprite_scene.instantiate()
+	target.add_child(turn_sprite)
+	turn_sprite.z_index = zSetter
+
 func cast_sprint():
 	Global.change_stamina_player2(-50)
 	stamina = Global.player2_stamina
 	player_panel.change_stamina(2)
-	speed += 50
+	change_speed(50)
 	is_sprinting = true
 
 func stop_sprint():
-	speed = base_speed
+	change_speed(-50)
 	is_sprinting = false
 
 func cast_dodge():
@@ -132,3 +143,12 @@ func cast_skill_one(caster = self, target = null):
 
 func cast_skill_two(caster = self, target = null):
 	skill_two.cast_skill(caster, target)
+
+func buff_incrementer(body):
+	var children_in_group = []
+	for node in get_tree().get_nodes_in_group("buff"):
+		if body.is_ancestor_of(node): 
+			children_in_group.push_front(node)
+			
+	for i in children_in_group:
+		i.turn_expiration(body)

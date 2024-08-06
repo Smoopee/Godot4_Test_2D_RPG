@@ -1,10 +1,9 @@
-[gd_scene load_steps=30 format=3 uid="uid://by2qyvemev4se"]
+[gd_scene load_steps=29 format=3 uid="uid://by2qyvemev4se"]
 
 [ext_resource type="Texture2D" uid="uid://cmmtk76lng52j" path="res://art/characters/Enemy/Characters/Gobuss.png" id="1_eafc6"]
 [ext_resource type="Script" path="res://scripts/TurnBased/tb_enemy.gd" id="1_r8u4j"]
 [ext_resource type="Texture2D" uid="uid://chewicsrv2m66" path="res://art/UI/PlayerElements/LifeBarMiniUnder.png" id="2_4iabe"]
 [ext_resource type="Texture2D" uid="uid://qsdtsxe6cs0a" path="res://art/UI/PlayerElements/LifeBarMiniProgress.png" id="3_tqku4"]
-[ext_resource type="Texture2D" uid="uid://bwvlmucnuk0y5" path="res://art/TBCharacters/enemy_turn_sprite.png" id="5_3yxvq"]
 [ext_resource type="Texture2D" uid="uid://dt2jv6xmnha6c" path="res://art/TBCharacters/enemy_sprite_dead.png" id="6_1ddun"]
 [ext_resource type="Script" path="res://scripts/TurnBased/Enemy/TBEnemyShieldBar.gd" id="6_wx12e"]
 [ext_resource type="Texture2D" uid="uid://cs0avpvw1gugn" path="res://art/UI/PlayerElements/stagger_bar_under.png" id="7_67fok"]
@@ -161,10 +160,6 @@ offset_right = 9.0
 offset_bottom = -5.0
 texture_under = ExtResource("7_67fok")
 texture_progress = ExtResource("8_nj82c")
-
-[node name="TurnSprite" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("5_3yxvq")
 
 [node name="DeadSprite" type="Sprite2D" parent="."]
 visible = false

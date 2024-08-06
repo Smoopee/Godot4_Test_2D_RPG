@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://dt7ja5b3owfqv"]
+[gd_scene load_steps=39 format=3 uid="uid://dt7ja5b3owfqv"]
 
 [ext_resource type="Script" path="res://scripts/TurnBased/enemy_spawner.gd" id="1_j5o40"]
 [ext_resource type="Script" path="res://scripts/TurnBased/TurnQueue.gd" id="1_kroxe"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bngjrj485gceu" path="res://scenes/TBScenes/Player/player1_for_turn_base.tscn" id="12_pink3"]
 [ext_resource type="PackedScene" uid="uid://ds5lklr0wjo2o" path="res://scenes/TBScenes/Player/player2_for_turn_base.tscn" id="13_52r2e"]
 [ext_resource type="Script" path="res://scripts/TurnBased/UI/ArrowLogic.gd" id="13_ee0yq"]
+[ext_resource type="FontFile" uid="uid://cthyendgiwi28" path="res://art/Fonts/Xolonium-Regular.ttf" id="14_pythc"]
 [ext_resource type="PackedScene" uid="uid://dmkbogp1yuhqh" path="res://scenes/TBScenes/Player/player3_for_turn_base.tscn" id="14_ukkdm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l16pf"]
@@ -148,13 +149,13 @@ z_index = 1
 position = Vector2(242, 313)
 scale = Vector2(3, 3)
 
-[node name="Player1ForTurnBase" parent="PartyMembers" instance=ExtResource("12_pink3")]
-position = Vector2(52, 36)
+[node name="Player1ForTurnBase" parent="PartyMembers" groups=["allys"] instance=ExtResource("12_pink3")]
+position = Vector2(46.6667, 50.3333)
 
-[node name="Player2ForTurnBase" parent="PartyMembers" instance=ExtResource("13_52r2e")]
-position = Vector2(20.6667, 61.3333)
+[node name="Player2ForTurnBase" parent="PartyMembers" groups=["allys"] instance=ExtResource("13_52r2e")]
+position = Vector2(20.6667, 68)
 
-[node name="Player3ForTurnBase" parent="PartyMembers" instance=ExtResource("14_ukkdm")]
+[node name="Player3ForTurnBase" parent="PartyMembers" groups=["allys"] instance=ExtResource("14_ukkdm")]
 position = Vector2(52, 86)
 
 [node name="Enemies" type="Node" parent="."]
@@ -368,11 +369,12 @@ text = "Turn1
 "
 
 [node name="CurrentTurnContainer" type="HBoxContainer" parent="CanvasLayer/TurnPanel"]
-layout_mode = 0
-offset_left = 5.1538
-offset_right = 55.1538
-offset_bottom = 24.0
-scale = Vector2(0.177231, 0.903281)
+layout_mode = 1
+offset_left = 3.01866
+offset_top = -5.25762
+offset_right = 53.0187
+offset_bottom = 18.7424
+scale = Vector2(0.292592, 1.29961)
 
 [node name="NextTurnLabel" type="Label" parent="CanvasLayer/TurnPanel"]
 layout_mode = 0
@@ -385,30 +387,35 @@ text = "Turn 2
 "
 
 [node name="NextTurnContainer" type="HBoxContainer" parent="CanvasLayer/TurnPanel"]
-layout_mode = 0
-offset_left = 29.8184
-offset_top = 1.75254
-offset_right = 79.8184
-offset_bottom = 25.7525
-scale = Vector2(0.171111, 0.891989)
+layout_mode = 1
+offset_left = 26.5789
+offset_top = -3.50508
+offset_right = 76.5789
+offset_bottom = 20.4949
+scale = Vector2(0.294869, 1.16201)
 
 [node name="ActionPanel" type="Panel" parent="CanvasLayer" groups=["game_state_tracker"]]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -120.0
-offset_right = 40.0
-offset_bottom = -80.0001
+offset_top = -234.0
+offset_right = 48.0
+offset_bottom = -163.0
 grow_vertical = 0
-scale = Vector2(4.04265, 2.95894)
+scale = Vector2(4.09129, 2.99454)
 theme_override_styles/panel = SubResource("StyleBoxFlat_j8i0i")
 script = ExtResource("9_173tm")
 
 [node name="ActionContainer" type="VBoxContainer" parent="CanvasLayer/ActionPanel"]
-layout_mode = 0
-offset_top = -0.675905
-offset_right = 67.0
-offset_bottom = 104.325
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -71.0
+offset_right = 79.0
+offset_bottom = 126.0
+grow_vertical = 0
 scale = Vector2(0.592595, 0.374542)
 
 [node name="Attack" type="Button" parent="CanvasLayer/ActionPanel/ActionContainer"]
@@ -429,44 +436,51 @@ text = "Item
 
 [node name="AttackContainer" type="VBoxContainer" parent="CanvasLayer/ActionPanel"]
 visible = false
-layout_mode = 0
-offset_left = 0.0742041
-offset_top = 0.274658
-offset_right = 65.0742
-offset_bottom = 136.275
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -71.0
+offset_right = 78.0
+offset_bottom = 183.0
+grow_vertical = 0
 scale = Vector2(0.610591, 0.291148)
 localize_numeral_system = false
 
 [node name="Default" type="Button" parent="CanvasLayer/ActionPanel/AttackContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("14_pythc")
+theme_override_font_sizes/font_size = 14
 text = "Default"
 
 [node name="Skill 1" type="Button" parent="CanvasLayer/ActionPanel/AttackContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("14_pythc")
 text = "Skill 1
 "
+text_overrun_behavior = 3
 
 [node name="Skill 2" type="Button" parent="CanvasLayer/ActionPanel/AttackContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("14_pythc")
 text = "Skill 2
 "
 
 [node name="Back" type="Button" parent="CanvasLayer/ActionPanel/AttackContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("14_pythc")
 text = "Back
 "
 
 [node name="EvasionContainer" type="VBoxContainer" parent="CanvasLayer/ActionPanel"]
 visible = false
 layout_mode = 0
-offset_left = 0.0742041
-offset_top = 0.274658
-offset_right = 67.0742
-offset_bottom = 136.275
+offset_right = 80.0
+offset_bottom = 236.0
 scale = Vector2(0.594282, 0.292845)
 
 [node name="Sprint" type="Button" parent="CanvasLayer/ActionPanel/EvasionContainer"]
@@ -525,6 +539,10 @@ offset_right = 40.0001
 offset_bottom = 40.0
 script = ExtResource("13_ee0yq")
 
+[node name="EnemyArrows" type="Node" parent="ArrowLogic"]
+
+[node name="PlayerArrows" type="Node" parent="ArrowLogic"]
+
 [node name="EnemyButtonPanel" type="Panel" parent="."]
 layout_mode = 0
 offset_left = 676.0
@@ -542,7 +560,6 @@ offset_right = 12.6268
 offset_bottom = 13.2387
 scale = Vector2(1.04869, 1.12127)
 theme_override_styles/focus = SubResource("StyleBoxFlat_n8wi0")
-flat = true
 
 [node name="Button2" type="Button" parent="EnemyButtonPanel"]
 layout_mode = 0
@@ -551,7 +568,6 @@ offset_top = 19.6028
 offset_right = 13.6549
 offset_bottom = 27.6028
 theme_override_styles/focus = SubResource("StyleBoxFlat_jcwcx")
-flat = true
 
 [node name="Button3" type="Button" parent="EnemyButtonPanel"]
 layout_mode = 0
@@ -560,7 +576,6 @@ offset_top = 26.0245
 offset_right = 26.8926
 offset_bottom = 34.0245
 theme_override_styles/focus = SubResource("StyleBoxFlat_au2kc")
-flat = true
 
 [node name="Button4" type="Button" parent="EnemyButtonPanel"]
 layout_mode = 0
@@ -569,7 +584,6 @@ offset_top = 13.0122
 offset_right = 30.3626
 offset_bottom = 21.0122
 theme_override_styles/focus = SubResource("StyleBoxFlat_d5hxy")
-flat = true
 
 [node name="Button5" type="Button" parent="EnemyButtonPanel"]
 layout_mode = 0
@@ -578,7 +592,6 @@ offset_top = 1.52091
 offset_right = 26.1214
 offset_bottom = 9.52091
 theme_override_styles/focus = SubResource("StyleBoxFlat_hr2gv")
-flat = true
 
 [node name="FriendlyButtonPanel" type="Panel" parent="."]
 layout_mode = 0
@@ -591,30 +604,30 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_bw36w")
 
 [node name="Player1Button" type="Button" parent="FriendlyButtonPanel"]
 layout_mode = 0
-offset_left = 3.21308
-offset_top = 16.5999
-offset_right = 11.2131
-offset_bottom = 24.5999
+offset_left = 17.6719
+offset_top = 7.82113
+offset_right = 25.6719
+offset_bottom = 15.8211
 scale = Vector2(1.20314, 1.30217)
 theme_override_styles/focus = SubResource("StyleBoxFlat_h1qpq")
 flat = true
 
 [node name="Player2Button" type="Button" parent="FriendlyButtonPanel"]
 layout_mode = 0
-offset_left = 20.3495
-offset_top = 4.14998
-offset_right = 28.3495
-offset_bottom = 12.15
+offset_left = 4.4626
+offset_top = 16.4403
+offset_right = 12.4626
+offset_bottom = 24.4403
 scale = Vector2(1.13004, 1.29083)
 theme_override_styles/focus = SubResource("StyleBoxFlat_2k66t")
 flat = true
 
 [node name="Player3Button" type="Button" parent="FriendlyButtonPanel"]
 layout_mode = 0
-offset_left = 19.9925
-offset_top = 28.2518
-offset_right = 27.9925
-offset_bottom = 36.2518
+offset_left = 19.457
+offset_top = 24.2615
+offset_right = 27.457
+offset_bottom = 32.2615
 scale = Vector2(1.37133, 1.37133)
 theme_override_styles/focus = SubResource("StyleBoxFlat_47fbd")
 flat = true

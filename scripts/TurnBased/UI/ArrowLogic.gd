@@ -5,6 +5,8 @@ var arrow_inicator_scene = load("res://scenes/TBScenes/TBBattleScene/arrow_indic
 @onready var party_members = $"../PartyMembers"
 @onready var enemies = $"../Enemies"
 @onready var spawn_location = $"../SpawnLocation"
+@onready var enemy_arrows = $EnemyArrows
+@onready var player_arrows = $PlayerArrows
 
 
 #DECLARES AND SETS STATES-------------------------------------------------------
@@ -29,8 +31,25 @@ var arrow_indicator
 var first_alive_enemy
 var first_alive_friendly
 
+func _ready():
+	for i in enemies.get_children().size():
+		arrow_indicator = arrow_inicator_scene.instantiate()
+		enemy_arrows.add_child(arrow_indicator)
+		arrow_indicator.scale = Vector2(.2, .2)
+		arrow_indicator.global_position = enemies.get_child(i).global_position + Vector2(55,5)
+	
+	for i in party_members.get_children().size():
+		arrow_indicator = arrow_inicator_scene.instantiate()
+		player_arrows.add_child(arrow_indicator)
+		arrow_indicator.scale = Vector2(.2, .2)
+		arrow_indicator.global_position = party_members.get_child(i).global_position + Vector2(55,5)
+		
+	arrow_clear()
+	
 
 func arrow_initializer(targeting):
+	arrow_clear()
+	
 	for i in enemies.get_children().size():
 		if enemies.get_child(i).current_state == 1:
 			first_alive_enemy = i
@@ -45,10 +64,7 @@ func arrow_initializer(targeting):
 	match targeting:
 		"Single":
 			set_state(State.SINGLE)
-			arrow_indicator = arrow_inicator_scene.instantiate()
-			add_child(arrow_indicator)
-			arrow_indicator.scale = Vector2(.2, .2)
-			arrow_indicator.global_position = spawn_location.get_child(first_alive_enemy).global_position + Vector2(55,5)
+			enemy_arrows.get_child(first_alive_enemy).visible = true
 		"Multi":
 			set_state(State.MULTI)
 			arrow_multi()
@@ -59,6 +75,7 @@ func arrow_initializer(targeting):
 			set_state(State.FRIENDLY_SINGLE)
 		"Friendly_Multi":
 			set_state(State.FRIENDLY_MULTI)
+			arrow_multi_friendly()
 		"Friendly_AOE":
 			set_state(State.FRIENDLY_AOE)
 			arrow_duplicator_friendly()
@@ -71,10 +88,7 @@ func arrow_duplicator_enemy():
 			continue
 		
 		#RESUMES MAKING REST OF ARROWS
-		arrow_indicator = arrow_inicator_scene.instantiate()
-		add_child(arrow_indicator)
-		arrow_indicator.scale = Vector2(.2, .2)
-		arrow_indicator.position = enemies.get_child(i).global_position + Vector2(55,5)
+		enemy_arrows.get_child(i).visible = true
 
 func arrow_duplicator_friendly():
 	for i in party_members.get_children().size():
@@ -84,10 +98,7 @@ func arrow_duplicator_friendly():
 			continue
 		
 		#RESUMES MAKING REST OF ARROWS
-		arrow_indicator = arrow_inicator_scene.instantiate()
-		add_child(arrow_indicator)
-		arrow_indicator.scale = Vector2(.2, .2)
-		arrow_indicator.position = party_members.get_child(i).global_position + Vector2(55,25)
+		player_arrows.get_child(i).visible = true
 
 func arrow_multi(current_enemy_index = first_alive_enemy):
 	var right_enemy_index = current_enemy_index + 1
@@ -99,80 +110,93 @@ func arrow_multi(current_enemy_index = first_alive_enemy):
 	if current_enemy_index - 1 < 0:
 		left_enemy_index = enemies.get_children().size()-1
 	
-	arrow_indicator = arrow_inicator_scene.instantiate()
-	add_child(arrow_indicator)
-	arrow_indicator.scale = Vector2(.2, .2)
-	arrow_indicator.position = enemies.get_child(current_enemy_index).global_position + Vector2(55,5)
+	enemy_arrows.get_child(current_enemy_index).visible = true
+	enemy_arrows.get_child(current_enemy_index).scale = Vector2(.2, .2)
 	
-	if enemies.get_child(right_enemy_index).current_state == 1:
-		arrow_indicator = arrow_inicator_scene.instantiate()
-		add_child(arrow_indicator)
-		arrow_indicator.scale = Vector2(.1, .1)
-		arrow_indicator.position = enemies.get_child(right_enemy_index).global_position + Vector2(35,5)
-	
-	
-	if enemies.get_child(left_enemy_index).current_state == 1:
-		arrow_indicator = arrow_inicator_scene.instantiate()
-		add_child(arrow_indicator)
-		arrow_indicator.scale = Vector2(.1, .1)
-		arrow_indicator.position = enemies.get_child(left_enemy_index).global_position + Vector2(35,5)
+	if current_enemy_index != right_enemy_index:
+		if enemies.get_child(right_enemy_index).current_state == 1:
+			enemy_arrows.get_child(right_enemy_index).visible = true
+			enemy_arrows.get_child(right_enemy_index).global_position = enemies.get_child(right_enemy_index).global_position + Vector2(35,5)
+			enemy_arrows.get_child(right_enemy_index).scale = Vector2(.1, .1)
 
+	if current_enemy_index != left_enemy_index:
+		if enemies.get_child(left_enemy_index).current_state == 1:
+			enemy_arrows.get_child(left_enemy_index).visible = true
+			enemy_arrows.get_child(left_enemy_index).global_position = enemies.get_child(left_enemy_index).global_position + Vector2(35,5)
+			enemy_arrows.get_child(left_enemy_index).scale = Vector2(.1, .1)
 
-func arrow_repositioner(enemy):
+func arrow_multi_friendly(current_player_index = first_alive_friendly):
+	var right_player_index = current_player_index + 1
+	var left_player_index = current_player_index - 1
+	
+	if right_player_index + 1 > party_members.get_children().size():
+		right_player_index = 0
+	
+	if current_player_index - 1 < 0:
+		left_player_index = party_members.get_children().size()-1
+	
+	player_arrows.get_child(current_player_index).visible = true
+	player_arrows.get_child(current_player_index).scale = Vector2(.2, .2)
+	
+	if current_player_index != right_player_index:
+		if party_members.get_child(right_player_index).current_state == 1:
+			player_arrows.get_child(right_player_index).visible = true
+			player_arrows.get_child(right_player_index).global_position = party_members.get_child(right_player_index).global_position + Vector2(35,5)
+			player_arrows.get_child(right_player_index).scale = Vector2(.1, .1)
+
+	if current_player_index != left_player_index:
+		if party_members.get_child(left_player_index).current_state == 1:
+			player_arrows.get_child(left_player_index).visible = true
+			player_arrows.get_child(left_player_index).global_position = party_members.get_child(left_player_index).global_position + Vector2(35,5)
+			player_arrows.get_child(left_player_index).scale = Vector2(.1, .1)
+
+func arrow_repositioner(target):
+	arrow_clear()
 
 	match current_state:
 		State.SINGLE:
-			arrow_indicator.position = enemy.global_position + Vector2(55,5)
+			enemy_arrows.get_child(target.get_index()).visible = true
 		State.MULTI:
-			arrow_clear()
-			arrow_multi(enemy.get_index())
+			arrow_multi(target.get_index())
 		State.AOE:
-			pass
+			arrow_duplicator_enemy()
 		State.FRIENDLY_SINGLE:
 			pass
-		State.MULTI:
-			pass
+		State.FRIENDLY_MULTI:
+			print("mult target index is: " + str(target.get_index()))
+			arrow_multi_friendly(target.get_index())
 		State.FRIENDLY_AOE:
-			pass
+			arrow_duplicator_friendly()
 
 
 func arrow_start():
-	match current_state:
-		State.SINGLE:
-			arrow_indicator.arrow_blink()
-		State.MULTI:
-			for i in get_children().size():
-				get_child(i).arrow_blink()
-		State.AOE:
-			for i in get_children().size():
-				get_child(i).arrow_blink()
-		State.FRIENDLY_SINGLE:
-			arrow_indicator.arrow_blink()
-		State.MULTI:
-			arrow_indicator.arrow_blink()
-		State.FRIENDLY_AOE:
-			for i in get_children().size():
-				get_child(i).arrow_blink()
+	for i in enemy_arrows.get_children().size():
+		if enemy_arrows.get_child(i).visible == true:
+			enemy_arrows.get_child(i).arrow_blink()
+		
+	for i in player_arrows.get_children().size():
+		if player_arrows.get_child(i).visible == true:
+			player_arrows.get_child(i).arrow_blink()
+
 
 func arrow_stop():
-	match current_state:
-		State.SINGLE:
-			arrow_indicator.arrow_stop()
-		State.MULTI:
-			for i in get_children().size():
-				get_child(i).arrow_stop()
-		State.AOE:
-			for i in get_children().size():
-				get_child(i).arrow_stop()
-		State.FRIENDLY_SINGLE:
-			arrow_indicator.arrow_stop()
-		State.MULTI:
-			arrow_indicator.arrow_stop()
-		State.FRIENDLY_AOE:
-			for i in get_children().size():
-				get_child(i).arrow_stop()
+	for i in enemy_arrows.get_children().size():
+		enemy_arrows.get_child(i).arrow_stop()
+		
+	for i in player_arrows.get_children().size():
+		player_arrows.get_child(i).arrow_stop()
 
 
 func arrow_clear():
-	for i in get_children().size():
-		get_child(i).queue_free()
+	arrow_stop()
+	for i in enemy_arrows.get_children().size():
+		enemy_arrows.get_child(i).visible = false
+		enemy_arrows.get_child(i).global_position = enemies.get_child(i).global_position + Vector2(55,5)
+		enemy_arrows.get_child(i).scale = Vector2(.2, .2)
+
+	
+	for i in player_arrows.get_children().size():
+		player_arrows.get_child(i).visible = false
+		player_arrows.get_child(i).global_position = party_members.get_child(i).global_position + Vector2(55,5)
+		player_arrows.get_child(i).scale = Vector2(.2, .2)
+

@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://b41q3xwfetfww"]
+
+[ext_resource type="Texture2D" uid="uid://cepui3luq6hl0" path="res://art/TBCharacters/PlayerCharacter/djinn pixel art.png" id="1_b1hhs"]
+
+[node name="TurnSpritePanel" type="CenterContainer"]
+offset_left = -24.0
+offset_top = -20.0
+offset_right = 16.0
+offset_bottom = 20.0
+scale = Vector2(1.19928, 1.12175)
+size_flags_horizontal = 3
+
+[node name="TurnSprite" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(20.012, 17.8293)
+scale = Vector2(0.312611, 0.260456)
+texture = ExtResource("1_b1hhs")

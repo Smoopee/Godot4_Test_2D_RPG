@@ -1,53 +1,17 @@
-[gd_scene load_steps=11 format=3 uid="uid://ds5lklr0wjo2o"]
+[gd_scene load_steps=5 format=3 uid="uid://ds5lklr0wjo2o"]
 
-[ext_resource type="Texture2D" uid="uid://ob51rnx42bgs" path="res://art/characters/player.png" id="1_02hdf"]
+[ext_resource type="Texture2D" uid="uid://cpow0nsh7huq8" path="res://art/TBCharacters/PlayerCharacter/flame_sprite.png" id="1_djwqm"]
 [ext_resource type="Script" path="res://scripts/TurnBased/Player/player2_for_turn_base.gd" id="2_hen5o"]
-[ext_resource type="Texture2D" uid="uid://bcexs8yfga78o" path="res://art/TBCharacters/player_turn_sprite.png" id="3_6dy8m"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4v1u0"]
-atlas = ExtResource("1_02hdf")
-region = Rect2(0, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7o2b7"]
-atlas = ExtResource("1_02hdf")
-region = Rect2(48, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gywg7"]
-atlas = ExtResource("1_02hdf")
-region = Rect2(96, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_k1h5s"]
-atlas = ExtResource("1_02hdf")
-region = Rect2(144, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6mjrg"]
-atlas = ExtResource("1_02hdf")
-region = Rect2(192, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gyrxo"]
-atlas = ExtResource("1_02hdf")
-region = Rect2(240, 0, 48, 48)
+[sub_resource type="AtlasTexture" id="AtlasTexture_wro3d"]
+atlas = ExtResource("1_djwqm")
+region = Rect2(0, 0, 64, 67)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vtrdt"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4v1u0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7o2b7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gywg7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_k1h5s")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6mjrg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gyrxo")
+"texture": SubResource("AtlasTexture_wro3d")
 }],
 "loop": true,
 "name": &"default",
@@ -55,11 +19,8 @@ animations = [{
 }]
 
 [node name="Player2ForTurnBase" type="AnimatedSprite2D"]
+scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_vtrdt")
 autoplay = "default"
 frame_progress = 0.591092
 script = ExtResource("2_hen5o")
-
-[node name="TurnSprite" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("3_6dy8m")

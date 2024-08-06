@@ -62,7 +62,9 @@ func turn_keeper():
 		current_character.shield_turn_tracker()
 		current_character.stagger_turn_tracker()
 		enemy_ai(current_character)
-		
+	elif current_character.is_in_group("allys"):
+		pass
+	
 	active_player_highlighter()
 
 func active_player_highlighter():
@@ -122,19 +124,16 @@ func _on_back_pressed():
 
 func _on_default_pressed():
 	target_confirmation_check.clear()
-	arrow_logic.arrow_clear()
 	arrow_logic.arrow_initializer(current_character.default_attack_targeting)
 	set_state(State.DEFAULT)
 
 func _on_skill_1_pressed():
 	target_confirmation_check.clear()
-	arrow_logic.arrow_clear()
 	arrow_logic.arrow_initializer(current_character.skill_one_targeting)
 	set_state(State.SKILLONE)
 
 func _on_skill_2_pressed():
 	target_confirmation_check.clear()
-	arrow_logic.arrow_clear()
 	arrow_logic.arrow_initializer(current_character.skill_two_targeting)
 	set_state(State.SKILLTWO)
 
@@ -222,7 +221,7 @@ func the_attack_step(defender):
 			attack_container.visible = false
 			action_container.visible = true
 			action_counter()
-			current_turn_container.get_child(0).queue_free()
+			current_turn_container.get_child(0).free()
 			turn_queue.characters_array.pop_front()
 			set_state(State.SELECTING)
 			turn_queue.next_character()
@@ -232,10 +231,15 @@ func the_attack_step(defender):
 			attack_container.visible = false
 			action_container.visible = true
 			action_counter()
-			current_turn_container.get_child(0).queue_free()
+			print("Current turn container before " + str(current_turn_container.get_children().size()))
+			current_turn_container.get_child(0).free()
+			print("Current turn container after " + str(current_turn_container.get_children().size()))
 			turn_queue.characters_array.pop_front()
 			set_state(State.SELECTING)
+			print("This is 2")
 			turn_queue.next_character()
+	print("This is 3")
+	current_character.buff_incrementer(current_character)
 	turn_keeper()
 
 func enemy_ai(body):
@@ -248,8 +252,6 @@ func enemy_ai(body):
 	current_turn_container.get_child(0).free()
 
 	turn_queue.characters_array.pop_front()
-	print("Current Turn Container is: " + str(current_turn_container.get_children()))
-	print("Character array is: " + str(turn_queue.characters_array))
 	turn_queue.next_character()
 	turn_keeper()
 
@@ -396,3 +398,7 @@ func stamina_checker():
 func character_died(body):
 	print("a character has died")
 	queue_and_array_remover(body)
+
+func character_speed_change(_body):
+	print("New zoom on dude")
+	turn_panel.change_order()

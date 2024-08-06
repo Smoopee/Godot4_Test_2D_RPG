@@ -14,69 +14,56 @@ var enemy_sprite = load("res://scenes/TBScenes/enemy_turn_sprite_panel.tscn")
 
 var turn_list_array = []
 var next_turn_list_array = []
-var turn_sprite
-var zindex_setter = 9
+var zSetter = 9
+
 
 func _ready():
-	#CURRENT TURN CREATOR ON STARTUP--------------------------------------------
-	turn_list_array = turn_queue.characters_array
-	for i in turn_list_array.size():
-		if turn_list_array[i].get_parent() == enemies:
-			turn_sprite = enemy_sprite.instantiate()
-		
-		if turn_list_array[i].get_parent() == party_members:
-			turn_sprite = player_sprite.instantiate()
-
-		current_turn_container.add_child(turn_sprite)
-		turn_sprite.z_index = zindex_setter
-		zindex_setter -=1
-	#NEXT TURN CREATOR ON STARTUP-----------------------------------------------
-	next_turn_list_array = turn_queue.next_turn_characters_array
-	zindex_setter = 9
-	for i in next_turn_list_array.size():
-		if next_turn_list_array[i].get_parent() == enemies:
-			turn_sprite = enemy_sprite.instantiate()
-		
-		if next_turn_list_array[i].get_parent() == party_members:
-			turn_sprite = player_sprite.instantiate()
-
-		next_turn_container.add_child(turn_sprite)
-		turn_sprite.z_index = zindex_setter
-		zindex_setter -=1
+	create_turn_panel()
+	create_next_turn_panel()
 
 func create_turn_panel():
+	zSetter = 9 
 	turn_label_changer()
-	turn_list_array = turn_queue.characters_array
-	zindex_setter = 9
-	for i in turn_list_array.size():
-		if turn_list_array[i].get_parent() == enemies:
-			turn_sprite = enemy_sprite.instantiate()
+	for n in current_turn_container.get_children():
+		n.free()
 		
-		if turn_list_array[i].get_parent() == party_members:
-			turn_sprite = player_sprite.instantiate()
-			
-		current_turn_container.add_child(turn_sprite)
-		turn_sprite.z_index = zindex_setter
-		zindex_setter -=1
+	turn_list_array = turn_queue.characters_array
+	for i in turn_list_array.size():
+		turn_list_array[i].instantiate_turn_sprite(current_turn_container, zSetter)
+		zSetter -= 1
 
 func create_next_turn_panel():
+	zSetter = 9 
 	#CLEARS THE NEXT TURN PANEL------------------------------------------------
 	for n in next_turn_container.get_children():
-		n.queue_free()
+		n.free()
 	#CREATES THE NEXT TURN PAENEL----------------------------------------------
 	next_turn_list_array = turn_queue.next_turn_characters_array
-	zindex_setter = 9
 	for i in next_turn_list_array.size():
-		if next_turn_list_array[i].get_parent() == enemies:
-			turn_sprite = enemy_sprite.instantiate()
-		
-		if next_turn_list_array[i].get_parent() == party_members:
-			turn_sprite = player_sprite.instantiate()
-
-		next_turn_container.add_child(turn_sprite)
-		turn_sprite.z_index = zindex_setter
-		zindex_setter -=1
+		next_turn_list_array[i].instantiate_turn_sprite(next_turn_container, zSetter)
+		zSetter -= 1
 
 func turn_label_changer():
 	current_turn_label.text = "Turn " + str(turn_queue.turn_counter)
-	next_turn_label.text = "Turn " + str(turn_queue.turn_counter + 1)
+	next_turn_label.text = "Turn " + str(turn_queue.turn_counter+1)
+
+func change_order():
+	print("This is 1")
+	turn_queue.new_list()
+	turn_list_array = turn_queue.characters_array
+	print("The characters array is " + str(turn_list_array.size()))
+	zSetter = 9
+	for n in current_turn_container.get_children():
+		n.free()
+	for i in turn_list_array.size():
+		turn_list_array[i].instantiate_turn_sprite(current_turn_container, zSetter)
+		zSetter -= 1
+	
+	next_turn_list_array = turn_queue.next_turn_characters_array
+	zSetter = 9 
+	for n in next_turn_container.get_children():
+		n.free()
+	for i in next_turn_list_array.size():
+		next_turn_list_array[i].instantiate_turn_sprite(next_turn_container, zSetter)
+		zSetter -= 1
+	
