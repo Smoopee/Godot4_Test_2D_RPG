@@ -22,8 +22,7 @@ DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 
 [display]
 
-window/stretch/mode="canvas_items"
-window/stretch/scale=1.14
+window/stretch/scale=1.85
 
 [editor]
 

@@ -1,10 +1,12 @@
-extends AnimatedSprite2D
+extends Control
 
 var drizzle_scene = load("res://scenes/TBScenes/SkillsAndAttacks/drizzle.tscn")
 var mist_scene = load("res://scenes/TBScenes/SkillsAndAttacks/mist.tscn")
 var turn_sprite_scene = load("res://scenes/TBScenes/Player/TurnSprites/water_djinn_turn_sprite.tscn")
+@onready var animated_sprite = $AnimatedSprite2D
 
-@onready var player_panel = $"../../CanvasLayer/PlayerPanel"
+
+
 
 #DECLARES AND SETS STATES-------------------------------------------------------
 enum State{
@@ -54,13 +56,21 @@ var skill_two
 #DEFAULT ATTACK SETUP-----------------------------------------------------------
 var default_attack_targeting: String = "Single"
 
+var player_panel
+
 func _ready():
+	player_panel = $"../../../../../PlayerPanel"
+	
 	set_state(State.ALIVE)
 	Global.change_max_player3_health(max_health)
 	Global.change_max_player3_mana(max_mana)
 	Global.change_max_player3_stamina(max_stamina)
 	instantiate_skill_one()
 	instantiate_skill_two()
+
+func _process(_delta):
+	animated_sprite.scale.x = get_viewport().size.x * 0.002
+	animated_sprite.scale.y = get_viewport().size.y * 0.002
 
 func get_speed():
 	return speed

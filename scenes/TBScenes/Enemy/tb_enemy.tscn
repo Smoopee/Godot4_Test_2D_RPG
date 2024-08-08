@@ -13,6 +13,9 @@
 [ext_resource type="Texture2D" uid="uid://lqqtfcs2184e" path="res://art/UI/PlayerElements/lightning_symbol.png" id="12_y74ia"]
 [ext_resource type="Texture2D" uid="uid://rxtvbxbdapk3" path="res://art/UI/PlayerElements/flame_symbol.png" id="13_cmlqj"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fk51n"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_gchnl"]
 atlas = ExtResource("1_eafc6")
 region = Rect2(0, 64, 32, 32)
@@ -124,70 +127,83 @@ animations = [{
 "speed": 9.0
 }]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fk51n"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-
-[node name="TBEnemy" type="Node2D" groups=["enemy"]]
+[node name="TBEnemy" type="Panel" groups=["enemy"]]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.0267379, 0.0503608)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
 script = ExtResource("1_r8u4j")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_lvimw")
-animation = &"idle"
-autoplay = "idle"
-frame_progress = 0.971111
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+offset_top = -138.997
+offset_right = 18.0
+offset_bottom = -112.997
+scale = Vector2(62.9335, 17.0638)
 
-[node name="TBEnemyHealthBar" type="TextureProgressBar" parent="."]
-offset_left = -9.0
-offset_top = -12.0
-offset_right = 9.0
-offset_bottom = -8.0
+[node name="ElementalIndicators" type="Panel" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.25
+theme_override_styles/panel = SubResource("StyleBoxFlat_fk51n")
+
+[node name="Water" type="Sprite2D" parent="VBoxContainer/ElementalIndicators"]
+visible = false
+position = Vector2(2.81149, 1.88778)
+scale = Vector2(0.171488, 0.171488)
+texture = ExtResource("11_tdrsx")
+
+[node name="Electric" type="Sprite2D" parent="VBoxContainer/ElementalIndicators"]
+visible = false
+position = Vector2(8.43448, 1.88778)
+scale = Vector2(0.0110275, 0.0110275)
+texture = ExtResource("12_y74ia")
+
+[node name="Fire" type="Sprite2D" parent="VBoxContainer/ElementalIndicators"]
+visible = false
+position = Vector2(14.9946, 1.88778)
+scale = Vector2(0.05594, 0.05594)
+texture = ExtResource("13_cmlqj")
+
+[node name="TBEnemyHealthBar" type="TextureProgressBar" parent="VBoxContainer"]
+layout_mode = 2
 max_value = 1000.0
 texture_under = ExtResource("2_4iabe")
 texture_progress = ExtResource("3_tqku4")
 
-[node name="TBEnemyShieldBar" type="TextureProgressBar" parent="."]
-offset_left = -9.0
-offset_top = -12.0
-offset_right = 9.0
-offset_bottom = -8.0
+[node name="TBEnemyShieldBar" type="TextureProgressBar" parent="VBoxContainer/TBEnemyHealthBar"]
+z_index = 1
+layout_mode = 2
+offset_top = 14.0
+offset_right = 18.0
+offset_bottom = 18.0
 texture_progress = ExtResource("7_qgkds")
 script = ExtResource("6_wx12e")
 
-[node name="TBEnemyStaggerBar" type="TextureProgressBar" parent="."]
-offset_left = -9.0
-offset_top = -7.0
-offset_right = 9.0
-offset_bottom = -5.0
+[node name="TBEnemyStaggerBar" type="TextureProgressBar" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.8
+max_value = 300.0
 texture_under = ExtResource("7_67fok")
 texture_progress = ExtResource("8_nj82c")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(561.001, 357.421)
+scale = Vector2(28.7907, 13.9172)
+sprite_frames = SubResource("SpriteFrames_lvimw")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.971111
 
 [node name="DeadSprite" type="Sprite2D" parent="."]
 visible = false
 rotation = 1.1188
 texture = ExtResource("6_1ddun")
 
-[node name="Panel" type="Panel" parent="."]
-offset_left = -19.0
-offset_top = -19.0
-offset_right = 9.0
-offset_bottom = -13.0
-scale = Vector2(1.34685, 1.34685)
-theme_override_styles/panel = SubResource("StyleBoxFlat_fk51n")
-
-[node name="Water" type="Sprite2D" parent="Panel"]
-visible = false
-position = Vector2(8, 2)
-scale = Vector2(0.171488, 0.171488)
-texture = ExtResource("11_tdrsx")
-
-[node name="Electric" type="Sprite2D" parent="Panel"]
-visible = false
-position = Vector2(14, 2)
-scale = Vector2(0.0110275, 0.0110275)
-texture = ExtResource("12_y74ia")
-
-[node name="Fire" type="Sprite2D" parent="Panel"]
-visible = false
-position = Vector2(20, 2)
-scale = Vector2(0.05594, 0.05594)
-texture = ExtResource("13_cmlqj")
+[connection signal="resized" from="." to="." method="_on_resized"]

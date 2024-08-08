@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 var power: int = 10
 var multi_attack_power = 0
-var mana_cost: int = 60
+var mana_cost: int = 30
 var hit_rate: float = .95
 var target_selection: String = "Single"
 var elemental_typing: String = "Fire"

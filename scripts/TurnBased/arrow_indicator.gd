@@ -1,4 +1,4 @@
-extends Sprite2D
+extends Panel
 
 @onready var animation_player = $AnimationPlayer
 

@@ -1,26 +1,32 @@
-[gd_scene load_steps=5 format=3 uid="uid://ds5lklr0wjo2o"]
+[gd_scene load_steps=4 format=3 uid="uid://ds5lklr0wjo2o"]
 
 [ext_resource type="Texture2D" uid="uid://cpow0nsh7huq8" path="res://art/TBCharacters/PlayerCharacter/flame_sprite.png" id="1_djwqm"]
 [ext_resource type="Script" path="res://scripts/TurnBased/Player/player2_for_turn_base.gd" id="2_hen5o"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wro3d"]
-atlas = ExtResource("1_djwqm")
-region = Rect2(0, 0, 64, 67)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_vtrdt"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_uqhpk"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_wro3d")
+"texture": ExtResource("1_djwqm")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
 }]
 
-[node name="Player2ForTurnBase" type="AnimatedSprite2D"]
+[node name="Player2ForTurnBase" type="Control" groups=["player"]]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(0.4, 0.4)
-sprite_frames = SubResource("SpriteFrames_vtrdt")
-autoplay = "default"
-frame_progress = 0.591092
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("2_hen5o")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_uqhpk")

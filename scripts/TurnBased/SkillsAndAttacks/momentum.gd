@@ -14,6 +14,7 @@ var attack_type: String = "Pool"
 var animation_lok = true
 var spell_name = "Momentum"
 
+var player_group = []
 
 func _ready():
 	visible = false
@@ -31,30 +32,37 @@ func start_cast_path():
 		animation_lok = false
 		await get_tree().create_timer(1).timeout
 
-func cast_skill(caster = null, target = null):
+func get_group_array():
+	player_group = []
+	for node in get_tree().get_nodes_in_group("player"):
+		player_group.push_front(node)
+
+func cast_skill(_caster = null, target = null):
+	get_group_array()
+	
 	var momentum_buff = momentum_buff_scene
 
-	var current_player_index = target.get_index()
+	var current_player_index = player_group.find(target)
 	var right_player_index = current_player_index + 1
 	var left_player_index = current_player_index - 1
 	
-	if right_player_index + 1 > target.get_parent().get_children().size():
+	if right_player_index + 1 > player_group.size():
 		right_player_index = 0
 	
 	if current_player_index - 1 < 0:
-		left_player_index = target.get_parent().get_children().size()-1
+		left_player_index = player_group.size()-1
 	
-	target.get_parent().get_child(current_player_index).add_child(momentum_buff.instantiate())
+	player_group[current_player_index].add_child(momentum_buff.instantiate())
 	print("Target's children are " + str(target.get_node("MomentumBuff")))
 	target.get_node("MomentumBuff").speed_buff = 50
-	target.get_parent().get_child(current_player_index).change_speed(50)
+	player_group[current_player_index].change_speed(50)
 	
 	if right_player_index != current_player_index:
-		target.get_parent().get_child(right_player_index).add_child(momentum_buff.instantiate())
-		target.get_parent().get_child(right_player_index).get_node("MomentumBuff").speed_buff = 25
-		target.get_parent().get_child(right_player_index).change_speed(25)
+		player_group[right_player_index].add_child(momentum_buff.instantiate())
+		player_group[right_player_index].get_node("MomentumBuff").speed_buff = 25
+		player_group[right_player_index].change_speed(25)
 	if left_player_index != current_player_index:
-		target.get_parent().get_child(left_player_index).add_child(momentum_buff.instantiate())
-		target.get_parent().get_child(left_player_index).get_node("MomentumBuff").speed_buff = 25
-		target.get_parent().get_child(left_player_index).change_speed(25)
+		player_group[left_player_index].add_child(momentum_buff.instantiate())
+		player_group[left_player_index].get_node("MomentumBuff").speed_buff = 25
+		player_group[left_player_index].change_speed(25)
 

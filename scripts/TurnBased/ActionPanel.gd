@@ -4,21 +4,20 @@ extends Panel
 @onready var action_container = $ActionContainer
 @onready var attack_container = $AttackContainer
 @onready var evasion_container = $EvasionContainer
-@onready var arrow_logic = $"../../ArrowLogic"
+@onready var arrow_logic = $"../ArrowLogic"
 
-@onready var enemies = $"../../Enemies"
+@onready var enemies = $"../Enemies"
+
+
 
 #PLAYERS PARTY------------------------------------------------------------------
-@onready var player_1 = $"../../PartyMembers/Player1ForTurnBase"
-@onready var player_2 = $"../../PartyMembers/Player2ForTurnBase"
-@onready var player_3 = $"../../PartyMembers/Player3ForTurnBase"
 @onready var active_character_highlighter1 = $"../PlayerPanel/PartyMember1/ActiveCharacterHighlighter"
 @onready var active_character_highlighter2 = $"../PlayerPanel/PartyMember2/ActiveCharacterHighlighter"
 @onready var active_character_highlighter3 = $"../PlayerPanel/PartyMember3/ActiveCharacterHighlighter"
 
 
-@onready var turn_queue = $"../../TurnQueue"
-@onready var party_members = $"../../PartyMembers"
+@onready var turn_queue = $"../TurnQueue"
+@onready var party_members = $"../PartyMembers"
 
 
 @onready var turn_panel = $"../TurnPanel"
@@ -44,14 +43,33 @@ func set_state(new_state):
 	if new_state == current_state:
 		return
 	current_state = new_state
+	
+enum Mode{
+	BATTLE,
+	INSPECTOR,
+}
+
+var current_mode: int = -1: set = set_mode
+
+func set_mode(new_mode):
+	if new_mode == current_mode:
+		return
+	current_mode = new_mode
 
 #SCRIPT WIDE VARIABLES----------------------------------------------------------
 var current_character 
 var target_confirmation_check = []
 var rng = RandomNumberGenerator.new()
 
+var player_1
+var player_2
+var player_3
 
 func _ready():
+	player_1 = party_members.players_array[0]
+	player_2 = party_members.players_array[1]
+	player_3 = party_members.players_array[2]
+	set_mode(Mode.BATTLE)
 	turn_keeper()
 
 func turn_keeper():
@@ -139,42 +157,45 @@ func _on_skill_2_pressed():
 
 #ENEMY BUTTONS------------------------------------------------------------------
 func button_handler(body):
+	print("The target parent is " + str(body.get_parent()))
 	if dead_checker(body): return
 	if target_confirmation_checker(body):
 		the_attack_step(body)
 
 
-func _on_button_pressed():
-	button_handler(enemies.get_child(0))
+func _on_enemy_1_pressed():
+	button_handler(enemies.enemies_array[0])
+	print("Pressed Enemy 1 Button")
 
-func _on_button_2_pressed():
-	button_handler(enemies.get_child(1))
+func _on_enemy_2_pressed():
+	button_handler(enemies.enemies_array[1])
+	print("Pressed Enemy 5 Button")
 
+func _on_enemy_3_pressed():
+	button_handler(enemies.enemies_array[2])
+	print("Pressed Enemy 2 Button")
 
-func _on_button_3_pressed():
-	button_handler(enemies.get_child(2))
+func _on_enemy_4_pressed():
+	button_handler(enemies.enemies_array[3])
+	print("Pressed Enemy 4 Button")
 
-
-func _on_button_4_pressed():
-	button_handler(enemies.get_child(3))
-
-
-func _on_button_5_pressed():
-	button_handler(enemies.get_child(4))
-
+func _on_enemy_5_pressed():
+	button_handler(enemies.enemies_array[4])
+	print("Pressed Enemy 3 Button")
 
 #PARTY MEMBER BUTTONS-----------------------------------------------------------
 
-func _on_player_1_button_pressed():
-	button_handler(party_members.get_child(0))
+func _on_player_1_pressed():
+	print("Player 1 Button has been pressed")
+	button_handler(party_members.players_array[0])
 
+func _on_player_2_pressed():
+	print("Player 2 Button has been pressed")
+	button_handler(party_members.players_array[1])
 
-func _on_player_2_button_pressed():
-	button_handler(party_members.get_child(1))
-
-
-func _on_player_3_button_pressed():
-	button_handler(party_members.get_child(2))
+func _on_player_3_pressed():
+	print("Player 3 Button has been pressed")
+	button_handler(party_members.players_array[2])
 
 
 func target_confirmation_checker(test):
@@ -244,8 +265,14 @@ func the_attack_step(defender):
 
 func enemy_ai(body):
 	body.debuff_incrementer(body)
-	var random = rng.randi_range(0, party_members.get_child_count()-1)
-	var enemy_target = party_members.get_children()[random]
+	var possible_targets = []
+	
+	for i in party_members.players_array:
+		if i.current_state == 1:
+			possible_targets.push_back(i)
+	
+	var random = rng.randi_range(0, possible_targets.size()-1)
+	var enemy_target = possible_targets[random]
 	if enemy_target.is_dodging == false:
 		enemy_target.change_health(-current_character.attack)
 
@@ -306,13 +333,13 @@ func skill_one_attack_step(defender):
 			current_character.instantiate_skill_one()
 			current_character.change_mana(-current_character.skill_one_mana_cost)
 			
-			for i in enemies.get_children().size():
-			
+			for i in enemies.enemies_array.size():
+				print("Enemy is " + str(enemies.enemies_array[i]))
 			#SKIPS DEAD ENEMIES
-				if enemies.get_child(i).current_state == 0:
+				if enemies.enemies_array[i].current_state == 0:
 					continue
 				
-				current_character.cast_skill_one(current_character, enemies.get_child(i))
+				current_character.cast_skill_one(current_character, enemies.enemies_array[i])
 					
 		"Friendly_Single":
 			current_character.instantiate_skill_one()
@@ -323,14 +350,14 @@ func skill_one_attack_step(defender):
 			current_character.change_mana(-current_character.skill_one_mana_cost)
 			current_character.cast_skill_one(current_character, defender)
 		"Friendly_AOE":
-			current_character.instantiate_skill_one()
-			current_character.change_mana(-current_character.skill_one_mana_cost)
+			current_character.instantiate_skill_two()
+			current_character.change_mana(-current_character.skill_two_mana_cost)
 			
-			for i in party_members.get_children().size():
+			for i in party_members.players_array.size():
 				
-				if party_members.get_child(i).current_state == 0:
+				if party_members.players_array[i].current_state == 0:
 					continue
-				current_character.cast_skill_one(current_character, party_members.get_child(i))
+				current_character.cast_skill_two(current_character, party_members.players_array[i])
 	
 
 func skill_two_attack_step(defender):
@@ -348,13 +375,13 @@ func skill_two_attack_step(defender):
 			current_character.instantiate_skill_two()
 			current_character.change_mana(-current_character.skill_two_mana_cost)
 			
-			for i in enemies.get_children().size():
-			
+			for i in enemies.enemies_array.size():
+				print("Enemy is " + str(enemies.enemies_array[i]))
 			#SKIPS DEAD ENEMIES
-				if enemies.get_child(i).current_state == 0:
+				if enemies.enemies_array[i].current_state == 0:
 					continue
 				
-				current_character.cast_skill_two(current_character, enemies.get_child(i))
+				current_character.cast_skill_two(current_character, enemies.enemies_array[i])
 		"Friendly_Single":
 			current_character.instantiate_skill_two()
 			current_character.change_mana(-current_character.skill_two_mana_cost)
@@ -367,11 +394,11 @@ func skill_two_attack_step(defender):
 			current_character.instantiate_skill_two()
 			current_character.change_mana(-current_character.skill_two_mana_cost)
 			
-			for i in party_members.get_children().size():
+			for i in party_members.players_array.size():
 				
-				if party_members.get_child(i).current_state == 0:
+				if party_members.players_array[i].current_state == 0:
 					continue
-				current_character.cast_skill_two(current_character, party_members.get_child(i))
+				current_character.cast_skill_two(current_character, party_members.players_array[i])
 
 func mana_checker():
 	match current_state:
@@ -402,3 +429,20 @@ func character_died(body):
 func character_speed_change(_body):
 	print("New zoom on dude")
 	turn_panel.change_order()
+
+
+func _on_inspector_button_pressed():
+	if current_mode == Mode.BATTLE:
+		print("Inspector Mode")
+		set_mode(Mode.INSPECTOR)
+	else: 
+		print("Battle Mode")
+		set_mode(Mode.BATTLE)
+
+
+
+
+
+
+
+

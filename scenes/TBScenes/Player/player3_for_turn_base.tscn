@@ -1,26 +1,32 @@
-[gd_scene load_steps=5 format=3 uid="uid://dmkbogp1yuhqh"]
+[gd_scene load_steps=4 format=3 uid="uid://dmkbogp1yuhqh"]
 
 [ext_resource type="Texture2D" uid="uid://dntnew8jgl8ug" path="res://art/TBCharacters/PlayerCharacter/water_sprite.png" id="1_hcgy4"]
 [ext_resource type="Script" path="res://scripts/TurnBased/Player/player3_for_turn_base.gd" id="2_nckq6"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ts7gf"]
-atlas = ExtResource("1_hcgy4")
-region = Rect2(0, 0, 64, 68)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_vtrdt"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_edkyq"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ts7gf")
+"texture": ExtResource("1_hcgy4")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
 }]
 
-[node name="Player3ForTurnBase" type="AnimatedSprite2D"]
+[node name="Player3ForTurnBase" type="Control" groups=["player"]]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(0.4, 0.4)
-sprite_frames = SubResource("SpriteFrames_vtrdt")
-autoplay = "default"
-frame_progress = 0.591092
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("2_nckq6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_edkyq")

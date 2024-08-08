@@ -1,11 +1,11 @@
-extends AnimatedSprite2D
+extends Control
 
 var skill_one_scene = load("res://scenes/TBScenes/SkillsAndAttacks/lightning_strike.tscn")
 var skill_two_scene = load("res://scenes/TBScenes/SkillsAndAttacks/momentum.tscn")
 var turn_sprite_scene = load("res://scenes/TBScenes/Player/TurnSprites/lightning_djinn_turn_sprite.tscn")
+@onready var animated_sprite = $AnimatedSprite2D
 
 
-@onready var player_panel = $"../../CanvasLayer/PlayerPanel"
 
 
 #DECLARES AND SETS STATES-------------------------------------------------------
@@ -57,15 +57,23 @@ var skill_two
 #DEFAULT ATTACK SETUP-----------------------------------------------------------
 var default_attack_targeting: String = "Single"
 
-
+var player_panel
 
 func _ready():
+
+	player_panel = $"../../../../../PlayerPanel"
+	
+	
 	set_state(State.ALIVE)
 	Global.change_max_player1_health(max_health)
 	Global.change_max_player1_mana(max_mana)
 	Global.change_max_player1_stamina(max_stamina)
 	instantiate_skill_one()
 	instantiate_skill_two()
+	
+func _process(_delta):
+	animated_sprite.scale.x = get_viewport().size.x * 0.002
+	animated_sprite.scale.y = get_viewport().size.y * 0.002
 
 func get_speed():
 	return speed
@@ -80,6 +88,7 @@ func change_health(value):
 		print("Your character DIED!")
 
 func change_mana(value):
+	print("player panel is " + str(player_panel))
 	Global.change_mana_player1(value)
 	player_panel.change_mana(1)
 	mana += value

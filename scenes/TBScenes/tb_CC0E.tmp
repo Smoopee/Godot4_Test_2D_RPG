@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dt7ja5b3owfqv"]
+[gd_scene load_steps=25 format=3 uid="uid://dt7ja5b3owfqv"]
 
 [ext_resource type="Script" path="res://scripts/TurnBased/enemy_spawner.gd" id="1_j5o40"]
 [ext_resource type="Script" path="res://scripts/TurnBased/TurnQueue.gd" id="1_kroxe"]
@@ -11,8 +11,11 @@
 [ext_resource type="Texture2D" uid="uid://7dfhjd0uftom" path="res://art/UI/PlayerElements/ManaBarMiniProgress.png" id="9_1gxnj"]
 [ext_resource type="Script" path="res://scripts/TurnBased/ActionPanel.gd" id="9_173tm"]
 [ext_resource type="Texture2D" uid="uid://kfiqdsbxtkh2" path="res://art/UI/PlayerElements/player_stamina_bar.png" id="11_2dv0h"]
+[ext_resource type="PackedScene" uid="uid://bngjrj485gceu" path="res://scenes/TBScenes/Player/player1_for_turn_base.tscn" id="12_pink3"]
+[ext_resource type="PackedScene" uid="uid://ds5lklr0wjo2o" path="res://scenes/TBScenes/Player/player2_for_turn_base.tscn" id="13_52r2e"]
 [ext_resource type="Script" path="res://scripts/TurnBased/UI/ArrowLogic.gd" id="13_ee0yq"]
 [ext_resource type="FontFile" uid="uid://cthyendgiwi28" path="res://art/Fonts/Xolonium-Regular.ttf" id="14_pythc"]
+[ext_resource type="PackedScene" uid="uid://dmkbogp1yuhqh" path="res://scenes/TBScenes/Player/player3_for_turn_base.tscn" id="14_ukkdm"]
 [ext_resource type="Texture2D" uid="uid://dsb4hmpy4ojjb" path="res://art/UI/TBBattleArena/magnifying_glass.png" id="15_ugiav"]
 
 [sub_resource type="Theme" id="Theme_g7xpf"]
@@ -74,7 +77,7 @@ size_flags_vertical = 3
 [node name="Spacer2" type="Panel" parent="PositionContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 2.0
+size_flags_stretch_ratio = 2.36
 
 [node name="PlayerSpawnLocation" type="GridContainer" parent="PositionContainer/HBoxContainer"]
 layout_mode = 2
@@ -99,12 +102,11 @@ size_flags_vertical = 3
 [node name="Spacer3" type="Panel" parent="PositionContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 1.67
+size_flags_stretch_ratio = 2.56
 
 [node name="EnemySpawnLocation" type="GridContainer" parent="PositionContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 1.55
 columns = 2
 
 [node name="Enemy1" type="Button" parent="PositionContainer/HBoxContainer/EnemySpawnLocation"]
@@ -145,7 +147,7 @@ size_flags_stretch_ratio = 2.25
 [node name="Panel" type="Panel" parent="PositionContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.23
+size_flags_stretch_ratio = 0.11
 
 [node name="PartyMembers" type="Node2D" parent="."]
 visible = false
@@ -153,6 +155,24 @@ z_index = 1
 position = Vector2(20, 28)
 scale = Vector2(3, 3)
 script = ExtResource("2_k2fgy")
+
+[node name="Player1ForTurnBase" parent="PartyMembers" groups=["allys"] instance=ExtResource("12_pink3")]
+offset_left = 46.6667
+offset_top = 50.3333
+offset_right = 46.6667
+offset_bottom = 50.3333
+
+[node name="Player2ForTurnBase" parent="PartyMembers" groups=["allys"] instance=ExtResource("13_52r2e")]
+offset_left = 20.6667
+offset_top = 68.0
+offset_right = 20.6667
+offset_bottom = 68.0
+
+[node name="Player3ForTurnBase" parent="PartyMembers" groups=["allys"] instance=ExtResource("14_ukkdm")]
+offset_left = 52.0
+offset_top = 86.0
+offset_right = 52.0
+offset_bottom = 86.0
 
 [node name="Enemies" type="Node" parent="."]
 script = ExtResource("1_j5o40")
@@ -397,27 +417,27 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -137.0
-offset_top = -127.0
-offset_right = -88.0
-offset_bottom = -55.9999
+offset_left = -150.0
+offset_top = -157.0
+offset_right = -101.0
+offset_bottom = -85.9999
 grow_horizontal = 0
 grow_vertical = 0
-scale = Vector2(2.61526, 1.63471)
+scale = Vector2(2.94469, 2.07483)
 theme_override_styles/panel = SubResource("StyleBoxFlat_j8i0i")
 script = ExtResource("9_173tm")
 
 [node name="ActionContainer" type="VBoxContainer" parent="ActionPanel"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 2
+anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = 1.0
-offset_right = 84.0
-offset_bottom = 162.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.361698, 0.298095)
+offset_left = 1.0
+offset_top = -71.0
+offset_right = 79.0
+offset_bottom = 126.0
+grow_vertical = 0
+scale = Vector2(0.592595, 0.374542)
 
 [node name="Attack" type="Button" parent="ActionPanel/ActionContainer"]
 layout_mode = 2
@@ -438,16 +458,14 @@ text = "Item
 [node name="AttackContainer" type="VBoxContainer" parent="ActionPanel"]
 visible = false
 layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
+anchors_preset = 2
+anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 1.0
-offset_top = 2.0
-offset_right = 95.0
-offset_bottom = 147.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.32426, 0.321767)
+offset_top = -71.0
+offset_right = 78.0
+offset_bottom = 183.0
+grow_vertical = 0
+scale = Vector2(0.610591, 0.291148)
 localize_numeral_system = false
 
 [node name="Default" type="Button" parent="ActionPanel/AttackContainer"]
@@ -481,16 +499,10 @@ text = "Back
 
 [node name="EvasionContainer" type="VBoxContainer" parent="ActionPanel"]
 visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 2.0
-offset_right = 57.0
-offset_bottom = 202.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.452066, 0.245038)
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 236.0
+scale = Vector2(0.594282, 0.292845)
 
 [node name="Sprint" type="Button" parent="ActionPanel/EvasionContainer"]
 layout_mode = 2
@@ -561,7 +573,6 @@ script = ExtResource("13_ee0yq")
 [node name="PlayerArrows" type="Node" parent="ArrowLogic"]
 
 [node name="InormationContainer" type="VBoxContainer" parent="."]
-visible = false
 layout_mode = 0
 offset_left = 879.0
 offset_top = 83.0
@@ -569,7 +580,6 @@ offset_right = 919.0
 offset_bottom = 123.0
 scale = Vector2(6.83627, 8.87097)
 
-[connection signal="resized" from="PositionContainer" to="ArrowLogic" method="_on_position_container_resized"]
 [connection signal="pressed" from="PositionContainer/HBoxContainer/PlayerSpawnLocation/Player1" to="ActionPanel" method="_on_player_1_pressed"]
 [connection signal="pressed" from="PositionContainer/HBoxContainer/PlayerSpawnLocation/Player2" to="ActionPanel" method="_on_player_2_pressed"]
 [connection signal="pressed" from="PositionContainer/HBoxContainer/PlayerSpawnLocation/Player3" to="ActionPanel" method="_on_player_3_pressed"]

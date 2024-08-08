@@ -1,15 +1,20 @@
-extends Node2D
+extends Control
 
 var turn_sprite_scene = load("res://scenes/TBScenes/enemy_turn_sprite_panel.tscn")
 
-@onready var tb_enemy_health_bar = $TBEnemyHealthBar
-@onready var animated_sprite= $AnimatedSprite2D
+@onready var tb_enemy_health_bar = $VBoxContainer/TBEnemyHealthBar
+@onready var animated_sprite = $AnimatedSprite2D
+
 @onready var dead_sprite = $DeadSprite
-@onready var tb_enemy_shield_bar = $TBEnemyShieldBar
-@onready var tb_enemy_stagger_bar = $TBEnemyStaggerBar
-@onready var water = $Panel/Water
-@onready var electric = $Panel/Electric
-@onready var fire = $Panel/Fire
+@onready var tb_enemy_shield_bar = $VBoxContainer/TBEnemyHealthBar/TBEnemyShieldBar
+
+
+@onready var tb_enemy_stagger_bar = $VBoxContainer/TBEnemyStaggerBar
+@onready var water = $VBoxContainer/ElementalIndicators/Water
+@onready var electric = $VBoxContainer/ElementalIndicators/Electric
+@onready var fire = $VBoxContainer/ElementalIndicators/Fire
+
+
 
 
 
@@ -27,6 +32,8 @@ var is_dodging: bool = false
 var shield_tracker: int = 0
 var stagger_tracker: int = 0
 
+var enemy_group = []
+
 #DECLARES AND SETS STATES-------------------------------------------------------
 enum State{
 	DEAD,
@@ -39,6 +46,7 @@ func set_state(new_state):
 	if new_state == current_state:
 		return
 	current_state = new_state
+
 #-------------------------------------------------------------------------------
 func _ready():
 	set_state(State.ALIVE)
@@ -46,6 +54,24 @@ func _ready():
 	tb_enemy_health_bar.value = health
 	tb_enemy_shield_bar.value = shield
 	tb_enemy_stagger_bar.value = 0
+
+func _on_resized():
+	if animated_sprite == null: return
+	animated_sprite.scale.x = get_viewport().size.x * 0.04
+	animated_sprite.scale.y = get_viewport().size.y * 0.04
+	animated_sprite.position.x = get_viewport().size.x * .5
+	animated_sprite.position.y = get_viewport().size.y * .5
+	tb_enemy_health_bar.scale.x = get_viewport().size.x * 0.0009
+	tb_enemy_health_bar.scale.y = get_viewport().size.y * 0.002
+	tb_enemy_stagger_bar.scale.x = get_viewport().size.x * 0.0009
+	tb_enemy_stagger_bar.scale.y = get_viewport().size.y * 0.002
+	electric.scale.x = get_viewport().size.x * 0.00002
+	electric.scale.y = get_viewport().size.y * 0.00003
+	fire.scale.x = get_viewport().size.x * 0.0001
+	fire.scale.y = get_viewport().size.y * 0.0002
+	water.scale.x = get_viewport().size.x * 0.0002
+	water.scale.y = get_viewport().size.y * 0.0003
+
 
 func get_speed():
 	return speed
@@ -125,6 +151,10 @@ func debuff_incrementer(body):
 	for i in children_in_group:
 		i.turn_expiration(body)
 
+func get_group_array():
+	enemy_group = []
+	for node in get_tree().get_nodes_in_group("enemy"):
+		enemy_group.push_front(node)
 #ELEMENTAL REACTIONS-----------------------------------------------------------
 var water_application = 0
 var electric_application = 0
@@ -154,6 +184,11 @@ func add_electric_application(value, power):
 		water_application -= 1
 		electric_application -= 1
 		zapped(power)
+	
+	if fire_application > 0:
+		fire_application -= 1
+		electric_application -= 1
+		overcharge(power)
 		
 	elemental_symbol_checker()
 		
@@ -165,6 +200,11 @@ func add_fire_application(value, power, damage):
 		water_application -= 1
 		fire_application -= 1
 		boil(power, damage)
+		
+	if electric_application > 0:
+		electric_application -= 1
+		fire_application -= 1
+		overcharge(power)
 	
 	elemental_symbol_checker()
 
@@ -179,27 +219,28 @@ func elemental_symbol_checker():
 		fire.visible = false
 
 func zapped(power):
+	get_group_array()
+	print("Enemy group is: " + str(enemy_group))
 	var damage = power * 10
 	
-	var current_enemy_index = self.get_index()
+	var current_enemy_index = enemy_group.find(self)
 	var right_enemy_index = current_enemy_index + 1
 	var left_enemy_index = current_enemy_index - 1
 	
-	if right_enemy_index + 1 > self.get_parent().get_children().size():
+	if right_enemy_index + 1 > enemy_group.size():
 		right_enemy_index = 0
 	
 	if current_enemy_index - 1 < 0:
-		left_enemy_index = self.get_parent().get_children().size()-1
+		left_enemy_index = enemy_group.size()-1
 		
 	change_health(-damage)
-	
-	print("Self is: " + str(self))
-	
+
+
 	if right_enemy_index != current_enemy_index:
-		self.get_parent().get_child(right_enemy_index).change_health(-damage)
+		enemy_group[right_enemy_index].change_health(-damage)
 	
 	if left_enemy_index != current_enemy_index:
-		self.get_parent().get_child(left_enemy_index).change_health(-damage)
+		enemy_group[left_enemy_index].change_health(-damage)
 	
 	print("You got zapped for: " + str(damage))
 
@@ -208,8 +249,20 @@ func boil(power, damage):
 	change_health(-boil_damage)
 	print("You've been boiled for: " + str(boil_damage))
 
+func overcharge(power):
+	var overcharge_damage = power * 10
+	for i in enemy_group.size():
+		enemy_group[i].change_shield(-overcharge_damage)
+		enemy_group[i].change_stagger(-overcharge_damage)
+		print("You've been hit for overcharge damage of: " + str(overcharge_damage))
 
 func instantiate_turn_sprite(target, zSetter):
 	var turn_sprite = turn_sprite_scene.instantiate()
 	target.add_child(turn_sprite)
 	turn_sprite.z_index = zSetter
+
+
+
+
+
+

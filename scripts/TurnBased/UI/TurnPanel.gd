@@ -3,13 +3,15 @@ extends Panel
 var player_sprite = load("res://scenes/TBScenes/player_turn_sprite_panel.tscn")
 var enemy_sprite = load("res://scenes/TBScenes/enemy_turn_sprite_panel.tscn")
 
-@onready var enemies = $"../../Enemies"
-@onready var party_members = $"../../PartyMembers"
-@onready var turn_queue = $"../../TurnQueue"
+@onready var enemies = $"../Enemies"
+@onready var party_members = $"../PartyMembers"
+
+
+@onready var turn_queue = $"../TurnQueue"
 @onready var current_turn_container = $CurrentTurnContainer
 @onready var next_turn_container = $NextTurnContainer
-@onready var current_turn_label = $CurrentTurnLabel
 @onready var next_turn_label = $NextTurnLabel
+@onready var current_turn_label = $CurrentTurnLabel
 
 
 var turn_list_array = []

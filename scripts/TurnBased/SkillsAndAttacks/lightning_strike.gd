@@ -12,6 +12,7 @@ var attack_type: String = "Bolt"
 var animation_lok = true
 var spell_name = "Lightning Strike"
 
+var enemy_group
 func _ready():
 	visible = false
 
@@ -27,24 +28,37 @@ func start_cast_path():
 		await get_tree().create_timer(1).timeout
 		queue_free()
 
+func get_group_array():
+	enemy_group = []
+	for node in get_tree().get_nodes_in_group("enemy"):
+		enemy_group.push_front(node)
+
+
 func cast_skill(caster = null, target = null):
+	
+	get_group_array()
+	
+	print("Enemies " + str(enemy_group))
+	
 	var elemental_reaction_power = caster.reaction_power
-	var current_enemy_index = target.get_index()
+	var current_enemy_index = enemy_group.find(target)
 	var right_enemy_index = current_enemy_index + 1
 	var left_enemy_index = current_enemy_index - 1
 	
-	if right_enemy_index + 1 > target.get_parent().get_children().size():
+	
+
+	if right_enemy_index + 1 > enemy_group.size():
 		right_enemy_index = 0
 	
 	if current_enemy_index - 1 < 0:
-		left_enemy_index = target.get_parent().get_children().size()-1
-	
-	target.get_parent().get_child(current_enemy_index).change_health(-caster.skill_one_single_damage)
-	target.get_parent().get_child(current_enemy_index).add_electric_application(elemental_intensity, elemental_reaction_power)
+		left_enemy_index = enemy_group.size()-1
+
+	target.change_health(-caster.skill_one_single_damage)
+	target.add_electric_application(elemental_intensity, elemental_reaction_power)
 	if right_enemy_index != current_enemy_index:
-		target.get_parent().get_child(right_enemy_index).change_health(-caster.skill_one_multi_damage)
-		target.get_parent().get_child(right_enemy_index).add_electric_application(elemental_intensity, elemental_reaction_power)
+		enemy_group[right_enemy_index].change_health(-caster.skill_one_multi_damage)
+		enemy_group[right_enemy_index].add_electric_application(elemental_intensity, elemental_reaction_power)
 	if left_enemy_index != current_enemy_index:
-		target.get_parent().get_child(left_enemy_index).change_health(-caster.skill_one_multi_damage)
-		target.get_parent().get_child(left_enemy_index).add_electric_application(elemental_intensity, elemental_reaction_power)
+		enemy_group[left_enemy_index].change_health(-caster.skill_one_multi_damage)
+		enemy_group[left_enemy_index].add_electric_application(elemental_intensity, elemental_reaction_power)
 

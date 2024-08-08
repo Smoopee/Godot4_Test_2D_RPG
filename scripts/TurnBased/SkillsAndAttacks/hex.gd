@@ -33,5 +33,6 @@ func start_cast_path():
 
 func cast_skill(_caster = null, target = null):
 	var hex_debuff = hex_debuff_scene
+	print("hex target is " + str(target))
 	target.add_child(hex_debuff.instantiate())
 	target.attack -= 10

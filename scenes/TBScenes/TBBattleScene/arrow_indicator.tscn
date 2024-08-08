@@ -48,12 +48,22 @@ _data = {
 "stopped": SubResource("Animation_j16p1")
 }
 
-[node name="ArrowIndicator" type="Sprite2D"]
-z_index = 1
+[node name="ArrowIndicator" type="Panel"]
 material = SubResource("CanvasItemMaterial_c2f7k")
-scale = Vector2(1.01021, 0.992844)
-texture = ExtResource("1_d5jqa")
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(0.5, 0.492)
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("2_6k3nk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_d5jqa")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
