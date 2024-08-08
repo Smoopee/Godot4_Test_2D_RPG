@@ -1,4 +1,4 @@
-extends Control
+extends Panel
 
 var skill_one_scene = load("res://scenes/TBScenes/SkillsAndAttacks/lightning_strike.tscn")
 var skill_two_scene = load("res://scenes/TBScenes/SkillsAndAttacks/momentum.tscn")
@@ -71,9 +71,15 @@ func _ready():
 	instantiate_skill_one()
 	instantiate_skill_two()
 	
-func _process(_delta):
-	animated_sprite.scale.x = get_viewport().size.x * 0.002
-	animated_sprite.scale.y = get_viewport().size.y * 0.002
+
+	
+func _on_resized():
+	print("resized")
+	if animated_sprite == null: return
+	
+	animated_sprite.scale.x = get_viewport().size.x * 0.0015
+	animated_sprite.scale.y = get_viewport().size.y * 0.0015
+
 
 func get_speed():
 	return speed
@@ -165,3 +171,6 @@ func buff_incrementer(body):
 			
 	for i in children_in_group:
 		i.turn_expiration(body)
+
+
+

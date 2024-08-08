@@ -2,14 +2,17 @@ extends Control
 
 var turn_sprite_scene = load("res://scenes/TBScenes/enemy_turn_sprite_panel.tscn")
 
+@export var enemy_resource: TBEnemyResource
 @onready var tb_enemy_health_bar = $VBoxContainer/TBEnemyHealthBar
 @onready var animated_sprite = $AnimatedSprite2D
 
 @onready var dead_sprite = $DeadSprite
+@onready var tb_enemy_stagger_bar = $VBoxContainer/Panel/TBEnemyStaggerBar
 @onready var tb_enemy_shield_bar = $VBoxContainer/TBEnemyHealthBar/TBEnemyShieldBar
 
 
-@onready var tb_enemy_stagger_bar = $VBoxContainer/TBEnemyStaggerBar
+
+@onready var panel = $VBoxContainer/Panel
 @onready var water = $VBoxContainer/ElementalIndicators/Water
 @onready var electric = $VBoxContainer/ElementalIndicators/Electric
 @onready var fire = $VBoxContainer/ElementalIndicators/Fire
@@ -56,6 +59,7 @@ func _ready():
 	tb_enemy_stagger_bar.value = 0
 
 func _on_resized():
+	print("Enemy Resized")
 	if animated_sprite == null: return
 	animated_sprite.scale.x = get_viewport().size.x * 0.04
 	animated_sprite.scale.y = get_viewport().size.y * 0.04

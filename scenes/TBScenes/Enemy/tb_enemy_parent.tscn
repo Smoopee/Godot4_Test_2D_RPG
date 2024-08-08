@@ -1,0 +1,99 @@
+[gd_scene load_steps=14 format=3 uid="uid://drq52ewbynyfn"]
+
+[ext_resource type="Script" path="res://scripts/TurnBased/tb_enemy.gd" id="1_oatm4"]
+[ext_resource type="Texture2D" uid="uid://bapikvl8phl44" path="res://art/UI/PlayerElements/water-drop.png" id="2_r4tq2"]
+[ext_resource type="Texture2D" uid="uid://lqqtfcs2184e" path="res://art/UI/PlayerElements/lightning_symbol.png" id="3_l0jii"]
+[ext_resource type="Texture2D" uid="uid://rxtvbxbdapk3" path="res://art/UI/PlayerElements/flame_symbol.png" id="4_2dgub"]
+[ext_resource type="Texture2D" uid="uid://chewicsrv2m66" path="res://art/UI/PlayerElements/LifeBarMiniUnder.png" id="5_ja4cw"]
+[ext_resource type="Texture2D" uid="uid://qsdtsxe6cs0a" path="res://art/UI/PlayerElements/LifeBarMiniProgress.png" id="6_4ec2t"]
+[ext_resource type="Texture2D" uid="uid://d0o7lnfwotui0" path="res://art/UI/PlayerElements/shiled_bar_progress.png" id="7_aohhe"]
+[ext_resource type="Script" path="res://scripts/TurnBased/Enemy/TBEnemyShieldBar.gd" id="8_88s1p"]
+[ext_resource type="Texture2D" uid="uid://cs0avpvw1gugn" path="res://art/UI/PlayerElements/stagger_bar_under.png" id="9_fxwy1"]
+[ext_resource type="Texture2D" uid="uid://dqbqtbxlfae1i" path="res://art/UI/PlayerElements/stagger_bar_progress.png" id="10_uqxy7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vj0mp"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fk51n"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w2ua1"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="TBEnemy" type="Panel" groups=["enemy"]]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.0267379, 0.0503608)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vj0mp")
+script = ExtResource("1_oatm4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+offset_top = -138.997
+offset_right = 18.0
+offset_bottom = -120.997
+scale = Vector2(63.5751, 29.2691)
+
+[node name="ElementalIndicators" type="Panel" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_stretch_ratio = 0.46
+theme_override_styles/panel = SubResource("StyleBoxFlat_fk51n")
+
+[node name="Water" type="Sprite2D" parent="VBoxContainer/ElementalIndicators"]
+visible = false
+position = Vector2(2.81149, 1.88778)
+scale = Vector2(0.171488, 0.171488)
+texture = ExtResource("2_r4tq2")
+
+[node name="Electric" type="Sprite2D" parent="VBoxContainer/ElementalIndicators"]
+visible = false
+position = Vector2(8.43448, 1.88778)
+scale = Vector2(0.0110275, 0.0110275)
+texture = ExtResource("3_l0jii")
+
+[node name="Fire" type="Sprite2D" parent="VBoxContainer/ElementalIndicators"]
+visible = false
+position = Vector2(14.9946, 1.88778)
+scale = Vector2(0.05594, 0.05594)
+texture = ExtResource("4_2dgub")
+
+[node name="TBEnemyHealthBar" type="TextureProgressBar" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.71
+max_value = 1000.0
+texture_under = ExtResource("5_ja4cw")
+texture_progress = ExtResource("6_4ec2t")
+
+[node name="TBEnemyShieldBar" type="TextureProgressBar" parent="VBoxContainer/TBEnemyHealthBar"]
+z_index = 1
+layout_mode = 2
+offset_top = 14.0
+offset_right = 18.0
+offset_bottom = 18.0
+texture_progress = ExtResource("7_aohhe")
+script = ExtResource("8_88s1p")
+
+[node name="Panel" type="Panel" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+theme_override_styles/panel = SubResource("StyleBoxFlat_w2ua1")
+
+[node name="TBEnemyStaggerBar" type="TextureProgressBar" parent="VBoxContainer/Panel"]
+layout_mode = 1
+offset_top = -6.0
+offset_right = 18.0
+offset_bottom = -4.0
+size_flags_stretch_ratio = 1.12
+max_value = 300.0
+texture_under = ExtResource("9_fxwy1")
+texture_progress = ExtResource("10_uqxy7")
+
+[connection signal="resized" from="." to="." method="_on_resized"]

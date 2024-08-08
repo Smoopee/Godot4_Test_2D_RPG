@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://by2qyvemev4se"]
+[gd_scene load_steps=29 format=3 uid="uid://by2qyvemev4se"]
 
 [ext_resource type="Texture2D" uid="uid://cmmtk76lng52j" path="res://art/characters/Enemy/Characters/Gobuss.png" id="1_eafc6"]
 [ext_resource type="Script" path="res://scripts/TurnBased/tb_enemy.gd" id="1_r8u4j"]
@@ -13,13 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://lqqtfcs2184e" path="res://art/UI/PlayerElements/lightning_symbol.png" id="12_y74ia"]
 [ext_resource type="Texture2D" uid="uid://rxtvbxbdapk3" path="res://art/UI/PlayerElements/flame_symbol.png" id="13_cmlqj"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vj0mp"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fk51n"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w2ua1"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gchnl"]
@@ -143,7 +137,6 @@ scale = Vector2(0.0267379, 0.0503608)
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_vj0mp")
 script = ExtResource("1_r8u4j")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -196,8 +189,7 @@ script = ExtResource("6_wx12e")
 [node name="Panel" type="Panel" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.2
-theme_override_styles/panel = SubResource("StyleBoxFlat_w2ua1")
+size_flags_stretch_ratio = 0.7
 
 [node name="TBEnemyStaggerBar" type="TextureProgressBar" parent="VBoxContainer/Panel"]
 layout_mode = 1

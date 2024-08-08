@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpoi04alg5igc"]
+
+[ext_resource type="AudioStream" uid="uid://byf30h6mpm2qa" path="res://sounds/Fantasy_Game_Background.mp3" id="1_y8mkq"]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_y8mkq")
+autoplay = true

@@ -69,7 +69,9 @@ func _ready():
 	instantiate_skill_one()
 	instantiate_skill_two()
 
-func _process(_delta):
+
+func _on_panel_resized():
+	print("plyaer 2 resized")
 	animated_sprite.scale.x = get_viewport().size.x * 0.002
 	animated_sprite.scale.y = get_viewport().size.y * 0.002
 
@@ -161,3 +163,6 @@ func buff_incrementer(body):
 			
 	for i in children_in_group:
 		i.turn_expiration(body)
+
+
+

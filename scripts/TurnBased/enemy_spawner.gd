@@ -1,7 +1,10 @@
 extends Node
 
 var tb_enemy_scene = load("res://scenes/TBScenes/Enemy/tb_enemy.tscn")
+var minotaur_scene = load("res://scenes/TBScenes/Enemy/minoutaur_tb_enemy.tscn")
+
 @onready var spawn_location = $"../PositionContainer/HBoxContainer/EnemySpawnLocation"
+
 
 
 var enemies_array = []
@@ -23,7 +26,7 @@ func _ready():
 		#elif temp_n == 4:
 			#temp_n = 1
 
-		var tb_enemy = tb_enemy_scene.instantiate()
+		var tb_enemy = minotaur_scene.instantiate()
 		spawn_location.get_child(n).add_child(tb_enemy)
 		enemies_array.push_back(tb_enemy)
 		n += 1

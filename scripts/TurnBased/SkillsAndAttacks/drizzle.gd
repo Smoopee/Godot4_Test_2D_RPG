@@ -35,5 +35,3 @@ func cast_skill(caster = null, target = null):
 	
 	target.change_health(-damage)
 	target.add_water_application(elemental_intensity, elemental_reaction_power)
-	
-

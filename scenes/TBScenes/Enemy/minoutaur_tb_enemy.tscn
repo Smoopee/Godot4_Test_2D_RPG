@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://be7rf80nuqtft"]
+
+[ext_resource type="PackedScene" uid="uid://drq52ewbynyfn" path="res://scenes/TBScenes/Enemy/tb_enemy_parent.tscn" id="1_fvoea"]
+[ext_resource type="Texture2D" uid="uid://bwk2ax0k11tgf" path="res://art/TBCharacters/Enemies/Minotaur - Sprite Sheet (1).png" id="2_r1b65"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_di80c"]
+atlas = ExtResource("2_r1b65")
+region = Rect2(0, 0, 96, 91)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xx7qt"]
+atlas = ExtResource("2_r1b65")
+region = Rect2(96, 0, 96, 91)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1fctd"]
+atlas = ExtResource("2_r1b65")
+region = Rect2(192, 0, 96, 91)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xe1f4"]
+atlas = ExtResource("2_r1b65")
+region = Rect2(288, 0, 96, 91)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xs8ei"]
+atlas = ExtResource("2_r1b65")
+region = Rect2(384, 0, 96, 91)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0700x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_di80c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xx7qt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1fctd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xe1f4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xs8ei")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="TBEnemy" instance=ExtResource("1_fvoea")]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="1"]
+position = Vector2(598.402, 456.704)
+scale = Vector2(13.6952, 7.53796)
+sprite_frames = SubResource("SpriteFrames_0700x")
+autoplay = "default"
+frame_progress = 0.409478
