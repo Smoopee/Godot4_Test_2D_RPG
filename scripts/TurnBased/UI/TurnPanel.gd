@@ -50,14 +50,13 @@ func turn_label_changer():
 	next_turn_label.text = "Turn " + str(turn_queue.turn_counter+1)
 
 func change_order():
-	print("This is 1")
 	turn_queue.new_list()
 	turn_list_array = turn_queue.characters_array
-	print("The characters array is " + str(turn_list_array.size()))
 	zSetter = 9
 	for n in current_turn_container.get_children():
 		n.free()
 	for i in turn_list_array.size():
+		
 		turn_list_array[i].instantiate_turn_sprite(current_turn_container, zSetter)
 		zSetter -= 1
 	

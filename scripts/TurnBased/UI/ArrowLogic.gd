@@ -230,7 +230,6 @@ func arrow_stop():
 
 func arrow_clear():
 	arrow_stop()
-	print("initial position is " + str(initial_position))
 	for i in enemy_arrows_array.size():
 		enemy_arrows_array[i].visible = false
 		enemy_arrows_array[i].global_position += initial_position

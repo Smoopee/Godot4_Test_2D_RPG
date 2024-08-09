@@ -1,3 +1,24 @@
-[gd_resource type="Resource" format=3 uid="uid://baiiavy5dypuq"]
+[gd_resource type="Resource" script_class="EnemyStatsTB" load_steps=4 format=3 uid="uid://baiiavy5dypuq"]
+
+[ext_resource type="Script" path="res://resources/tb_resources/tb_enemy.gd" id="1_6ckg5"]
+[ext_resource type="Texture2D" uid="uid://bwk2ax0k11tgf" path="res://art/TBCharacters/Enemies/Minotaur - Sprite Sheet (1).png" id="2_a0coi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_di80c"]
+atlas = ExtResource("2_a0coi")
+region = Rect2(0, 0, 96, 91)
 
 [resource]
+script = ExtResource("1_6ckg5")
+turn_sprite = SubResource("AtlasTexture_di80c")
+enemy_name = "Minoutaur"
+speed = 25
+attack = 25
+health = 400
+defense = 20
+base_shield = 50
+shield = 50
+stagger_max = 300
+crit_chance = 0.5
+lightning_resistance = 0
+water_resistance = 0
+fire_resistance = 10

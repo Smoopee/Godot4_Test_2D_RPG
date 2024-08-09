@@ -27,8 +27,8 @@ func start_cast_path():
 	queue_free()
 
 func cast_skill(caster = null, target = null):
-	var elemental_reaction_power = caster.reaction_power
-	var damage = caster.attack * power
+	var elemental_reaction_power = caster.stats.reaction_power
+	var damage = caster.stats.attack * power
 	
 	target.change_health(-damage)
 	target.add_fire_application(elemental_intensity, elemental_reaction_power, damage)

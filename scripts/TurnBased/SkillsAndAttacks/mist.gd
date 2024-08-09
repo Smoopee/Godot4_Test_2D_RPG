@@ -28,5 +28,4 @@ func start_cast_path():
 		await get_tree().create_timer(1).timeout
 
 func cast_skill(caster = null, target = null):
-	target.change_health(caster.intellect * power)
-	print("mist is: " + str(caster.intellect * power))
+	target.change_health(caster.stats.intellect * power)

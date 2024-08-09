@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="EnemyStatsTB" load_steps=3 format=3 uid="uid://dx04gmlxp4cux"]
+
+[ext_resource type="Script" path="res://resources/tb_resources/tb_enemy.gd" id="1_e7v8h"]
+[ext_resource type="Texture2D" uid="uid://bwvlmucnuk0y5" path="res://art/TBCharacters/enemy_turn_sprite.png" id="2_s3tvm"]
+
+[resource]
+script = ExtResource("1_e7v8h")
+turn_sprite = ExtResource("2_s3tvm")
+enemy_name = "Gobuss"
+speed = 30
+attack = 15
+health = 100
+defense = 5
+base_shield = 50
+shield = 50
+stagger_max = 100
+crit_chance = 0.5
+lightning_resistance = 0
+water_resistance = 0
+fire_resistance = 0

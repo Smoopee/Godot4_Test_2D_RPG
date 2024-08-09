@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://cfbqi37o7lyli"]
+
+[ext_resource type="PackedScene" uid="uid://bhrxq6406ld8w" path="res://scenes/TBScenes/Player/djinn_parent.tscn" id="1_sqp24"]
+[ext_resource type="Script" path="res://scripts/TurnBased/Player/lightning_djinn.gd" id="2_ia3uj"]
+[ext_resource type="Texture2D" uid="uid://cepui3luq6hl0" path="res://art/TBCharacters/PlayerCharacter/djinn pixel art.png" id="3_6oy8p"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5wytl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_6oy8p")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="LightningDjinn" instance=ExtResource("1_sqp24")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 0.0
+offset_bottom = 0.0
+script = ExtResource("2_ia3uj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
+position = Vector2(7.25369, 7.05676)
+scale = Vector2(1.08594, 1)
+sprite_frames = SubResource("SpriteFrames_5wytl")
+
+[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]

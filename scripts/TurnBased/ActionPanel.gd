@@ -9,11 +9,13 @@ extends Panel
 @onready var enemies = $"../Enemies"
 
 
-
 #PLAYERS PARTY------------------------------------------------------------------
 @onready var active_character_highlighter1 = $"../PlayerPanel/PartyMember1/ActiveCharacterHighlighter"
 @onready var active_character_highlighter2 = $"../PlayerPanel/PartyMember2/ActiveCharacterHighlighter"
 @onready var active_character_highlighter3 = $"../PlayerPanel/PartyMember3/ActiveCharacterHighlighter"
+@onready var items_panel = $"../ItemsPanel"
+@onready var items = $"../Items"
+@onready var ultimate_progress_bar = $"../Ultimate/UltimateProgressBar"
 
 
 @onready var turn_queue = $"../TurnQueue"
@@ -55,11 +57,28 @@ func set_mode(new_mode):
 	if new_mode == current_mode:
 		return
 	current_mode = new_mode
+	
+enum Target{
+	SINGLE,
+	MULTI,
+	AOE,
+	FRIENDLY_SINGLE,
+	FRIENDLY_MULTI,
+	FRIENDLY_AOE
+}
+
+var current_target: int = -1: set = set_target
+
+func set_target(new_target):
+	if new_target == current_target:
+		return
+	current_target = new_target
+
+var target_tracker: String
 
 #SCRIPT WIDE VARIABLES----------------------------------------------------------
 var current_character 
 var target_confirmation_check = []
-var rng = RandomNumberGenerator.new()
 
 var player_1
 var player_2
@@ -75,6 +94,7 @@ func _ready():
 func turn_keeper():
 	turn_queue.turn_cycle()
 	current_character = turn_queue.active_character
+	print("Current character's speed is " + str(current_character.stats.speed))
 	if current_character.is_in_group("enemy"):
 		action_counter()
 		current_character.shield_turn_tracker()
@@ -132,71 +152,121 @@ func _on_dodge_pressed():
 	attack_container.visible = false
 	action_container.visible = true
 
+func _on_item_pressed():
+	items_panel.visible = true
+
+func _on_health_flask_pressed():
+	print(current_character)
+	items.use_health_flask(current_character)
+	items.change_health_flask(-1)
+
+
+func _on_mana_flask_pressed():
+	items.use_mana_flask(current_character)
+	items.change_mana_flask(-1)
+
+
+func _on_stamina_flask_pressed():
+	items.use_stamina_flask(current_character)
+	items.change_stamina_flask(-1)
+
 func _on_back_pressed():
+	target_tracker = ""
 	target_confirmation_check.clear()
 	arrow_logic.arrow_clear()
 	evasion_container.visible = false
 	attack_container.visible = false
 	action_container.visible = true
+	items_panel.visible = false
 
 
 func _on_default_pressed():
 	target_confirmation_check.clear()
 	arrow_logic.arrow_initializer(current_character.default_attack_targeting)
+	targeting_state(current_character.default_attack_targeting)
 	set_state(State.DEFAULT)
 
 func _on_skill_1_pressed():
 	target_confirmation_check.clear()
 	arrow_logic.arrow_initializer(current_character.skill_one_targeting)
+	targeting_state(current_character.skill_one_targeting)
 	set_state(State.SKILLONE)
 
 func _on_skill_2_pressed():
 	target_confirmation_check.clear()
 	arrow_logic.arrow_initializer(current_character.skill_two_targeting)
+	targeting_state(current_character.skill_two_targeting)
 	set_state(State.SKILLTWO)
 
 #ENEMY BUTTONS------------------------------------------------------------------
 func button_handler(body):
-	print("The target parent is " + str(body.get_parent()))
 	if dead_checker(body): return
 	if target_confirmation_checker(body):
 		the_attack_step(body)
 
 
 func _on_enemy_1_pressed():
-	button_handler(enemies.enemies_array[0])
-	print("Pressed Enemy 1 Button")
+	if target_tracker == "enemy":
+		button_handler(enemies.enemies_array[0])
+		print("Pressed Enemy 1 Button")
 
 func _on_enemy_2_pressed():
-	button_handler(enemies.enemies_array[1])
-	print("Pressed Enemy 5 Button")
+	if target_tracker == "enemy":
+		button_handler(enemies.enemies_array[1])
+		print("Pressed Enemy 5 Button")
 
 func _on_enemy_3_pressed():
-	button_handler(enemies.enemies_array[2])
-	print("Pressed Enemy 2 Button")
+	if target_tracker == "enemy":
+		button_handler(enemies.enemies_array[2])
+		print("Pressed Enemy 2 Button")
 
 func _on_enemy_4_pressed():
-	button_handler(enemies.enemies_array[3])
-	print("Pressed Enemy 4 Button")
+	if target_tracker == "enemy":
+		button_handler(enemies.enemies_array[3])
+		print("Pressed Enemy 4 Button")
 
 func _on_enemy_5_pressed():
-	button_handler(enemies.enemies_array[4])
-	print("Pressed Enemy 3 Button")
+	if target_tracker == "enemy":
+		button_handler(enemies.enemies_array[4])
+		print("Pressed Enemy 3 Button")
 
 #PARTY MEMBER BUTTONS-----------------------------------------------------------
 
 func _on_player_1_pressed():
-	print("Player 1 Button has been pressed")
-	button_handler(party_members.players_array[0])
+	if target_tracker == "friendly":
+		print("Player 1 Button has been pressed")
+		button_handler(party_members.players_array[0])
 
 func _on_player_2_pressed():
-	print("Player 2 Button has been pressed")
-	button_handler(party_members.players_array[1])
+	if target_tracker == "friendly":
+		print("Player 2 Button has been pressed")
+		button_handler(party_members.players_array[1])
 
 func _on_player_3_pressed():
-	print("Player 3 Button has been pressed")
-	button_handler(party_members.players_array[2])
+	if target_tracker == "friendly":
+		print("Player 3 Button has been pressed")
+		button_handler(party_members.players_array[2])
 
+func targeting_state(targeting):
+	match targeting:
+		"Single":
+			set_target(Target.SINGLE)
+			target_tracker = "enemy"
+		"Multi":
+			set_target(Target.MULTI)
+			target_tracker = "enemy"
+		"AOE":
+			set_target(Target.AOE)
+			target_tracker = "enemy"
+		"Friendly_Single":
+			set_target(Target.FRIENDLY_SINGLE)
+			target_tracker = "friendly"
+		"Friendly_Multi":
+			set_target(Target.FRIENDLY_MULTI)
+			target_tracker = "friendly"
+		"Friendly_AOE":
+			set_target(Target.FRIENDLY_AOE)
+			target_tracker = "friendly"
 
 func target_confirmation_checker(test):
 	
@@ -257,27 +327,31 @@ func the_attack_step(defender):
 			print("Current turn container after " + str(current_turn_container.get_children().size()))
 			turn_queue.characters_array.pop_front()
 			set_state(State.SELECTING)
-			print("This is 2")
 			turn_queue.next_character()
-	print("This is 3")
 	current_character.buff_incrementer(current_character)
+	
+	var temp_array = []
+	for i in enemies.enemies_array.size():
+			if enemies.enemies_array[i].current_state == 1:
+				temp_array.push_front(i)
+	if temp_array == []: 
+		print("VICTORY")
+		get_tree().change_scene_to_file("res://scenes/Worlds/world.tscn")
+	
 	turn_keeper()
 
 func enemy_ai(body):
 	body.debuff_incrementer(body)
 	var possible_targets = []
-	
+	print("The players array before enemy attack is " + str(party_members.players_array))
 	for i in party_members.players_array:
+		print(i.stats.health)
 		if i.current_state == 1:
 			possible_targets.push_back(i)
 	
-	var random = rng.randi_range(0, possible_targets.size()-1)
-	var enemy_target = possible_targets[random]
-	if enemy_target.is_dodging == false:
-		enemy_target.change_health(-current_character.attack)
-
+	body.attack_ai(possible_targets)
+	
 	current_turn_container.get_child(0).free()
-
 	turn_queue.characters_array.pop_front()
 	turn_queue.next_character()
 	turn_keeper()
@@ -334,7 +408,6 @@ func skill_one_attack_step(defender):
 			current_character.change_mana(-current_character.skill_one_mana_cost)
 			
 			for i in enemies.enemies_array.size():
-				print("Enemy is " + str(enemies.enemies_array[i]))
 			#SKIPS DEAD ENEMIES
 				if enemies.enemies_array[i].current_state == 0:
 					continue
@@ -376,7 +449,6 @@ func skill_two_attack_step(defender):
 			current_character.change_mana(-current_character.skill_two_mana_cost)
 			
 			for i in enemies.enemies_array.size():
-				print("Enemy is " + str(enemies.enemies_array[i]))
 			#SKIPS DEAD ENEMIES
 				if enemies.enemies_array[i].current_state == 0:
 					continue
@@ -405,26 +477,27 @@ func mana_checker():
 		State.DEFAULT:
 			pass
 		State.SKILLONE:
-			if current_character.skill_one_mana_cost > current_character.mana:
+			if current_character.skill_one_mana_cost > current_character.stats.mana:
 				print("Too much mana for skill one")
 				return true
 			else: 
 				return false
 		State.SKILLTWO:
-			if current_character.skill_two_mana_cost > current_character.mana:
+			if current_character.skill_two_mana_cost > current_character.stats.mana:
 				print("Too much mana for skill two")
 				return true
 			else: 
 				return false
 
 func stamina_checker():
-	if current_character.stamina < 50:
+	if current_character.stats.stamina < 50:
 		print("Too much stamina")
 		return true
 
 func character_died(body):
 	print("a character has died")
 	queue_and_array_remover(body)
+
 
 func character_speed_change(_body):
 	print("New zoom on dude")
@@ -439,10 +512,16 @@ func _on_inspector_button_pressed():
 		print("Battle Mode")
 		set_mode(Mode.BATTLE)
 
+func get_group_array():
+	var temp_array = []
+	for i in enemies.enemies_array.size():
+			if enemies.enemies_array[i].current_state == 1:
+				temp_array.push_front(i)
+	return temp_array
 
 
-
-
-
-
-
+func _on_ultimate_button_pressed():
+	if ultimate_progress_bar.value != 100: return
+	for i in enemies.enemies_array.size():
+		enemies.enemies_array[i].change_health(-50)
+	ultimate_progress_bar.value = 0

@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cf27t5a8temf3"]
+
+[node name="TurnSpritePanel" type="CenterContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.21254, 1.12815)
+size_flags_horizontal = 3
+
+[node name="TurnSprite" type="Sprite2D" parent="."]
+position = Vector2(19.7931, 18.6145)
+scale = Vector2(0.300431, 0.299833)

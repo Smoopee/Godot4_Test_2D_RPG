@@ -40,7 +40,7 @@ func cast_skill(caster = null, target = null):
 	
 	print("Enemies " + str(enemy_group))
 	
-	var elemental_reaction_power = caster.reaction_power
+	var elemental_reaction_power = caster.stats.reaction_power
 	var current_enemy_index = enemy_group.find(target)
 	var right_enemy_index = current_enemy_index + 1
 	var left_enemy_index = current_enemy_index - 1

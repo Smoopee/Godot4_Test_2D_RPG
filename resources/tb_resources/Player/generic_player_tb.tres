@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="PlayerStatsTB" load_steps=3 format=3 uid="uid://dsxumq50rw0u"]
+
+[ext_resource type="Script" path="res://resources/tb_resources/tb_player_stats.gd" id="1_igron"]
+[ext_resource type="Texture2D" uid="uid://cjvatdn3liydq" path="res://art/icon.svg" id="2_5546x"]
+
+[resource]
+script = ExtResource("1_igron")
+turn_sprite = ExtResource("2_5546x")
+name = ""
+max_health = 1
+max_mana = 1
+max_stamina = 1
+health = 1
+mana = 1
+stamina = 1
+attack = 1
+speed = 1
+base_speed = 1
+intellect = 1
+reaction_power = 1
+base_shield = 0
+shield = 0
+stagger_max = 0
+crit_chance = 0.0
+lightning_resistance = 0
+water_resistance = 0
+fire_resistance = 0

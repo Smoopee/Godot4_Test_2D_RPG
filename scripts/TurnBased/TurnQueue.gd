@@ -23,7 +23,7 @@ func _ready():
 	turn_size = enemies.get_children().size() + party_members.get_children().size()
 
 func custom_sorter(a, b):
-	if a.speed > b.speed:
+	if a.stats.speed > b.stats.speed:
 		return true
 	return false
 	
@@ -46,13 +46,13 @@ func turn_order_array_creator():
 	
 	for i in party_members.players_array.size():
 		characters_array.append(party_members.players_array[i])
-		
+
 	characters_array = characters_array.filter(dead_check)
 
+	
 	characters_array.sort_custom(custom_sorter)
 	
 func next_turn_creator():
-	print(enemies.enemies_array)
 	next_turn_characters_array.resize(0)
 	for i in enemies.enemies_array.size():
 		next_turn_characters_array.append(enemies.enemies_array[i])

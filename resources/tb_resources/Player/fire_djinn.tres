@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="PlayerStatsTB" load_steps=3 format=3 uid="uid://esp4tvph1psu"]
+
+[ext_resource type="Script" path="res://resources/tb_resources/tb_player_stats.gd" id="1_qfj1x"]
+[ext_resource type="Texture2D" uid="uid://cpow0nsh7huq8" path="res://art/TBCharacters/PlayerCharacter/flame_sprite.png" id="2_pm3lp"]
+
+[resource]
+script = ExtResource("1_qfj1x")
+turn_sprite = ExtResource("2_pm3lp")
+name = ""
+max_health = 100
+max_mana = 100
+max_stamina = 100
+health = 100
+mana = 100
+stamina = 100
+attack = 10
+speed = 30
+base_speed = 30
+intellect = 30
+reaction_power = 10
+ultimate_charge = 5
+base_shield = 0
+shield = 0
+stagger_max = 0
+crit_chance = 0.5
+lightning_resistance = 0
+water_resistance = 0
+fire_resistance = 0

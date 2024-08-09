@@ -1,10 +1,11 @@
-[gd_scene load_steps=23 format=3 uid="uid://dt7ja5b3owfqv"]
+[gd_scene load_steps=26 format=3 uid="uid://dt7ja5b3owfqv"]
 
 [ext_resource type="Script" path="res://scripts/TurnBased/enemy_spawner.gd" id="1_j5o40"]
 [ext_resource type="Script" path="res://scripts/TurnBased/TurnQueue.gd" id="1_kroxe"]
 [ext_resource type="Texture2D" uid="uid://c45ug2k55xtqc" path="res://art/UI/tb_background/forest_of_pixels_by_bunnsp_ddxkac6-414w-2x.jpg" id="2_bh4vk"]
 [ext_resource type="Script" path="res://scripts/TurnBased/player_spawn.gd" id="2_k2fgy"]
 [ext_resource type="Script" path="res://scripts/TurnBased/UI/PlayerPanel.gd" id="2_mnwqx"]
+[ext_resource type="Script" path="res://scripts/TurnBased/items_spawner.gd" id="4_uurct"]
 [ext_resource type="Texture2D" uid="uid://chewicsrv2m66" path="res://art/UI/PlayerElements/LifeBarMiniUnder.png" id="6_wg7b6"]
 [ext_resource type="Texture2D" uid="uid://qsdtsxe6cs0a" path="res://art/UI/PlayerElements/LifeBarMiniProgress.png" id="7_3kroo"]
 [ext_resource type="Script" path="res://scripts/TurnBased/UI/TurnPanel.gd" id="7_6tp2l"]
@@ -33,6 +34,12 @@ bg_color = Color(0, 0, 0, 0.643137)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ttlr"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j1r1h"]
+bg_color = Color(0.219501, 0.219501, 0.219501, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gy66m"]
+bg_color = Color(0.6, 0.321569, 0.929412, 1)
 
 [node name="TBBattleArena" type="Control"]
 layout_mode = 3
@@ -158,11 +165,14 @@ script = ExtResource("2_k2fgy")
 [node name="Enemies" type="Node" parent="."]
 script = ExtResource("1_j5o40")
 
+[node name="Items" type="Node" parent="."]
+script = ExtResource("4_uurct")
+
 [node name="TurnQueue" type="Node2D" parent="."]
 visible = false
 script = ExtResource("1_kroxe")
 
-[node name="PlayerPanel" type="Panel" parent="."]
+[node name="PlayerPanel" type="Panel" parent="." groups=["player_panel"]]
 layout_mode = 0
 offset_right = 121.0
 offset_bottom = 292.0
@@ -536,6 +546,57 @@ offset_bottom = 24.0733
 scale = Vector2(0.262459, 0.439984)
 text = "Not enough Mana"
 
+[node name="ItemsPanel" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -102.0
+offset_top = -60.0
+offset_right = -62.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(4.14028, 2.48929)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ItemsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = 1.0
+offset_right = 207.0
+offset_bottom = 142.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.163041, 0.21358)
+
+[node name="HealthFlask" type="Button" parent="ItemsPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Health"
+
+[node name="ManaFlask" type="Button" parent="ItemsPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Mana"
+
+[node name="StaminaFlask" type="Button" parent="ItemsPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Stamina"
+
+[node name="Back" type="Button" parent="ItemsPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("14_pythc")
+text = "Back
+"
+
 [node name="InspectorButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 2
@@ -570,7 +631,45 @@ offset_right = 919.0
 offset_bottom = 123.0
 scale = Vector2(6.83627, 8.87097)
 
+[node name="Ultimate" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_top = 58.0
+offset_right = 44.0
+offset_bottom = 96.0
+grow_vertical = 2
+
+[node name="UltimateProgressBar" type="ProgressBar" parent="Ultimate" groups=["ultimate"]]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+offset_right = 15.0
+offset_bottom = 32.0
+grow_vertical = 0
+rotation = -1.5708
+scale = Vector2(2.3128, 1.1861)
+theme_override_styles/background = SubResource("StyleBoxFlat_j1r1h")
+theme_override_styles/fill = SubResource("StyleBoxFlat_gy66m")
+value = 100.0
+show_percentage = false
+
+[node name="UltimateButton" type="Button" parent="Ultimate/UltimateProgressBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.484734, 1.00769)
+
 [node name="AudioStreamPlayer2D" parent="." instance=ExtResource("15_lip5p")]
+volume_db = -4.238
 
 [connection signal="resized" from="PositionContainer" to="ArrowLogic" method="_on_position_container_resized"]
 [connection signal="pressed" from="PositionContainer/HBoxContainer/PlayerSpawnLocation/Player1" to="ActionPanel" method="_on_player_1_pressed"]
@@ -583,6 +682,7 @@ scale = Vector2(6.83627, 8.87097)
 [connection signal="pressed" from="PositionContainer/HBoxContainer/EnemySpawnLocation/Enemy5" to="ActionPanel" method="_on_enemy_5_pressed"]
 [connection signal="pressed" from="ActionPanel/ActionContainer/Attack" to="ActionPanel" method="_on_attack_pressed"]
 [connection signal="pressed" from="ActionPanel/ActionContainer/Evasion" to="ActionPanel" method="_on_evasion_pressed"]
+[connection signal="pressed" from="ActionPanel/ActionContainer/Item" to="ActionPanel" method="_on_item_pressed"]
 [connection signal="pressed" from="ActionPanel/AttackContainer/Default" to="ActionPanel" method="_on_default_pressed"]
 [connection signal="pressed" from="ActionPanel/AttackContainer/Skill 1" to="ActionPanel" method="_on_skill_1_pressed"]
 [connection signal="pressed" from="ActionPanel/AttackContainer/Skill 2" to="ActionPanel" method="_on_skill_2_pressed"]
@@ -590,4 +690,9 @@ scale = Vector2(6.83627, 8.87097)
 [connection signal="pressed" from="ActionPanel/EvasionContainer/Sprint" to="ActionPanel" method="_on_sprint_pressed"]
 [connection signal="pressed" from="ActionPanel/EvasionContainer/Dodge" to="ActionPanel" method="_on_dodge_pressed"]
 [connection signal="pressed" from="ActionPanel/EvasionContainer/Back" to="ActionPanel" method="_on_back_pressed"]
+[connection signal="pressed" from="ItemsPanel/VBoxContainer/HealthFlask" to="ActionPanel" method="_on_health_flask_pressed"]
+[connection signal="pressed" from="ItemsPanel/VBoxContainer/ManaFlask" to="ActionPanel" method="_on_mana_flask_pressed"]
+[connection signal="pressed" from="ItemsPanel/VBoxContainer/StaminaFlask" to="ActionPanel" method="_on_stamina_flask_pressed"]
+[connection signal="pressed" from="ItemsPanel/VBoxContainer/Back" to="ActionPanel" method="_on_back_pressed"]
 [connection signal="pressed" from="InspectorButton" to="ActionPanel" method="_on_inspector_button_pressed"]
+[connection signal="pressed" from="Ultimate/UltimateProgressBar/UltimateButton" to="ActionPanel" method="_on_ultimate_button_pressed"]

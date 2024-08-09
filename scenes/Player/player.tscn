@@ -3461,7 +3461,7 @@ position = Vector2(0, -4)
 sprite_frames = SubResource("SpriteFrames_hk6r7")
 animation = &"front_attack"
 frame_progress = 0.0111711
-offset = Vector2(0, -7)
+offset = Vector2(0, -9)
 
 [node name="Attack" type="Node2D" parent="."]
 position = Vector2(12, -2)

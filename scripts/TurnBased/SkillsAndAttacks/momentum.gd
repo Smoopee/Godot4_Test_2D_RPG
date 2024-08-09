@@ -34,7 +34,7 @@ func start_cast_path():
 
 func get_group_array():
 	player_group = []
-	for node in get_tree().get_nodes_in_group("player"):
+	for node in get_tree().get_nodes_in_group("djinn"):
 		player_group.push_front(node)
 
 func cast_skill(_caster = null, target = null):

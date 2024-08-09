@@ -2,7 +2,7 @@ extends Control
 
 var turn_sprite_scene = load("res://scenes/TBScenes/enemy_turn_sprite_panel.tscn")
 
-@export var enemy_resource: TBEnemyResource
+@export var enemy_resource: EnemyStatsTB
 @onready var tb_enemy_health_bar = $VBoxContainer/TBEnemyHealthBar
 @onready var animated_sprite = $AnimatedSprite2D
 
@@ -265,8 +265,12 @@ func instantiate_turn_sprite(target, zSetter):
 	target.add_child(turn_sprite)
 	turn_sprite.z_index = zSetter
 
-
-
+func attack_ai(targets):
+	var rng = RandomNumberGenerator.new()
+	var random = rng.randi_range(0, targets.size()-1)
+	var enemy_target = targets[random]
+	if enemy_target.is_dodging == false:
+		enemy_target.change_health(-attack)
 
 
 

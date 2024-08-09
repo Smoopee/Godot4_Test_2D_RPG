@@ -30,8 +30,8 @@ func start_cast_path():
 		await get_tree().create_timer(1).timeout
 
 func cast_skill(caster = null, target = null):
-	var elemental_reaction_power = caster.reaction_power
-	var damage = caster.attack * power
+	var elemental_reaction_power = caster.stats.reaction_power
+	var damage = caster.stats.attack * power
 	
 	target.change_health(-damage)
 	target.add_water_application(elemental_intensity, elemental_reaction_power)

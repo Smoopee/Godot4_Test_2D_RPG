@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://ddtjte75pnnsr"]
+
+[ext_resource type="PackedScene" uid="uid://bhrxq6406ld8w" path="res://scenes/TBScenes/Player/djinn_parent.tscn" id="1_wge7f"]
+[ext_resource type="Script" path="res://scripts/TurnBased/Player/fire_djinn.gd" id="2_sbivt"]
+[ext_resource type="Texture2D" uid="uid://cpow0nsh7huq8" path="res://art/TBCharacters/PlayerCharacter/flame_sprite.png" id="3_odc4u"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o6lag"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_odc4u")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="FireDjinn" instance=ExtResource("1_wge7f")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -25.0
+offset_right = 50.6
+offset_bottom = 37.704
+script = ExtResource("2_sbivt")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
+position = Vector2(37.7192, 30.6121)
+sprite_frames = SubResource("SpriteFrames_o6lag")
+
+[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]

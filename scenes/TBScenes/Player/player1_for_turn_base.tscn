@@ -1,33 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://bngjrj485gceu"]
+[gd_scene load_steps=2 format=3 uid="uid://bngjrj485gceu"]
 
-[ext_resource type="Texture2D" uid="uid://cepui3luq6hl0" path="res://art/TBCharacters/PlayerCharacter/djinn pixel art.png" id="1_lsej0"]
 [ext_resource type="Script" path="res://scripts/TurnBased/Player/player1_for_turn_base.gd" id="2_e1y0x"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_q2g0y"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("1_lsej0")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
 [node name="Player1ForTurnBase" type="Panel" groups=["player"]]
-anchors_preset = -1
-anchor_right = 0.075
-anchor_bottom = 0.127
-offset_right = 69.6
-offset_bottom = 62.704
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.551443, 0.566834)
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 2
 script = ExtResource("2_e1y0x")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(67.0966, 70.5674)
-scale = Vector2(1.08594, 1)
-sprite_frames = SubResource("SpriteFrames_q2g0y")
