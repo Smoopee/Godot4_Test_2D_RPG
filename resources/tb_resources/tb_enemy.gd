@@ -16,5 +16,6 @@ class_name EnemyStatsTB
 @export var lightning_resistance: int
 @export var water_resistance: int
 @export var fire_resistance: int
+@export var experience: int
 
 

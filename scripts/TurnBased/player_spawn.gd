@@ -7,7 +7,6 @@ var player3_scene = load("res://scenes/TBScenes/Player/player3_for_turn_base.tsc
 @onready var player_spawn_location = $"../PositionContainer/HBoxContainer/PlayerSpawnLocation"
 
 
-
 var players_array = []
 
 func _ready():

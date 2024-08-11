@@ -20,9 +20,9 @@ class_name PlayerStatsTB
 @export var base_shield: int
 @export var shield: int
 @export var stagger_max: int
-@export var crit_chance: float
+@export var crit_chance: int
+@export var crit_damage: int
 @export var lightning_resistance: int
 @export var water_resistance: int
 @export var fire_resistance: int
-
 

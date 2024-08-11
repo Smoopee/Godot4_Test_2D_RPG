@@ -10,7 +10,10 @@ var player_stats_resource = load("res://resources/tb_resources/Player/generic_pl
 @onready var animated_sprite = $AnimatedSprite2D
 
 
-#DECLARES AND SETS STATES-------------------------------------------------------
+var level:int = 1
+var experience:int = 0
+
+#DECLARES AND SETS STATES-------------------------------------------------------c
 enum State{
 	DEAD,
 	ALIVE,
@@ -49,6 +52,9 @@ var skill_two
 #DEFAULT ATTACK SETUP-----------------------------------------------------------
 var default_attack_targeting: String = "Single"
 
+
+
+#BATTLE ARENA VARIABLES---------------------------------------------------------
 var player_panel
 var player_position
 
@@ -157,6 +163,4 @@ func buff_incrementer(body):
 			
 	for i in children_in_group:
 		i.turn_expiration(body)
-
-
 

@@ -34,6 +34,14 @@ var player2_stamina = 100
 var player3_stamina = 100
 
 #-------------------------------------------------------------------------------
+var players_gold: int
+var overworld_player_level: int
+var player1_player_level: int
+var player2_player_level: int
+var player3_player_level: int
+
+
+
 func _ready():
 	player_health = 100
 	player_mana = 100
@@ -139,5 +147,4 @@ func change_stamina_player3(value):
 	player3_stamina += value
 	if player3_stamina <= 0: player3_stamina = 0
 	if player3_stamina > max_player3_stamina: player3_stamina = max_player3_stamina
-	
 

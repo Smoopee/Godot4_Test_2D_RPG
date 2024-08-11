@@ -18,3 +18,4 @@ crit_chance = 0.5
 lightning_resistance = 0
 water_resistance = 0
 fire_resistance = 0
+experience = 25

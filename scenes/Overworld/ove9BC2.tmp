@@ -2555,7 +2555,6 @@ sources/2 = SubResource("TileSetAtlasSource_qvpji")
 sources/3 = SubResource("TileSetScenesCollectionSource_gg4s4")
 
 [node name="Overworld1" type="Node2D"]
-process_mode = 1
 y_sort_enabled = true
 script = ExtResource("1_n5m2a")
 
@@ -2585,8 +2584,35 @@ z_index = 1
 [node name="Camera2D" type="Camera2D" parent="player"]
 position_smoothing_enabled = true
 
-[connection signal="child_exiting_tree" from="SideSceneLayer" to="." method="_on_side_scene_layer_child_exiting_tree"]
+[node name="TallGrass" parent="." instance=ExtResource("5_6bveg")]
+position = Vector2(-24, 24)
+
+[node name="TallGrass2" parent="." instance=ExtResource("5_6bveg")]
+position = Vector2(-7, 24)
+
+[node name="TallGrass3" parent="." instance=ExtResource("5_6bveg")]
+position = Vector2(-7, 38)
+
+[node name="TallGrass4" parent="." instance=ExtResource("5_6bveg")]
+position = Vector2(9, 10)
+
+[node name="TallGrass5" parent="." instance=ExtResource("5_6bveg")]
+position = Vector2(-7, 10)
+
+[node name="TallGrass6" parent="." instance=ExtResource("5_6bveg")]
+position = Vector2(9, 24)
+
+[node name="TallGrass7" parent="." instance=ExtResource("5_6bveg")]
+position = Vector2(9, 38)
+
 [connection signal="body_entered" from="TileMap/TallGrass" to="TileMap/TallGrass" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMap/@Area2D@56657" to="TileMap/@Area2D@56657" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMap/@Area2D@56658" to="TileMap/@Area2D@56658" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMap/@Area2D@56659" to="TileMap/@Area2D@56659" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@51983" to="TileMap/@Area2D@51983" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@51984" to="TileMap/@Area2D@51984" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@51985" to="TileMap/@Area2D@51985" method="_on_body_entered"]
+[connection signal="side_scene_finished" from="TallGrass" to="." method="_on_tall_grass_side_scene_finished"]
+[connection signal="side_scene_finished" from="TallGrass2" to="." method="_on_tall_grass_side_scene_finished"]
+[connection signal="side_scene_finished" from="TallGrass3" to="." method="_on_tall_grass_side_scene_finished"]
+[connection signal="side_scene_finished" from="TallGrass4" to="." method="_on_tall_grass_side_scene_finished"]
+[connection signal="side_scene_finished" from="TallGrass5" to="." method="_on_tall_grass_side_scene_finished"]
+[connection signal="side_scene_finished" from="TallGrass6" to="." method="_on_tall_grass_side_scene_finished"]
+[connection signal="side_scene_finished" from="TallGrass7" to="." method="_on_tall_grass_side_scene_finished"]
