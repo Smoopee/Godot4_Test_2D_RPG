@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://yuw71n624lid"]
+[gd_scene load_steps=14 format=3 uid="uid://yuw71n624lid"]
 
 [ext_resource type="Texture2D" uid="uid://dni01tohj5w7x" path="res://art/tilesets/TilesetNature.png" id="1_2561q"]
 [ext_resource type="Script" path="res://scripts/Overworld/overworld_1.gd" id="1_n5m2a"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b4dgu6pvygcr" path="res://art/Backgrounds/Animated/Plant/SpriteSheet16x16.png" id="3_gdep0"]
 [ext_resource type="PackedScene" uid="uid://cjaglme4iavay" path="res://scenes/Overworld/tall_grass.tscn" id="5_6bveg"]
 [ext_resource type="PackedScene" uid="uid://w6ek38apyy1i" path="res://scenes/Player/player.tscn" id="6_7fyts"]
+[ext_resource type="PackedScene" uid="uid://ysnaiwx8s6vy" path="res://scenes/UI/djinn_menu.tscn" id="8_wund6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_psuxy"]
 texture = ExtResource("1_2561q")
@@ -2585,8 +2586,17 @@ z_index = 1
 [node name="Camera2D" type="Camera2D" parent="player"]
 position_smoothing_enabled = true
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DjinnMenu" parent="CanvasLayer" instance=ExtResource("8_wund6")]
+offset_left = -98.0
+offset_top = -65.0
+offset_right = -98.0
+offset_bottom = -65.0
+scale = Vector2(0.55507, 0.550237)
+
 [connection signal="child_exiting_tree" from="SideSceneLayer" to="." method="_on_side_scene_layer_child_exiting_tree"]
 [connection signal="body_entered" from="TileMap/TallGrass" to="TileMap/TallGrass" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMap/@Area2D@56657" to="TileMap/@Area2D@56657" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMap/@Area2D@56658" to="TileMap/@Area2D@56658" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMap/@Area2D@56659" to="TileMap/@Area2D@56659" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@257260" to="TileMap/@Area2D@257260" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@257261" to="TileMap/@Area2D@257261" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@257262" to="TileMap/@Area2D@257262" method="_on_body_entered"]

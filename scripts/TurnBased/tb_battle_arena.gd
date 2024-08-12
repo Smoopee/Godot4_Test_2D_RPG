@@ -8,4 +8,4 @@ func _on_tree_entered():
 func tree_is_leaving():
 	await get_tree().create_timer(1).timeout
 	queue_free()
-	#get_parent().remove_child($".")
+

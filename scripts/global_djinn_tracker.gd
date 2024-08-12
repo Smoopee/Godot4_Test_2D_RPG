@@ -8,27 +8,30 @@ func djinn_experince_changer(djinn,value):
 	
 
 var djinn1_dicitionary = {
-	"name" : "",
+	"name" : "Lightning Djinn",
+	"texture": preload("res://art/TBCharacters/PlayerCharacter/djinn pixel art.png"),
 	"level" : 1,
 	"experience": 0,
-	"skill_one" : "",
-	"skill_two": ""
+	"skill_one" : "Lightning Strike",
+	"skill_two": "Momentum"
 }
 
 var djinn2_dicitionary = {
-	"name" : "",
+	"name" : "Fire Djinn",
+	"texture": preload("res://art/TBCharacters/PlayerCharacter/flame_sprite.png"),
 	"level" : 1,
 	"experience": 0,
-	"skill_one" : "",
-	"skill_two": ""
+	"skill_one" : "Fireball",
+	"skill_two": "Hex"
 }
 
 var djinn3_dicitionary = {
-	"name" : "",
+	"name" : "Water Djinn",
+	"texture": preload("res://art/TBCharacters/PlayerCharacter/water_sprite.png") ,
 	"level" : 1,
 	"experience": 0,
-	"skill_one" : "",
-	"skill_two": ""
+	"skill_one" : "Drizzle",
+	"skill_two": "Mist"
 }
 
 var djinn4_dicitionary = {

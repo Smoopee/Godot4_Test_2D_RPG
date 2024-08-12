@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://osaefhaf6eyg"]
+[gd_scene load_steps=14 format=3 uid="uid://osaefhaf6eyg"]
 
 [ext_resource type="Script" path="res://scripts/Worlds/world.gd" id="1_fi8x0"]
 [ext_resource type="PackedScene" uid="uid://w6ek38apyy1i" path="res://scenes/Player/player.tscn" id="7_fhyoc"]
@@ -12,7 +12,6 @@
 [ext_resource type="Script" path="res://scripts/UI/PlayerInfo/player_mana_bar.gd" id="15_gerp2"]
 [ext_resource type="PackedScene" uid="uid://52ucgdfpwadj" path="res://scenes/Enemy/enemy.tscn" id="16_ma87a"]
 [ext_resource type="Script" path="res://scripts/UI/PlayerInfo/player_stamina_bar.gd" id="16_vewc3"]
-[ext_resource type="Script" path="res://scripts/encounter_test.gd" id="18_6khwt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lclgh"]
 size = Vector2(42, 8)
@@ -187,7 +186,6 @@ speed = 50
 z_index = 1
 position = Vector2(-378, 72)
 scale = Vector2(2.11825, 2.42849)
-script = ExtResource("18_6khwt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(23, -34)
