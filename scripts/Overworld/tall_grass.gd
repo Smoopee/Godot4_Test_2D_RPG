@@ -1,7 +1,8 @@
 extends Area2D
 
 @onready var scene_transition_animation = $sceneTransitionAnimation/AnimationPlayer
-@onready var overworld_1 = $".."
+@onready var overworld_1 = $"../.."
+
 
 var encounter_cooldown: bool = true
 signal side_scene_finished
@@ -16,7 +17,6 @@ func _on_SideSceneLayer_child_exiting_tree(_node: Node) -> void:
 	side_scene_finished.emit() # Maybe some objects want to know when we just came back
 
 func _on_body_entered(body):
-
 	if body.is_in_group("player") and encounter_cooldown == true:
 		encounter_cooldown == false
 		var rng = RandomNumberGenerator.new()

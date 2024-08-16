@@ -31,7 +31,7 @@ func initialize():
 	active_character = characters_array[0]
 
 func next_character():
-	if characters_array.size() == 0:
+	if characters_array.size() == 0 or characters_array == null:
 		turn_order_array_creator()
 		turn_counter -= 1
 	active_character = characters_array[0]

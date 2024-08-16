@@ -2595,8 +2595,32 @@ offset_right = -98.0
 offset_bottom = -65.0
 scale = Vector2(0.55507, 0.550237)
 
+[node name="Save" type="Button" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+offset_right = 47.0
+grow_vertical = 0
+text = "SAVE"
+
+[node name="Load" type="Button" parent="CanvasLayer"]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -23.0
+offset_top = -31.0
+offset_right = 23.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Load"
+
 [connection signal="child_exiting_tree" from="SideSceneLayer" to="." method="_on_side_scene_layer_child_exiting_tree"]
 [connection signal="body_entered" from="TileMap/TallGrass" to="TileMap/TallGrass" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMap/@Area2D@257260" to="TileMap/@Area2D@257260" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMap/@Area2D@257261" to="TileMap/@Area2D@257261" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMap/@Area2D@257262" to="TileMap/@Area2D@257262" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@157761" to="TileMap/@Area2D@157761" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@157762" to="TileMap/@Area2D@157762" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@157763" to="TileMap/@Area2D@157763" method="_on_body_entered"]
+[connection signal="pressed" from="CanvasLayer/Save" to="." method="_on_save_pressed"]

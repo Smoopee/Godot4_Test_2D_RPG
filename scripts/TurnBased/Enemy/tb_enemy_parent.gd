@@ -31,6 +31,7 @@ var stagger: int
 var shield_tracker: int
 var stagger_tracker: int
 
+var combat_text
 var enemy_group = []
 var stats: EnemyStatsTB = null 
 
@@ -55,7 +56,10 @@ func _ready():
 	tb_enemy_health_bar.value = stats.health
 	tb_enemy_shield_bar.value = stats.shield
 	tb_enemy_stagger_bar.value = 0
-	print(stats.attack)
+	
+	var combat_text_node = get_tree().get_nodes_in_group("combat_text")
+	combat_text = combat_text_node[0]
+
 
 func set_stats(enemy_stats = EnemyStatsTB) -> void:
 	stats = enemy_stats
@@ -71,6 +75,9 @@ func change_health(value):
 	
 	if is_staggered:
 		value = value * 2
+	
+	print("tb_enemey_parent: Self.global position is " +str(self.global_position))
+	combat_text.spawn_damage_number(value, global_position)
 	
 	stats.health += value
 	tb_enemy_health_bar.value = stats.health

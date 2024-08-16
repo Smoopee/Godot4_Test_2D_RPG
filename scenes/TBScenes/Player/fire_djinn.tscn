@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://ddtjte75pnnsr"]
 
-[ext_resource type="PackedScene" uid="uid://bhrxq6406ld8w" path="res://scenes/TBScenes/Player/djinn_parent.tscn" id="1_wge7f"]
+[ext_resource type="PackedScene" uid="uid://bhrxq6406ld8w" path="res://scenes/TBScenes/Player/djinn_parent_scene.tscn" id="1_wge7f"]
 [ext_resource type="Script" path="res://scripts/TurnBased/Player/fire_djinn.gd" id="2_sbivt"]
 [ext_resource type="Texture2D" uid="uid://cpow0nsh7huq8" path="res://art/TBCharacters/PlayerCharacter/flame_sprite.png" id="3_odc4u"]
 

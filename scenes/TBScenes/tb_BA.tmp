@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dt7ja5b3owfqv"]
+[gd_scene load_steps=28 format=3 uid="uid://dt7ja5b3owfqv"]
 
 [ext_resource type="Script" path="res://scripts/TurnBased/tb_battle_arena.gd" id="1_18lt6"]
 [ext_resource type="Script" path="res://scripts/TurnBased/enemy_spawner.gd" id="1_j5o40"]
@@ -18,7 +18,6 @@
 [ext_resource type="PackedScene" uid="uid://bpoi04alg5igc" path="res://scenes/TBScenes/Sounds/fantasy_background_music.tscn" id="15_lip5p"]
 [ext_resource type="Texture2D" uid="uid://dsb4hmpy4ojjb" path="res://art/UI/TBBattleArena/magnifying_glass.png" id="15_ugiav"]
 [ext_resource type="PackedScene" uid="uid://bqfk3y0nkjwl3" path="res://scenes/scene_transition_animation.tscn" id="18_osx71"]
-[ext_resource type="Script" path="res://scripts/TurnBased/UI/ControlCombatText.gd" id="19_57lhm"]
 
 [sub_resource type="Theme" id="Theme_g7xpf"]
 
@@ -674,16 +673,9 @@ scale = Vector2(0.484734, 1.00769)
 
 [node name="AudioStreamPlayer2D" parent="." instance=ExtResource("15_lip5p")]
 volume_db = -4.238
-autoplay = false
 
 [node name="sceneTransitionAnimation" parent="." instance=ExtResource("18_osx71")]
 visible = false
-
-[node name="ControlCombatText" type="Control" parent="." groups=["combat_text"]]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("19_57lhm")
 
 [connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
 [connection signal="resized" from="PositionContainer" to="ArrowLogic" method="_on_position_container_resized"]

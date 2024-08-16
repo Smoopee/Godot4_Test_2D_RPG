@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://bhrxq6406ld8w"]
 
-[ext_resource type="Script" path="res://scripts/TurnBased/Player/tb_djinn_parent.gd" id="1_33knb"]
+[ext_resource type="Script" path="res://scripts/TurnBased/Player/tb_djinn_parent.gd" id="1_i1uen"]
 
-[node name="tb_player_parent" type="Panel" groups=["djinn"]]
+[node name="DjinnParentScene" type="Panel" groups=["djinn"]]
 anchors_preset = -1
 anchor_right = 0.075
 anchor_bottom = 0.127
@@ -14,4 +14,4 @@ scale = Vector2(0.551443, 0.566834)
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
-script = ExtResource("1_33knb")
+script = ExtResource("1_i1uen")

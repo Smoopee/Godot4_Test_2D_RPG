@@ -44,8 +44,6 @@ func cast_skill(caster = null, target = null):
 	var current_enemy_index = enemy_group.find(target)
 	var right_enemy_index = current_enemy_index + 1
 	var left_enemy_index = current_enemy_index - 1
-	
-	
 
 	if right_enemy_index + 1 > enemy_group.size():
 		right_enemy_index = 0

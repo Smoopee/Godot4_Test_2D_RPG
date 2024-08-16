@@ -1,13 +1,10 @@
 extends Panel
 
+class_name DjinnParent
 
 var turn_sprite_scene = load("res://scenes/TBScenes/TBBattleScene/turn_sprite_template.tscn")
 
-var player_stats_resource = load("res://resources/tb_resources/Player/generic_player_tb.tres")
-
-@export var enemy_resource: PlayerStatsTB
-
-@onready var animated_sprite = $AnimatedSprite2D
+var player_stats_resource = load("res://resources/tb_resources/Player/generic_player.tres")
 
 
 var level:int = 1
@@ -30,7 +27,7 @@ func set_state(new_state):
 var is_sprinting: bool = false
 var is_dodging: bool = false
 
-var stats: PlayerStatsTB = null 
+var stats: Djinn = null 
 
 #SKILL ONE SETUP----------------------------------------------------------------
 var skill_one_spellname: String
@@ -53,50 +50,50 @@ var skill_two
 var default_attack_targeting: String = "Single"
 
 
-
 #BATTLE ARENA VARIABLES---------------------------------------------------------
 var player_panel
 var player_position
+var ultimate_bar
 
 func _ready():
 	set_stats(player_stats_resource)
 	set_state(State.ALIVE)
-	instantiate_skill_one()
-	instantiate_skill_two()
+	
+	player_panel = get_tree().get_nodes_in_group("player_panel")
+	ultimate_bar = get_tree().get_nodes_in_group("ultimate")
 
 
-func _on_resized():
-	if animated_sprite == null: return
-	
-	animated_sprite.scale.x = get_viewport().size.x * 0.0015
-	animated_sprite.scale.y = get_viewport().size.y * 0.0015
-	
-func set_stats(player_stats =PlayerStatsTB) -> void:
+func set_stats(player_stats) -> void:
 	stats = player_stats
 
 func get_speed():
 	return stats.speed
 
 func change_health(value):
-	get_parent().ui_change_health(value)
 	stats.health += value
 	if stats.health <= 0:
 		stats.health = 0
 		set_state(State.DEAD)
 		print("Your character DIED!")
+	player_panel[0].change_health()
 
 func change_mana(value):
-	get_parent().ui_change_mana(value)
 	stats.mana += value
 	if stats.mana <= 0:
 		stats.mana = 0
+	player_panel[0].change_mana()
 
 func change_stamina(value):
-	get_parent().ui_change_stamina(value)
 	stats.stamina += value
 	if stats.stamina <= 0:
 		stats.stamina = 0
+	player_panel[0].change_stamina()
 
+
+func charge_ultimate(value):
+	ultimate_bar[0].value += value
+	print("The ultimate bar's value is " + str(ultimate_bar[0].value))
+	
 func change_speed(value):
 	stats.speed += value
 	var game_state = get_tree().get_nodes_in_group("game_state_tracker")
@@ -107,8 +104,10 @@ func default_attack(defender):
 	change_mana(20)
 	change_stamina(20)
 
+
 func instantiate_skill_one():
-	skill_one = get_parent().skill_one_scene.instantiate()
+	var skill_one_scene = load(stats.skill_one_path)
+	skill_one = skill_one_scene.instantiate()
 	add_child(skill_one)
 	skill_one_targeting = skill_one.target_selection
 	skill_one_spellname = skill_one.spell_name
@@ -117,7 +116,8 @@ func instantiate_skill_one():
 	skill_one_mana_cost = skill_one.mana_cost
 
 func instantiate_skill_two():
-	skill_two = get_parent().skill_two_scene.instantiate()
+	var skill_two_scene = load(stats.skill_two_path)
+	skill_two = skill_two_scene.instantiate()
 	add_child(skill_two)
 	skill_two_targeting = skill_two.target_selection
 	skill_two_spellname = skill_two.spell_name
@@ -148,12 +148,13 @@ func stop_dodge():
 	is_dodging = false
 
 func cast_skill_one(caster = self, target = null):
+	print("skill one is " + str(skill_one))
 	skill_one.cast_skill(caster, target)
-	get_parent().charge_ultimate(stats.ultimate_charge)
+	charge_ultimate(stats.ultimate_charge)
 	print("skill one has been cast and ultimate is charged by: " + str(stats.ultimate_charge))
 func cast_skill_two(caster = self, target = null):
 	skill_two.cast_skill(caster, target)
-	get_parent().charge_ultimate(stats.ultimate_charge)
+	charge_ultimate(stats.ultimate_charge)
 
 func buff_incrementer(body):
 	var children_in_group = []

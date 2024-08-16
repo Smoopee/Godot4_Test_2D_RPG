@@ -5,21 +5,24 @@ extends Control
 @onready var djinn_party = $DjinnParty
 @onready var open_menu = $OpenMenu
 @onready var close_button = $DjinnParty/CloseButton
+@onready var overworld_1 = $"../.."
 
 
-var party = [
-	GlobalDjinnTracker.djinn1_dicitionary,
-	GlobalDjinnTracker.djinn2_dicitionary,
-	GlobalDjinnTracker.djinn3_dicitionary
-	]
+@onready var party = Global.current_party
+
+func _ready():
+	print("party now is " + str(party))
 
 func _on_open_menu_pressed():
 	djinn_party.visible = true
 	open_menu.visible = false
+	get_tree().paused = true
+	djinn_party.set_djinn_party()
 
 func _on_close_button_pressed():
 	djinn_party.visible = false
 	open_menu.visible = true
+	get_tree().paused = false
 
 
 func _on_button_1_pressed():
@@ -44,8 +47,5 @@ func _on_back_button_pressed():
 	djinn_single.visible = false
 	djinn_party.visible = true
 	
-
-
-
 
 

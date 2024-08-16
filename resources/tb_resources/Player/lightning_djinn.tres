@@ -1,24 +1,24 @@
-[gd_resource type="Resource" script_class="PlayerStatsTB" load_steps=3 format=3 uid="uid://tkd8yufp2to"]
+[gd_resource type="Resource" script_class="Djinn" load_steps=3 format=3 uid="uid://djq6d3j4hw3rt"]
 
-[ext_resource type="Script" path="res://resources/tb_resources/tb_player_stats.gd" id="1_tua4p"]
-[ext_resource type="Texture2D" uid="uid://cepui3luq6hl0" path="res://art/TBCharacters/PlayerCharacter/djinn pixel art.png" id="2_mt1ns"]
+[ext_resource type="Script" path="res://resources/tb_resources/djinn_resource.gd" id="1_i2hsy"]
+[ext_resource type="Texture2D" uid="uid://cepui3luq6hl0" path="res://art/TBCharacters/PlayerCharacter/djinn pixel art.png" id="2_0g78s"]
 
 [resource]
-script = ExtResource("1_tua4p")
-turn_sprite = ExtResource("2_mt1ns")
-name = ""
+script = ExtResource("1_i2hsy")
+turn_sprite = ExtResource("2_0g78s")
+name = "Tempest"
 max_health = 100
 max_mana = 100
 max_stamina = 100
 health = 100
 mana = 100
 stamina = 100
-attack = 10
+attack = 16
 speed = 30
 base_speed = 30
-intellect = 30
-reaction_power = 10
-ultimate_charge = 5
+intellect = 15
+reaction_power = 5
+ultimate_charge = 10
 base_shield = 0
 shield = 0
 stagger_max = 0
@@ -27,3 +27,11 @@ crit_damage = 150
 lightning_resistance = 0
 water_resistance = 0
 fire_resistance = 0
+level = 1
+experience = 0
+skill_one_name = "Lightning Strike"
+skill_two_name = "Momentum"
+skill_one_path = "res://scenes/TBScenes/SkillsAndAttacks/lightning_strike.tscn"
+skill_two_path = "res://scenes/TBScenes/SkillsAndAttacks/momentum.tscn"
+node_name = "Lightning Djinn"
+save_file_name = "LightningDjinn.tres"

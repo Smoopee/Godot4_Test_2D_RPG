@@ -90,6 +90,7 @@ var player_2
 var player_3
 
 func _ready():
+	if party_members.players_array == []: return
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	player_1 = party_members.players_array[0]
 	player_2 = party_members.players_array[1]
@@ -100,7 +101,7 @@ func _ready():
 func turn_keeper():
 	turn_queue.turn_cycle()
 	current_character = turn_queue.active_character
-	print("Current character's speed is " + str(current_character.stats.speed))
+	print("Current character's attack is " + str(current_character.stats.attack))
 	if current_character.is_in_group("enemy"):
 		action_counter()
 		current_character.shield_turn_tracker()
@@ -133,8 +134,8 @@ func active_player_highlighter():
 func _on_attack_pressed():
 	action_container.visible = false
 	attack_container.visible = true
-	skill_1.text = current_character.skill_one_spellname
-	skill_2.text = current_character.skill_two_spellname
+	skill_1.text = current_character.stats.skill_one_name
+	skill_2.text = current_character.stats.skill_two_name
 
 
 func _on_evasion_pressed():
@@ -162,7 +163,6 @@ func _on_item_pressed():
 	items_panel.visible = true
 
 func _on_health_flask_pressed():
-	print(current_character)
 	items.use_health_flask(current_character)
 	items.change_health_flask(-1)
 
@@ -328,9 +328,7 @@ func the_attack_step(defender):
 			attack_container.visible = false
 			action_container.visible = true
 			action_counter()
-			print("Current turn container before " + str(current_turn_container.get_children().size()))
 			current_turn_container.get_child(0).free()
-			print("Current turn container after " + str(current_turn_container.get_children().size()))
 			turn_queue.characters_array.pop_front()
 			set_state(State.SELECTING)
 			turn_queue.next_character()
@@ -342,8 +340,6 @@ func the_attack_step(defender):
 				temp_array.push_front(i)
 	if temp_array == []: 
 		victory()
-
-		
 	
 	turn_keeper()
 
@@ -353,7 +349,6 @@ func enemy_ai(body):
 	var possible_targets = []
 	print("The players array before enemy attack is " + str(party_members.players_array))
 	for i in party_members.players_array:
-		print(i.stats.health)
 		if i.current_state == 1:
 			possible_targets.push_back(i)
 	
@@ -503,7 +498,7 @@ func stamina_checker():
 		return true
 
 func character_died(body):
-	print("a character has died")
+	print(str(body) + "has died")
 	queue_and_array_remover(body)
 
 
@@ -540,6 +535,11 @@ func victory():
 	var experience_tracker: int
 	for i in enemies.enemies_array:
 		experience_tracker += i.stats.experience
+	
+	print("You gained " + str(experience_tracker) + "!")
+	
+	for i in tb_battle_arena.current_party:
+		i.change_experience(i, experience_tracker)
 
 	transition_animation.visible = true
 	scene_transition_animation.play("fade_in")

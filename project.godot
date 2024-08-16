@@ -19,7 +19,6 @@ config/icon="res://art/icon.svg"
 
 Global="*res://scripts/global.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
-GlobalDjinnTracker="*res://scripts/global_djinn_tracker.gd"
 GlobalObtainables="*res://scripts/global_player_obtainables.gd"
 
 [display]
