@@ -4,8 +4,6 @@ class_name DjinnParent
 
 var turn_sprite_scene = load("res://scenes/TBScenes/TBBattleScene/turn_sprite_template.tscn")
 
-var player_stats_resource = load("res://resources/tb_resources/Player/generic_player.tres")
-
 
 var level:int = 1
 var experience:int = 0
@@ -56,7 +54,6 @@ var player_position
 var ultimate_bar
 
 func _ready():
-	set_stats(player_stats_resource)
 	set_state(State.ALIVE)
 	
 	player_panel = get_tree().get_nodes_in_group("player_panel")
@@ -81,6 +78,7 @@ func change_mana(value):
 	stats.mana += value
 	if stats.mana <= 0:
 		stats.mana = 0
+	print("tb_djinn_parent: Player panel is " + str(player_panel))
 	player_panel[0].change_mana()
 
 func change_stamina(value):
@@ -100,6 +98,7 @@ func change_speed(value):
 	game_state[0].character_speed_change(self)
 
 func default_attack(defender):
+	print("djinn_parent: defender's health is " + str(defender.stats.health))
 	defender.change_health(-stats.attack)
 	change_mana(20)
 	change_stamina(20)
@@ -125,7 +124,7 @@ func instantiate_skill_two():
 	skill_two_single_damage = skill_two.power * stats.attack
 	skill_two_mana_cost = skill_two.mana_cost
 
-func instantiate_turn_sprite(target, zSetter):
+func instantiate_turn_sprite(target, zSetter = 1):
 	var turn_sprite = turn_sprite_scene.instantiate()
 	target.add_child(turn_sprite)
 	turn_sprite.get_child(0).texture = stats.turn_sprite

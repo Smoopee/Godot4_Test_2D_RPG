@@ -90,20 +90,16 @@ var player_2
 var player_3
 
 func _ready():
-	if party_members.players_array == []: return
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	player_1 = party_members.players_array[0]
 	player_2 = party_members.players_array[1]
 	player_3 = party_members.players_array[2]
 	set_mode(Mode.BATTLE)
-	turn_keeper()
 
 func turn_keeper():
 	turn_queue.turn_cycle()
 	current_character = turn_queue.active_character
-	print("Current character's attack is " + str(current_character.stats.attack))
+	print("Current character is " + str(current_character))
 	if current_character.is_in_group("enemy"):
-		action_counter()
 		current_character.shield_turn_tracker()
 		current_character.stagger_turn_tracker()
 		enemy_ai(current_character)
@@ -304,45 +300,22 @@ func the_attack_step(defender):
 			pass
 		State.DEFAULT:
 			default_attack_step(defender)
-			evasion_container.visible = false
-			attack_container.visible = false
-			action_container.visible = true
-			action_counter()
-			current_turn_container.get_child(0).free()
-			turn_queue.characters_array.pop_front()
-			set_state(State.SELECTING)
-			turn_queue.next_character()
 		State.SKILLONE:
 			skill_one_attack_step(defender)
-			evasion_container.visible = false
-			attack_container.visible = false
-			action_container.visible = true
-			action_counter()
-			current_turn_container.get_child(0).free()
-			turn_queue.characters_array.pop_front()
-			set_state(State.SELECTING)
-			turn_queue.next_character()
 		State.SKILLTWO:
 			skill_two_attack_step(defender)
-			evasion_container.visible = false
-			attack_container.visible = false
-			action_container.visible = true
-			action_counter()
-			current_turn_container.get_child(0).free()
-			turn_queue.characters_array.pop_front()
-			set_state(State.SELECTING)
-			turn_queue.next_character()
-	current_character.buff_incrementer(current_character)
-	
+
 	var temp_array = []
 	for i in enemies.enemies_array.size():
 			if enemies.enemies_array[i].current_state == 1:
 				temp_array.push_front(i)
 	if temp_array == []: 
 		victory()
-	
-	turn_keeper()
 
+	set_state(State.SELECTING)
+	current_character.buff_incrementer(current_character)
+	
+	end_turn()
 
 func enemy_ai(body):
 	body.debuff_incrementer(body)
@@ -354,9 +327,16 @@ func enemy_ai(body):
 	
 	body.attack_ai(possible_targets)
 	
-	current_turn_container.get_child(0).free()
+func end_turn():
+	evasion_container.visible = false
+	attack_container.visible = false
+	action_container.visible = true
+	action_counter()
 	turn_queue.characters_array.pop_front()
 	turn_queue.next_character()
+	turn_panel.change_order()
+	print("ActionPanel: End of turn summary of turn " + str(turn_queue.turn_counter))
+	print("action_counter = " + str(turn_queue.action_counter))
 	turn_keeper()
 
 func dead_checker(body):
@@ -379,16 +359,16 @@ func queue_and_array_remover(body):
 	if current_body_index == -1:
 		if next_turn_body_index != -1:
 			turn_queue.next_turn_characters_array.remove_at(next_turn_body_index)
-			next_turn_container.get_child(next_turn_body_index).free()
+			turn_panel.change_order()
 			return
 		return
 	
 	turn_queue.characters_array.remove_at(current_body_index)
-	current_turn_container.get_child(current_body_index).free()
+	turn_panel.change_order()
 
 	
 	turn_queue.next_turn_characters_array.remove_at(next_turn_body_index)
-	next_turn_container.get_child(next_turn_body_index).free()
+	turn_panel.change_order()
 	action_counter()
 
 func default_attack_step(defender):

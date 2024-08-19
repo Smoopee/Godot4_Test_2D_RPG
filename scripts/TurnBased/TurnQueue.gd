@@ -7,7 +7,6 @@ class_name TurnQueue
 @onready var turn_panel = $"../TurnPanel"
 
 
-
 var characters_array = []
 var next_turn_characters_array = []
 var active_character
@@ -20,7 +19,8 @@ func _ready():
 	turn_order_array_creator()
 	next_turn_creator()
 	initialize()
-	turn_size = enemies.get_children().size() + party_members.get_children().size()
+	turn_size = characters_array.size()
+	print("TurnQueue: turn_size = " + str(turn_size))
 
 func custom_sorter(a, b):
 	if a.stats.speed > b.stats.speed:
@@ -49,7 +49,6 @@ func turn_order_array_creator():
 
 	characters_array = characters_array.filter(dead_check)
 
-	
 	characters_array.sort_custom(custom_sorter)
 	
 func next_turn_creator():
@@ -73,6 +72,7 @@ func turn_cycle():
 		next_turn_creator()
 		action_counter = 0
 		turn_size = characters_array.size()
+		print("TurnQueue: turn_size = " + str(turn_size))
 		turn_panel.create_turn_panel()
 		turn_panel.create_next_turn_panel()
 		sprint_checker()

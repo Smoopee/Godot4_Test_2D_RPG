@@ -2620,7 +2620,7 @@ text = "Load"
 
 [connection signal="child_exiting_tree" from="SideSceneLayer" to="." method="_on_side_scene_layer_child_exiting_tree"]
 [connection signal="body_entered" from="TileMap/TallGrass" to="TileMap/TallGrass" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMap/@Area2D@157761" to="TileMap/@Area2D@157761" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMap/@Area2D@157762" to="TileMap/@Area2D@157762" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMap/@Area2D@157763" to="TileMap/@Area2D@157763" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@65861" to="TileMap/@Area2D@65861" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@65862" to="TileMap/@Area2D@65862" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@65863" to="TileMap/@Area2D@65863" method="_on_body_entered"]
 [connection signal="pressed" from="CanvasLayer/Save" to="." method="_on_save_pressed"]

@@ -8,6 +8,7 @@ atlas = ExtResource("2_a0coi")
 region = Rect2(0, 0, 96, 91)
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_6ckg5")
 turn_sprite = SubResource("AtlasTexture_di80c")
 enemy_name = "Minoutaur"

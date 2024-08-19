@@ -14,6 +14,7 @@ func _ready():
 	var random_number_of_enemies = rng.randi_range(1,5)
 	var n = 0
 	
+	random_number_of_enemies = 5
 	
 	while n <= random_number_of_enemies - 1:
 		#var temp_n = n
@@ -25,14 +26,15 @@ func _ready():
 			#temp_n = 4
 		#elif temp_n == 4:
 			#temp_n = 1
-
-		var tb_enemy = enemy_selector().instantiate()
+		
+		var tb_enemy = enemy_selector()
+		tb_enemy = tb_enemy.duplicate().instantiate()
 		spawn_location.get_child(n).add_child(tb_enemy)
 		enemies_array.push_back(tb_enemy)
 		n += 1
 
 func enemy_selector():
-	var random_enemy_selector = rng.randi_range(1,2)
+	var random_enemy_selector = rng.randi_range(2,2)
 	
 	match(random_enemy_selector):
 		1:

@@ -3,13 +3,14 @@ extends Control
 var save_file_path = "user://save/"
 var save_file_name = "DjinnParty.tres"
 
+@onready var action_panel = $ActionPanel
 @onready var party_members = $PartyMembers
 
 var djinnData
 var current_party
 
 func _ready():
-	pass
+	action_panel.turn_keeper()
 
 func _on_tree_entered():
 	process_mode = Node.PROCESS_MODE_WHEN_PAUSED

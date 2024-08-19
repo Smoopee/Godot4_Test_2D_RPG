@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bwvlmucnuk0y5" path="res://art/TBCharacters/enemy_turn_sprite.png" id="2_s3tvm"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_e7v8h")
 turn_sprite = ExtResource("2_s3tvm")
 enemy_name = "Gobuss"

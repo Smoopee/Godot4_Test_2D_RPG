@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var power: int = 10
+var power: int = 1000
 var multi_attack_power = 0
 var mana_cost: int = 30
 var hit_rate: float = .95

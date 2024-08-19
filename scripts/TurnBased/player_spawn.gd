@@ -14,8 +14,11 @@ func _ready():
 	
 	var djinn_parent = djinn_parent_scene.instantiate()
 	player_spawn_location.get_child(n).add_child(djinn_parent)
+	#player_spawn_location.get_child(n).texture_normal = tb_battle_arena.current_party[n].turn_sprite
 	var party_member1 = djinn_parent
+	
 	party_member1.set_stats(tb_battle_arena.current_party[n])
+	party_member1.instantiate_turn_sprite(player_spawn_location.get_child(n))
 	party_member1.instantiate_skill_one()
 	party_member1.instantiate_skill_two()
 	players_array.push_back(party_member1)
@@ -23,8 +26,11 @@ func _ready():
 	
 	djinn_parent = djinn_parent_scene.instantiate()
 	player_spawn_location.get_child(n).add_child(djinn_parent)
+	#player_spawn_location.get_child(n).texture_normal = tb_battle_arena.current_party[n].turn_sprite
 	var party_member2 = djinn_parent
+	
 	party_member2.set_stats(tb_battle_arena.current_party[n])
+	party_member2.instantiate_turn_sprite(player_spawn_location.get_child(n))
 	party_member2.instantiate_skill_one()
 	party_member2.instantiate_skill_two()
 	players_array.push_back(party_member2)
@@ -32,8 +38,10 @@ func _ready():
 	
 	djinn_parent = djinn_parent_scene.instantiate()
 	player_spawn_location.get_child(n).add_child(djinn_parent)
+	#player_spawn_location.get_child(n).texture_normal = tb_battle_arena.current_party[n].turn_sprite
 	var party_member3 = djinn_parent
 	party_member3.set_stats(tb_battle_arena.current_party[n])
+	party_member3.instantiate_turn_sprite(player_spawn_location.get_child(n))
 	party_member3.instantiate_skill_one()
 	party_member3.instantiate_skill_two()
 	players_array.push_back(party_member3)

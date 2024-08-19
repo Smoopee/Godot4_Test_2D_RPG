@@ -7,7 +7,6 @@ var damage_number_2d_pool: Array[DamageNumber2D] = []
 func spawn_damage_number(value: int, spawn_location):
 	var damage_number = get_damage_number()
 	var val = str(round(value))
-	print("ControlCombatText: spawn_location = " + str(spawn_location))
 	var pos = spawn_location 
 	var height = 30
 	var spread = 30

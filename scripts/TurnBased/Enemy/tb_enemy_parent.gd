@@ -76,7 +76,6 @@ func change_health(value):
 	if is_staggered:
 		value = value * 2
 	
-	print("tb_enemey_parent: Self.global position is " +str(self.global_position))
 	combat_text.spawn_damage_number(value, global_position)
 	
 	stats.health += value
@@ -91,7 +90,7 @@ func change_health(value):
 		tb_enemy_shield_bar.visible = false
 		tb_enemy_stagger_bar.visible = false
 		animated_sprite.visible = false
-		#dead_sprite.visible = true
+		print("tb_enemy_parent: enemy's health is " + str(stats.health))
 		var game_state = get_tree().get_nodes_in_group("game_state_tracker")
 		game_state[0].character_died(self)
 
