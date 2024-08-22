@@ -1,10 +1,33 @@
-[gd_scene load_steps=10 format=3 uid="uid://be7rf80nuqtft"]
+[gd_scene load_steps=13 format=3 uid="uid://be7rf80nuqtft"]
 
 [ext_resource type="PackedScene" uid="uid://drq52ewbynyfn" path="res://scenes/TBScenes/Enemy/tb_enemy_parent.tscn" id="1_fvoea"]
 [ext_resource type="Texture2D" uid="uid://bwk2ax0k11tgf" path="res://art/TBCharacters/Enemies/Minotaur - Sprite Sheet (1).png" id="2_r1b65"]
 [ext_resource type="Script" path="res://scripts/TurnBased/Enemy/minoutaur_tb_enemy.gd" id="2_st0k6"]
+[ext_resource type="Script" path="res://resources/tb_resources/tb_enemy.gd" id="3_plrea"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_di80c"]
+atlas = ExtResource("2_r1b65")
+region = Rect2(0, 0, 96, 91)
+
+[sub_resource type="Resource" id="Resource_ywsuo"]
+resource_local_to_scene = true
+script = ExtResource("3_plrea")
+turn_sprite = SubResource("AtlasTexture_di80c")
+enemy_name = "Minoutaur"
+speed = 25
+attack = 25
+health = 400
+defense = 20
+base_shield = 50
+shield = 50
+stagger_max = 300
+crit_chance = 0.5
+lightning_resistance = 0
+water_resistance = 0
+fire_resistance = 10
+experience = 50
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e66dr"]
 atlas = ExtResource("2_r1b65")
 region = Rect2(0, 0, 96, 91)
 
@@ -28,7 +51,7 @@ region = Rect2(384, 0, 96, 91)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_di80c")
+"texture": SubResource("AtlasTexture_e66dr")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xx7qt")
@@ -53,7 +76,7 @@ offset_top = -19.0
 offset_right = -15.0001
 offset_bottom = -19.0
 script = ExtResource("2_st0k6")
-enemy_resource = null
+enemy_stats_resource = SubResource("Resource_ywsuo")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="1"]
 position = Vector2(598.402, 456.704)

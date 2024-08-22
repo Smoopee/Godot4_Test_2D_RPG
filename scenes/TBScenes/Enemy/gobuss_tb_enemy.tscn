@@ -1,8 +1,28 @@
-[gd_scene load_steps=19 format=3 uid="uid://cdm3afitbg8vq"]
+[gd_scene load_steps=22 format=3 uid="uid://cdm3afitbg8vq"]
 
 [ext_resource type="PackedScene" uid="uid://drq52ewbynyfn" path="res://scenes/TBScenes/Enemy/tb_enemy_parent.tscn" id="1_jixkt"]
 [ext_resource type="Script" path="res://scripts/TurnBased/Enemy/gobuss_tb_enemy.gd" id="2_hj4dc"]
 [ext_resource type="Texture2D" uid="uid://cmmtk76lng52j" path="res://art/characters/Enemy/Characters/Gobuss.png" id="3_n5bm5"]
+[ext_resource type="Script" path="res://resources/tb_resources/tb_enemy.gd" id="3_vh8do"]
+[ext_resource type="Texture2D" uid="uid://bwvlmucnuk0y5" path="res://art/TBCharacters/enemy_turn_sprite.png" id="4_cehkc"]
+
+[sub_resource type="Resource" id="Resource_dr82s"]
+resource_local_to_scene = true
+script = ExtResource("3_vh8do")
+turn_sprite = ExtResource("4_cehkc")
+enemy_name = "Gobuss"
+speed = 30
+attack = 15
+health = 100
+defense = 5
+base_shield = 50
+shield = 50
+stagger_max = 100
+crit_chance = 0.5
+lightning_resistance = 0
+water_resistance = 0
+fire_resistance = 0
+experience = 25
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8r680"]
 atlas = ExtResource("3_n5bm5")
@@ -116,7 +136,7 @@ offset_top = -19.0
 offset_right = -15.0001
 offset_bottom = -19.0
 script = ExtResource("2_hj4dc")
-enemy_resource = null
+enemy_stats_resource = SubResource("Resource_dr82s")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="1"]
 position = Vector2(561.001, 357.421)

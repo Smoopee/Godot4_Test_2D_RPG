@@ -29,6 +29,9 @@ func _on_button_toggled(toggled_on):
 
 func _on_button_2_pressed():
 	verify_save_directory(save_file_path)
+	#save_djinn_data(djinn1)
+	#save_djinn_data(djinn2)
+	#save_djinn_data(djinn3)
 	save_djinn_data(djinn_party)
 	Global.current_party = djinn_party.party
 
@@ -54,10 +57,13 @@ func load_djinn_data():
 	djinn3 = ResourceLoader.load(save_file_path + fn3)
 
 func _on_button_pressed():
+
+	#djinn1.default_attack_path = "res://scenes/TBScenes/SkillsAndAttacks/DefualtAttacks/tempest_default_attack.tscn"
+	#djinn2.default_attack_path = "res://scenes/TBScenes/SkillsAndAttacks/DefualtAttacks/mercuy_default_attack.tscn"
+	#djinn3.default_attack_path = "res://scenes/TBScenes/SkillsAndAttacks/DefualtAttacks/pluto_default_attack.tscn"
+	
 	party = [djinn1, djinn2, djinn3]
 	djinn_party.party = party
-	
-	
 
 func verify_save_directory(path: String):
 	DirAccess.make_dir_absolute(path)

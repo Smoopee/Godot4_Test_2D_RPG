@@ -19,7 +19,11 @@ func _ready():
 	
 	party_member1.set_stats(tb_battle_arena.current_party[n])
 	party_member1.instantiate_turn_sprite(player_spawn_location.get_child(n))
+	party_member1.instantiate_default_attack()
+	print("PartyMembers: party member 1 is = " + str(party_member1))
+	print("PartyMembers: DA name = " + str(party_member1.default_attack_name))
 	party_member1.instantiate_skill_one()
+	print("PartyMembers: skill1 name = " + str(party_member1.skill_one_spellname))
 	party_member1.instantiate_skill_two()
 	players_array.push_back(party_member1)
 	n += 1
@@ -31,6 +35,7 @@ func _ready():
 	
 	party_member2.set_stats(tb_battle_arena.current_party[n])
 	party_member2.instantiate_turn_sprite(player_spawn_location.get_child(n))
+	party_member2.instantiate_default_attack()
 	party_member2.instantiate_skill_one()
 	party_member2.instantiate_skill_two()
 	players_array.push_back(party_member2)
@@ -42,6 +47,7 @@ func _ready():
 	var party_member3 = djinn_parent
 	party_member3.set_stats(tb_battle_arena.current_party[n])
 	party_member3.instantiate_turn_sprite(player_spawn_location.get_child(n))
+	party_member3.instantiate_default_attack()
 	party_member3.instantiate_skill_one()
 	party_member3.instantiate_skill_two()
 	players_array.push_back(party_member3)

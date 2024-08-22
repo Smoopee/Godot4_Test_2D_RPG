@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="Djinn" load_steps=3 format=3 uid="uid://db7tw1dx1g2d5"]
+
+[ext_resource type="Script" path="res://resources/tb_resources/djinn_resource.gd" id="1_neaeg"]
+[ext_resource type="Texture2D" uid="uid://cepui3luq6hl0" path="res://art/TBCharacters/PlayerCharacter/djinn pixel art.png" id="2_7wlxe"]
+
+[resource]
+script = ExtResource("1_neaeg")
+turn_sprite = ExtResource("2_7wlxe")
+name = "Tempest"
+max_health = 100
+max_mana = 100
+max_stamina = 100
+health = 100
+mana = 100
+stamina = 100
+attack = 16
+speed = 30
+base_speed = 30
+intellect = 15
+reaction_power = 5
+ultimate_charge = 10
+base_shield = 0
+shield = 0
+stagger_max = 0
+crit_chance = 5
+crit_damage = 150
+lightning_resistance = 0
+water_resistance = 0
+fire_resistance = 0
+level = 1
+experience = 0
+skill_one_name = "Lightning Strike"
+skill_two_name = "Fireball"
+skill_one_path = "res://scenes/TBScenes/SkillsAndAttacks/lightning_strike.tscn"
+skill_two_path = "res://scenes/TBScenes/SkillsAndAttacks/fireball_tb.tscn"
+default_attack_name = "Swirl"
+default_attack_path = "res://scenes/TBScenes/SkillsAndAttacks/DefualtAttacks/tempest_default_attack.tscn"
+node_name = "Lightning Djinn"
+save_file_name = "TempestDjinn.tres"

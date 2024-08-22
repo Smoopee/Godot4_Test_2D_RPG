@@ -1,14 +1,11 @@
 extends Control
 
-class_name TBEnemyParent
-
 var turn_sprite_scene = load("res://scenes/TBScenes/enemy_turn_sprite_panel.tscn")
-var enemy_stats_resource = load("res://resources/tb_resources/Enemies/slimeBlue.tres")
 
-@export var enemy_resource: EnemyStatsTB
+@export var enemy_stats_resource: EnemyStatsTB
+
 @onready var tb_enemy_health_bar = $VBoxContainer/TBEnemyHealthBar
 @onready var animated_sprite = $AnimatedSprite2D
-
 
 @onready var tb_enemy_stagger_bar = $VBoxContainer/Panel/TBEnemyStaggerBar
 @onready var tb_enemy_shield_bar = $VBoxContainer/TBEnemyHealthBar/TBEnemyShieldBar

@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://dt7ja5b3owfqv"]
+[gd_scene load_steps=50 format=3 uid="uid://dt7ja5b3owfqv"]
 
 [ext_resource type="Script" path="res://scripts/TurnBased/tb_battle_arena.gd" id="1_18lt6"]
 [ext_resource type="Script" path="res://scripts/TurnBased/enemy_spawner.gd" id="1_j5o40"]
@@ -36,6 +36,54 @@ bg_color = Color(0, 0, 0, 0.643137)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_idi54"]
 bg_color = Color(0, 0, 0, 0.643137)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rmdkb"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6macy"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3knj7"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0qut4"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p4c1p"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oe7ay"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_njkjb"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_71fco"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v221i"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8nlfx"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iqhy0"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ajkdu"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y12xg"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y58va"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7llac"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tty3t"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j8i0i"]
 bg_color = Color(0, 0, 0, 0.643137)
@@ -395,6 +443,7 @@ scale = Vector2(0.366205, 1.63873)
 [node name="Panel1" type="Panel" parent="TurnPanel/CurrentTurnContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_rmdkb")
 
 [node name="CTSprite1" type="Sprite2D" parent="TurnPanel/CurrentTurnContainer/Panel1"]
 position = Vector2(4.21948, 10.5595)
@@ -404,6 +453,7 @@ texture = ExtResource("13_kksy2")
 [node name="Panel2" type="Panel" parent="TurnPanel/CurrentTurnContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_6macy")
 
 [node name="CTSprite2" type="Sprite2D" parent="TurnPanel/CurrentTurnContainer/Panel2"]
 position = Vector2(4.21948, 10.5595)
@@ -413,6 +463,7 @@ texture = ExtResource("14_mgspj")
 [node name="Panel3" type="Panel" parent="TurnPanel/CurrentTurnContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_3knj7")
 
 [node name="CTSprite3" type="Sprite2D" parent="TurnPanel/CurrentTurnContainer/Panel3"]
 position = Vector2(4.21948, 10.5595)
@@ -422,6 +473,7 @@ texture = ExtResource("15_bcqt6")
 [node name="Panel4" type="Panel" parent="TurnPanel/CurrentTurnContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_0qut4")
 
 [node name="CTSprite4" type="Sprite2D" parent="TurnPanel/CurrentTurnContainer/Panel4"]
 position = Vector2(4.21948, 10.5595)
@@ -431,6 +483,7 @@ texture = ExtResource("16_k3tgt")
 [node name="Panel5" type="Panel" parent="TurnPanel/CurrentTurnContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_p4c1p")
 
 [node name="CTSprite5" type="Sprite2D" parent="TurnPanel/CurrentTurnContainer/Panel5"]
 position = Vector2(4.21948, 10.5595)
@@ -440,6 +493,7 @@ texture = ExtResource("16_k3tgt")
 [node name="Panel6" type="Panel" parent="TurnPanel/CurrentTurnContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_oe7ay")
 
 [node name="CTSprite6" type="Sprite2D" parent="TurnPanel/CurrentTurnContainer/Panel6"]
 position = Vector2(4.21948, 10.5595)
@@ -449,6 +503,7 @@ texture = ExtResource("17_72jfu")
 [node name="Panel7" type="Panel" parent="TurnPanel/CurrentTurnContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_njkjb")
 
 [node name="CTSprite7" type="Sprite2D" parent="TurnPanel/CurrentTurnContainer/Panel7"]
 position = Vector2(4.21948, 10.5595)
@@ -458,6 +513,7 @@ texture = ExtResource("17_72jfu")
 [node name="Panel8" type="Panel" parent="TurnPanel/CurrentTurnContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_71fco")
 
 [node name="CTSprite8" type="Sprite2D" parent="TurnPanel/CurrentTurnContainer/Panel8"]
 position = Vector2(4.21948, 10.5595)
@@ -485,6 +541,7 @@ scale = Vector2(0.388597, 1.6393)
 [node name="Panel1" type="Panel" parent="TurnPanel/NextTurnContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_v221i")
 
 [node name="NTSprite1" type="Sprite2D" parent="TurnPanel/NextTurnContainer/Panel1"]
 position = Vector2(4.21948, 10.5595)
@@ -494,6 +551,7 @@ texture = ExtResource("13_kksy2")
 [node name="Panel2" type="Panel" parent="TurnPanel/NextTurnContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_8nlfx")
 
 [node name="NTSprite2" type="Sprite2D" parent="TurnPanel/NextTurnContainer/Panel2"]
 position = Vector2(4.21948, 10.5595)
@@ -503,6 +561,7 @@ texture = ExtResource("14_mgspj")
 [node name="Panel3" type="Panel" parent="TurnPanel/NextTurnContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_iqhy0")
 
 [node name="NTSprite3" type="Sprite2D" parent="TurnPanel/NextTurnContainer/Panel3"]
 position = Vector2(4.21948, 10.5595)
@@ -512,6 +571,7 @@ texture = ExtResource("15_bcqt6")
 [node name="Panel4" type="Panel" parent="TurnPanel/NextTurnContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_ajkdu")
 
 [node name="NTSprite4" type="Sprite2D" parent="TurnPanel/NextTurnContainer/Panel4"]
 position = Vector2(4.21948, 10.5595)
@@ -521,6 +581,7 @@ texture = ExtResource("16_k3tgt")
 [node name="Panel5" type="Panel" parent="TurnPanel/NextTurnContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_y12xg")
 
 [node name="NTSprite5" type="Sprite2D" parent="TurnPanel/NextTurnContainer/Panel5"]
 position = Vector2(4.21948, 10.5595)
@@ -530,6 +591,7 @@ texture = ExtResource("16_k3tgt")
 [node name="Panel6" type="Panel" parent="TurnPanel/NextTurnContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_y58va")
 
 [node name="NTSprite6" type="Sprite2D" parent="TurnPanel/NextTurnContainer/Panel6"]
 position = Vector2(4.21948, 10.5595)
@@ -539,6 +601,7 @@ texture = ExtResource("17_72jfu")
 [node name="Panel7" type="Panel" parent="TurnPanel/NextTurnContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_7llac")
 
 [node name="NTSprite7" type="Sprite2D" parent="TurnPanel/NextTurnContainer/Panel7"]
 position = Vector2(4.21948, 10.5595)
@@ -548,6 +611,7 @@ texture = ExtResource("17_72jfu")
 [node name="Panel8" type="Panel" parent="TurnPanel/NextTurnContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_tty3t")
 
 [node name="NTSprite8" type="Sprite2D" parent="TurnPanel/NextTurnContainer/Panel8"]
 position = Vector2(4.21948, 10.5595)

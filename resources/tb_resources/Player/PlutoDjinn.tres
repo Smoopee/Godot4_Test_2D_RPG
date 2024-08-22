@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="Djinn" load_steps=3 format=3 uid="uid://dy7vo2vjj2v3k"]
+
+[ext_resource type="Script" path="res://resources/tb_resources/djinn_resource.gd" id="1_a18xo"]
+[ext_resource type="Texture2D" uid="uid://dntnew8jgl8ug" path="res://art/TBCharacters/PlayerCharacter/water_sprite.png" id="2_d4548"]
+
+[resource]
+script = ExtResource("1_a18xo")
+turn_sprite = ExtResource("2_d4548")
+name = "Pluto"
+max_health = 100
+max_mana = 100
+max_stamina = 100
+health = 100
+mana = 100
+stamina = 100
+attack = 10
+speed = 24
+base_speed = 24
+intellect = 40
+reaction_power = 30
+ultimate_charge = 5
+base_shield = 0
+shield = 0
+stagger_max = 0
+crit_chance = 5
+crit_damage = 150
+lightning_resistance = 0
+water_resistance = 0
+fire_resistance = 0
+level = 1
+experience = 0
+skill_one_name = "Drizzle"
+skill_two_name = "Mist"
+skill_one_path = "res://scenes/TBScenes/SkillsAndAttacks/drizzle.tscn"
+skill_two_path = "res://scenes/TBScenes/SkillsAndAttacks/mist.tscn"
+default_attack_name = "Quench"
+default_attack_path = "res://scenes/TBScenes/SkillsAndAttacks/DefualtAttacks/pluto_default_attack.tscn"
+node_name = ""
+save_file_name = "PlutoDjinn.tres"

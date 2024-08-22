@@ -37,6 +37,7 @@ var ct_sprite_array = []
 var nt_sprite_array = []
 var turn_list_array = []
 var next_turn_list_array = []
+var z_setter = 9
 
 func _ready():
 	ct_sprite_array = [
@@ -67,22 +68,34 @@ func _ready():
 func create_turn_panel():
 	turn_label_changer()
 	print("TurnPanel: ct_sprite_array = " + str(ct_sprite_array))
-
+	
+	z_setter = 9
+	
 	turn_list_array = turn_queue.characters_array
 	for i in ct_sprite_array.size():
 		if i < turn_list_array.size():
 			ct_sprite_array[i].texture = turn_list_array[i].stats.turn_sprite
 			ct_sprite_array[i].visible = true
+			ct_sprite_array[i].get_parent().z_index = z_setter
+			z_setter -= 1
 		else:
 			ct_sprite_array[i].visible = false
-
+	
+	var tween = create_tween().set_loops()
+	tween.tween_property(ct_sprite_array[0], "scale", Vector2(.5, .5), .5)
+	tween.tween_property(ct_sprite_array[0], "scale", Vector2(.4, .4), .5)
 
 func create_next_turn_panel():
 	next_turn_list_array = turn_queue.next_turn_characters_array
+	
+	z_setter = 9
+	
 	for i in nt_sprite_array.size():
 		if i < next_turn_list_array.size():
 			nt_sprite_array[i].texture = next_turn_list_array[i].stats.turn_sprite
 			nt_sprite_array[i].visible = true
+			nt_sprite_array[i].get_parent().z_index = z_setter
+			z_setter -= 1
 		else:
 			nt_sprite_array[i].visible = false
 

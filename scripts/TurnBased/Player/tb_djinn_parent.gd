@@ -45,8 +45,9 @@ var skill_two
 
 
 #DEFAULT ATTACK SETUP-----------------------------------------------------------
-var default_attack_targeting: String = "Single"
-
+var default_attack_name: String
+var default_attack_targeting: String 
+var default_attack
 
 #BATTLE ARENA VARIABLES---------------------------------------------------------
 var player_panel
@@ -97,12 +98,17 @@ func change_speed(value):
 	var game_state = get_tree().get_nodes_in_group("game_state_tracker")
 	game_state[0].character_speed_change(self)
 
-func default_attack(defender):
-	print("djinn_parent: defender's health is " + str(defender.stats.health))
-	defender.change_health(-stats.attack)
-	change_mana(20)
-	change_stamina(20)
 
+func instantiate_default_attack():
+	var default_attack_scene = load(stats.default_attack_path)
+	default_attack = default_attack_scene.instantiate()
+	print("djinn_parent_scene: default attack is = " + str(default_attack))
+	add_child(default_attack)
+	default_attack_targeting = default_attack.target_selection
+	print("djinn_parent_scene: default attack is = " + str(default_attack.target_selection))
+	skill_one_spellname = default_attack.default_attack_name
+	print("djinn_parent_scene: default attack is = " + str(default_attack.default_attack_name))
+	
 
 func instantiate_skill_one():
 	var skill_one_scene = load(stats.skill_one_path)
@@ -151,8 +157,13 @@ func cast_skill_one(caster = self, target = null):
 	skill_one.cast_skill(caster, target)
 	charge_ultimate(stats.ultimate_charge)
 	print("skill one has been cast and ultimate is charged by: " + str(stats.ultimate_charge))
+
 func cast_skill_two(caster = self, target = null):
 	skill_two.cast_skill(caster, target)
+	charge_ultimate(stats.ultimate_charge)
+
+func cast_default_attack(caster = self, target = null):
+	default_attack.default_attack_function(caster, target)
 	charge_ultimate(stats.ultimate_charge)
 
 func buff_incrementer(body):

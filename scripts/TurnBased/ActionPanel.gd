@@ -42,6 +42,7 @@ enum State{
 	SKILLONE,
 	SKILLTWO,
 	DODGE,
+	ENEMY_TURN
 }
 
 var current_state: int = -1: set = set_state
@@ -98,15 +99,17 @@ func _ready():
 func turn_keeper():
 	turn_queue.turn_cycle()
 	current_character = turn_queue.active_character
+	active_player_highlighter()
 	print("Current character is " + str(current_character))
 	if current_character.is_in_group("enemy"):
 		current_character.shield_turn_tracker()
 		current_character.stagger_turn_tracker()
+		set_state(State.ENEMY_TURN)
 		enemy_ai(current_character)
 	elif current_character.is_in_group("allys"):
-		pass
-	
-	active_player_highlighter()
+		set_state(State.SELECTING)
+		print("ActionPanel: current_character.state is " + str(current_state))
+
 
 func active_player_highlighter():
 	match current_character:
@@ -128,6 +131,7 @@ func active_player_highlighter():
 			active_character_highlighter3.visible = false
 
 func _on_attack_pressed():
+	if current_state == State.ENEMY_TURN: return
 	action_container.visible = false
 	attack_container.visible = true
 	skill_1.text = current_character.stats.skill_one_name
@@ -135,6 +139,7 @@ func _on_attack_pressed():
 
 
 func _on_evasion_pressed():
+	if current_state == State.ENEMY_TURN: return
 	action_container.visible = false
 	evasion_container.visible = true
 
@@ -156,6 +161,7 @@ func _on_dodge_pressed():
 	action_container.visible = true
 
 func _on_item_pressed():
+	if current_state == State.ENEMY_TURN: return
 	items_panel.visible = true
 
 func _on_health_flask_pressed():
@@ -184,6 +190,7 @@ func _on_back_pressed():
 
 func _on_default_pressed():
 	target_confirmation_check.clear()
+	print("Actionpanel: current_character.default_attack_targeting is " + str(current_character.default_attack_targeting))
 	arrow_logic.arrow_initializer(current_character.default_attack_targeting)
 	targeting_state(current_character.default_attack_targeting)
 	set_state(State.DEFAULT)
@@ -202,6 +209,7 @@ func _on_skill_2_pressed():
 
 #ENEMY BUTTONS------------------------------------------------------------------
 func button_handler(body):
+	if current_state == State.ENEMY_TURN: return
 	if dead_checker(body): return
 	if target_confirmation_checker(body):
 		the_attack_step(body)
@@ -372,7 +380,38 @@ func queue_and_array_remover(body):
 	action_counter()
 
 func default_attack_step(defender):
-	current_character.default_attack(defender)
+	match current_character.default_attack_targeting:
+		"Single":
+			current_character.instantiate_default_attack()
+			current_character.cast_default_attack(current_character, defender)
+
+		"Multi":
+			current_character.instantiate_default_attack()
+			current_character.cast_default_attack(current_character, defender)
+		
+		"AOE":
+			current_character.instantiate_default_attack()
+			
+			for i in enemies.enemies_array.size():
+			#SKIPS DEAD ENEMIES
+				if enemies.enemies_array[i].current_state == 0:
+					continue
+				
+				current_character.cast_default_attack(current_character, enemies.enemies_array[i])
+					
+		"Friendly_Single":
+			current_character.instantiate_default_attack()
+			current_character.default_attack(current_character, defender)
+		"Friendly_Multi":
+			current_character.instantiate_default_attack()
+			current_character.default_attack(current_character, defender)
+		"Friendly_AOE":
+			current_character.instantiate_default_attack()
+			for i in party_members.players_array.size():
+				
+				if party_members.players_array[i].current_state == 0:
+					continue
+				current_character.cast_default_attack(current_character, party_members.players_array[i])
 
 func skill_one_attack_step(defender):
 	match current_character.skill_one_targeting:
@@ -406,14 +445,14 @@ func skill_one_attack_step(defender):
 			current_character.change_mana(-current_character.skill_one_mana_cost)
 			current_character.cast_skill_one(current_character, defender)
 		"Friendly_AOE":
-			current_character.instantiate_skill_two()
-			current_character.change_mana(-current_character.skill_two_mana_cost)
+			current_character.instantiate_skill_one()
+			current_character.change_mana(-current_character.skill_one_mana_cost)
 			
 			for i in party_members.players_array.size():
 				
 				if party_members.players_array[i].current_state == 0:
 					continue
-				current_character.cast_skill_two(current_character, party_members.players_array[i])
+				current_character.cast_skill_one(current_character, party_members.players_array[i])
 	
 
 func skill_two_attack_step(defender):

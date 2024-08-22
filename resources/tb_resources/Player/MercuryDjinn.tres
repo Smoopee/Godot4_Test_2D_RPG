@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="Djinn" load_steps=3 format=3 uid="uid://cnih33j4338db"]
+
+[ext_resource type="Script" path="res://resources/tb_resources/djinn_resource.gd" id="1_v84d2"]
+[ext_resource type="Texture2D" uid="uid://cpow0nsh7huq8" path="res://art/TBCharacters/PlayerCharacter/flame_sprite.png" id="2_7k5bk"]
+
+[resource]
+script = ExtResource("1_v84d2")
+turn_sprite = ExtResource("2_7k5bk")
+name = "Mercury"
+max_health = 100
+max_mana = 100
+max_stamina = 100
+health = 100
+mana = 100
+stamina = 100
+attack = 20
+speed = 27
+base_speed = 27
+intellect = 14
+reaction_power = 20
+ultimate_charge = 10
+base_shield = 0
+shield = 0
+stagger_max = 0
+crit_chance = 5
+crit_damage = 150
+lightning_resistance = 0
+water_resistance = 0
+fire_resistance = 0
+level = 1
+experience = 0
+skill_one_name = "Fireball"
+skill_two_name = "Drizzle"
+skill_one_path = "res://scenes/TBScenes/SkillsAndAttacks/fireball_tb.tscn"
+skill_two_path = "res://scenes/TBScenes/SkillsAndAttacks/drizzle.tscn"
+default_attack_name = "Flint Strike"
+default_attack_path = "res://scenes/TBScenes/SkillsAndAttacks/DefualtAttacks/mercury_default_attack.tscn"
+node_name = ""
+save_file_name = "MercuryDjinn.tres"

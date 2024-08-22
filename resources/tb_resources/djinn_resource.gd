@@ -4,6 +4,7 @@ class_name Djinn
 
 @export var turn_sprite: Texture
 
+
 @export var name: String
 @export var max_health: int 
 @export var max_mana: int
@@ -31,6 +32,8 @@ class_name Djinn
 @export var skill_two_name: String
 @export var skill_one_path: String
 @export var skill_two_path: String
+@export var default_attack_name:String
+@export var default_attack_path: String
 @export var node_name: String
 @export var save_file_name: String
 
@@ -62,3 +65,4 @@ func stats_on_level_up(target):
 	target.intellect += 2
 	target.reaction_power += 2
 	print("djinn_resource: Target's attack is " + str(target.attack))
+

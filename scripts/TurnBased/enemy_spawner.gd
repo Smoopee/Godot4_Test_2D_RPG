@@ -34,7 +34,7 @@ func _ready():
 		n += 1
 
 func enemy_selector():
-	var random_enemy_selector = rng.randi_range(2,2)
+	var random_enemy_selector = rng.randi_range(1,2)
 	
 	match(random_enemy_selector):
 		1:

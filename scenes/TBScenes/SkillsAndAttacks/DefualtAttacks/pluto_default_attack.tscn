@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dy6twyguyolf6"]
+
+[ext_resource type="Script" path="res://scripts/TurnBased/SkillsAndAttacks/DefaultAttacks/pluto_default.gd" id="1_l0wp7"]
+
+[node name="PlutoDefaultAttack" type="Node2D"]
+script = ExtResource("1_l0wp7")

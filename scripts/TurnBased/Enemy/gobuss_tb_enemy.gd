@@ -6,7 +6,8 @@ var game_state
 
 
 func _on_tree_entered():
-	enemy_stats_resource = load("res://resources/tb_resources/Enemies/gobuss.tres")
+	enemy_stats_resource 
+	#= load("res://resources/tb_resources/Enemies/gobuss.tres")
 	set_stats(enemy_stats_resource)
 	game_state = get_tree().get_nodes_in_group("game_state_tracker")
 

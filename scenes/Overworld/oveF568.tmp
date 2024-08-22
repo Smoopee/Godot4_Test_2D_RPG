@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://yuw71n624lid"]
+[gd_scene load_steps=16 format=3 uid="uid://yuw71n624lid"]
 
 [ext_resource type="Texture2D" uid="uid://dni01tohj5w7x" path="res://art/tilesets/TilesetNature.png" id="1_2561q"]
 [ext_resource type="Script" path="res://scripts/Overworld/overworld_1.gd" id="1_n5m2a"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://ysnaiwx8s6vy" path="res://scenes/UI/djinn_menu.tscn" id="8_wund6"]
 [ext_resource type="AudioStream" uid="uid://dm8xh8xq0uh78" path="res://sounds/MotiffWithDrumsGame.wav" id="9_iuenj"]
 [ext_resource type="Script" path="res://scripts/Sounds/AudioStreamPlayer2D.gd" id="10_37g7a"]
-[ext_resource type="PackedScene" uid="uid://b4g4jmy745vmr" path="res://scenes/TBScenes/SkillsAndAttacks/DefualtAttacks/tempest_default_attack.tscn" id="11_q8fy6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_psuxy"]
 texture = ExtResource("1_2561q")
@@ -2628,11 +2627,9 @@ pitch_scale = 1.49
 autoplay = true
 script = ExtResource("10_37g7a")
 
-[node name="TempestDefaultAttack" parent="AudioStreamPlayer2D" instance=ExtResource("11_q8fy6")]
-
 [connection signal="child_exiting_tree" from="SideSceneLayer" to="." method="_on_side_scene_layer_child_exiting_tree"]
 [connection signal="body_entered" from="TileMap/TallGrass" to="TileMap/TallGrass" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMap/@Area2D@159576" to="TileMap/@Area2D@159576" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMap/@Area2D@159577" to="TileMap/@Area2D@159577" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMap/@Area2D@159578" to="TileMap/@Area2D@159578" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@53068" to="TileMap/@Area2D@53068" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@53069" to="TileMap/@Area2D@53069" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@53070" to="TileMap/@Area2D@53070" method="_on_body_entered"]
 [connection signal="pressed" from="CanvasLayer/Save" to="." method="_on_save_pressed"]

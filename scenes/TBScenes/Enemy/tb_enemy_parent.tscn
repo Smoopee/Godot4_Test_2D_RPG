@@ -1,7 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://drq52ewbynyfn"]
+[gd_scene load_steps=14 format=3 uid="uid://drq52ewbynyfn"]
 
 [ext_resource type="Script" path="res://scripts/TurnBased/Enemy/tb_enemy_parent.gd" id="1_uni6f"]
-[ext_resource type="Resource" uid="uid://baiiavy5dypuq" path="res://resources/tb_resources/Enemies/minoutaur.tres" id="2_f1qs0"]
 [ext_resource type="Texture2D" uid="uid://bapikvl8phl44" path="res://art/UI/PlayerElements/water-drop.png" id="2_r4tq2"]
 [ext_resource type="Texture2D" uid="uid://lqqtfcs2184e" path="res://art/UI/PlayerElements/lightning_symbol.png" id="3_l0jii"]
 [ext_resource type="Texture2D" uid="uid://rxtvbxbdapk3" path="res://art/UI/PlayerElements/flame_symbol.png" id="4_2dgub"]
@@ -35,7 +34,6 @@ size_flags_vertical = 3
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_vj0mp")
 script = ExtResource("1_uni6f")
-enemy_resource = ExtResource("2_f1qs0")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1

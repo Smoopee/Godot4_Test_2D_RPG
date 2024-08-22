@@ -5,7 +5,7 @@ extends "res://scripts/TurnBased/Enemy/tb_enemy_parent.gd"
 var game_state
 
 func _on_tree_entered():
-	enemy_stats_resource = load("res://resources/tb_resources/Enemies/minoutaur.tres")
+	enemy_stats_resource 
 	set_stats(enemy_stats_resource)
 	game_state = get_tree().get_nodes_in_group("game_state_tracker")
 
@@ -25,4 +25,5 @@ func attack_ai(targets):
 
 	tween.tween_property(tb_enemy, "position", end_pos, 1.5)
 	tween.tween_property(tb_enemy, "position", start_pos - global_position, .5)
+	await tween.finished
 	game_state[0].end_turn()
