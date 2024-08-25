@@ -5,6 +5,8 @@ extends VBoxContainer
 @onready var skill_1_button = $SpellContainer/Skill1Button
 @onready var skill_2_button = $SpellContainer/Skill2Button
 @onready var spell_list = $"../SpellList"
+@onready var talent_tree_panel = $"../TalentTreePanel"
+
 
 var save_file_path = "user://save/"
 var save_file_name 
@@ -31,6 +33,13 @@ func _on_skill_1_button_pressed():
 func _on_skill_2_button_pressed():
 	spell_list.visible = true
 	skill2_button_toggle = true
+
+func _on_talent_button_pressed():
+	var talent_tree_scene = load(selected_djinn.talent_tree_path)
+	var talent_tree = talent_tree_scene.instantiate()
+	talent_tree_panel.add_child(talent_tree)
+	print("SpellList: selected_djinn is " + str(selected_djinn))
+	talent_tree_panel.get_child(0).transfer_djinn(selected_djinn)
 
 func _on_spell_list_item_activated(index):
 	if index == spell_list.get_item_count() - 1: 
@@ -65,3 +74,6 @@ func save_djinn_data():
 
 func verify_save_directory(path: String):
 	DirAccess.make_dir_absolute(path)
+
+
+

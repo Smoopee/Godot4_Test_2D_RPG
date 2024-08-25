@@ -1,13 +1,11 @@
-[gd_resource type="Resource" script_class="Djinn" load_steps=4 format=3 uid="uid://djq6d3j4hw3rt"]
+[gd_resource type="Resource" script_class="Djinn" load_steps=3 format=3 uid="uid://djq6d3j4hw3rt"]
 
 [ext_resource type="Script" path="res://resources/tb_resources/djinn_resource.gd" id="1_i2hsy"]
-[ext_resource type="Script" path="res://scripts/TurnBased/SkillsAndAttacks/DefaultAttacks/tempest_default.gd" id="1_mwygc"]
 [ext_resource type="Texture2D" uid="uid://cepui3luq6hl0" path="res://art/TBCharacters/PlayerCharacter/djinn pixel art.png" id="2_0g78s"]
 
 [resource]
 script = ExtResource("1_i2hsy")
 turn_sprite = ExtResource("2_0g78s")
-default_attack = ExtResource("1_mwygc")
 name = "Tempest"
 max_health = 100
 max_mana = 100
@@ -35,5 +33,9 @@ skill_one_name = "Lightning Strike"
 skill_two_name = "Momentum"
 skill_one_path = "res://scenes/TBScenes/SkillsAndAttacks/lightning_strike.tscn"
 skill_two_path = "res://scenes/TBScenes/SkillsAndAttacks/momentum.tscn"
+default_attack_name = ""
+default_attack_path = ""
 node_name = "Lightning Djinn"
 save_file_name = "LightningDjinn.tres"
+talent_tree_path = ""
+talent_tree_spread = [[1, 0, 0], [0, 1, 0], [1, 0, 0], [1, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]]

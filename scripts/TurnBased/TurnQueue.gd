@@ -70,7 +70,7 @@ func turn_cycle():
 	if action_counter >= turn_size:
 		turn_order_array_creator()
 		next_turn_creator()
-		action_counter = 0
+		action_counter = 1
 		turn_size = characters_array.size()
 		print("TurnQueue: turn_size = " + str(turn_size))
 		turn_panel.create_turn_panel()

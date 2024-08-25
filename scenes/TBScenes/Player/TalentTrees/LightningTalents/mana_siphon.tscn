@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bcvak7d2fex6o"]
+
+[ext_resource type="Script" path="res://scripts/TurnBased/Player/TalentTree/LightningTalents/mana_siphon.gd" id="1_paxga"]
+
+[node name="ManaSiphon" type="Node" groups=["on_default"]]
+script = ExtResource("1_paxga")

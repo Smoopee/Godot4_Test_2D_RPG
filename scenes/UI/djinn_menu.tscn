@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ysnaiwx8s6vy"]
+[gd_scene load_steps=10 format=3 uid="uid://ysnaiwx8s6vy"]
 
 [ext_resource type="Script" path="res://scripts/UI/DjinnMenu/djinn_menu.gd" id="1_cyqpn"]
 [ext_resource type="Script" path="res://scripts/UI/DjinnMenu/DjinnParty.gd" id="2_yvd67"]
@@ -9,6 +9,9 @@
 [ext_resource type="Script" path="res://scripts/UI/DjinnMenu/DjinnSingle.gd" id="3_opu1g"]
 [ext_resource type="Texture2D" uid="uid://qsdtsxe6cs0a" path="res://art/UI/PlayerElements/LifeBarMiniProgress.png" id="4_07jup"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_26g7f"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
 [node name="DjinnMenu" type="Control"]
 process_mode = 2
 layout_mode = 3
@@ -17,6 +20,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -1152.0
+offset_top = -648.0
+offset_right = -1152.0
+offset_bottom = -648.0
 grow_horizontal = 0
 grow_vertical = 0
 script = ExtResource("1_cyqpn")
@@ -24,15 +31,17 @@ script = ExtResource("1_cyqpn")
 [node name="DjinnParty" type="VBoxContainer" parent="."]
 visible = false
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -50.0
-offset_top = -79.0
-grow_horizontal = 0
-grow_vertical = 0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 722.0
+offset_top = 258.0
+offset_right = 772.0
+offset_bottom = 361.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("2_yvd67")
 
 [node name="Djinn1" type="TextureRect" parent="DjinnParty"]
@@ -120,15 +129,17 @@ text = "BACK"
 [node name="DjinnSingle" type="VBoxContainer" parent="."]
 visible = false
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -160.0
-offset_top = -148.0
-grow_horizontal = 0
-grow_vertical = 0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 722.0
+offset_top = 235.0
+offset_right = 882.0
+offset_bottom = 418.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("3_opu1g")
 
 [node name="TextureRect" type="TextureRect" parent="DjinnSingle"]
@@ -156,6 +167,10 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="TalentButton" type="Button" parent="DjinnSingle"]
+layout_mode = 2
+text = "Talents"
+
 [node name="BackButton" type="Button" parent="DjinnSingle"]
 layout_mode = 2
 text = "BACK"
@@ -168,8 +183,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -156.0
-offset_top = -191.0
+offset_left = 814.0
+offset_top = 235.0
+offset_right = 970.0
+offset_bottom = 426.0
 grow_horizontal = 0
 grow_vertical = 0
 scale = Vector2(0.687596, 0.696121)
@@ -177,12 +194,34 @@ script = ExtResource("3_0ij3d")
 
 [node name="OpenMenu" type="Button" parent="."]
 process_mode = 3
-layout_mode = 0
-offset_left = -54.0
-offset_top = -43.0
-offset_right = -4.0
-offset_bottom = -12.0
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1102.0
+offset_top = 603.0
+offset_right = 1152.0
+offset_bottom = 634.0
+grow_horizontal = 0
+grow_vertical = 0
 text = "Open"
+
+[node name="TalentTreePanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 539.0
+offset_top = 235.0
+offset_right = 579.0
+offset_bottom = 275.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_26g7f")
 
 [connection signal="pressed" from="DjinnParty/Button1" to="." method="_on_button_1_pressed"]
 [connection signal="pressed" from="DjinnParty/Button2" to="." method="_on_button_2_pressed"]
@@ -190,6 +229,7 @@ text = "Open"
 [connection signal="pressed" from="DjinnParty/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="pressed" from="DjinnSingle/SpellContainer/Skill1Button" to="DjinnSingle" method="_on_skill_1_button_pressed"]
 [connection signal="pressed" from="DjinnSingle/SpellContainer/Skill2Button" to="DjinnSingle" method="_on_skill_2_button_pressed"]
+[connection signal="pressed" from="DjinnSingle/TalentButton" to="DjinnSingle" method="_on_talent_button_pressed"]
 [connection signal="pressed" from="DjinnSingle/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="item_activated" from="SpellList" to="DjinnSingle" method="_on_spell_list_item_activated"]
 [connection signal="pressed" from="OpenMenu" to="." method="_on_open_menu_pressed"]

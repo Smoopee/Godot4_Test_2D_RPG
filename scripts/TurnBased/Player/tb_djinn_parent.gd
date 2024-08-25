@@ -49,6 +49,9 @@ var default_attack_name: String
 var default_attack_targeting: String 
 var default_attack
 
+#TALENT SETUP-----------------------------------------------------------
+var talent
+
 #BATTLE ARENA VARIABLES---------------------------------------------------------
 var player_panel
 var player_position
@@ -135,6 +138,11 @@ func instantiate_turn_sprite(target, zSetter = 1):
 	target.add_child(turn_sprite)
 	turn_sprite.get_child(0).texture = stats.turn_sprite
 	turn_sprite.z_index = zSetter
+	
+func instantiate_talents():
+	var talent_scene = load("res://scenes/TBScenes/Player/TalentTrees/LightningTalents/mana_shift.tscn")
+	talent = talent_scene.instantiate()
+	add_child(talent)
 
 func cast_sprint():
 	change_stamina(-50)

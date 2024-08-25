@@ -2592,10 +2592,10 @@ position_smoothing_enabled = true
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="DjinnMenu" parent="CanvasLayer" instance=ExtResource("8_wund6")]
-offset_left = -98.0
-offset_top = -65.0
-offset_right = -98.0
-offset_bottom = -65.0
+offset_left = -641.0
+offset_top = -358.0
+offset_right = -641.0
+offset_bottom = -358.0
 scale = Vector2(0.55507, 0.550237)
 
 [node name="Save" type="Button" parent="CanvasLayer"]
@@ -2632,7 +2632,7 @@ script = ExtResource("10_37g7a")
 
 [connection signal="child_exiting_tree" from="SideSceneLayer" to="." method="_on_side_scene_layer_child_exiting_tree"]
 [connection signal="body_entered" from="TileMap/TallGrass" to="TileMap/TallGrass" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMap/@Area2D@159576" to="TileMap/@Area2D@159576" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMap/@Area2D@159577" to="TileMap/@Area2D@159577" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMap/@Area2D@159578" to="TileMap/@Area2D@159578" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@35731" to="TileMap/@Area2D@35731" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@35732" to="TileMap/@Area2D@35732" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@35733" to="TileMap/@Area2D@35733" method="_on_body_entered"]
 [connection signal="pressed" from="CanvasLayer/Save" to="." method="_on_save_pressed"]

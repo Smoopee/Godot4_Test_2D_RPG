@@ -5,7 +5,7 @@ var momentum_buff_scene = load("res://scenes/TBScenes/SkillsAndAttacks/Buffs/mom
 
 var power: int = 0
 var multi_attack_power = 0
-var mana_cost: int = 30
+var mana_cost: int = 50
 var hit_rate: float = .95
 var target_selection: String = "Friendly_Multi"
 var elemental_typing: String = "Lightning"

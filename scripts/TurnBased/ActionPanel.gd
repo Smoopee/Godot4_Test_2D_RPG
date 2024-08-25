@@ -35,6 +35,7 @@ extends Panel
 
 
 
+
 #DECLARING STATES---------------------------------------------------------------
 enum State{
 	SELECTING,
@@ -95,7 +96,8 @@ func _ready():
 	player_2 = party_members.players_array[1]
 	player_3 = party_members.players_array[2]
 	set_mode(Mode.BATTLE)
-
+	
+	
 func turn_keeper():
 	turn_queue.turn_cycle()
 	current_character = turn_queue.active_character
@@ -147,6 +149,7 @@ func _on_sprint_pressed():
 	if stamina_checker(): return
 	stamina_checker()
 	current_character.cast_sprint()
+	on_sprint_trigger(current_character)
 	turn_queue.next_turn_creator()
 	turn_panel.create_next_turn_panel()
 	evasion_container.visible = false
@@ -193,6 +196,7 @@ func _on_default_pressed():
 	print("Actionpanel: current_character.default_attack_targeting is " + str(current_character.default_attack_targeting))
 	arrow_logic.arrow_initializer(current_character.default_attack_targeting)
 	targeting_state(current_character.default_attack_targeting)
+	on_default_trigger(current_character)
 	set_state(State.DEFAULT)
 
 func _on_skill_1_pressed():
@@ -380,6 +384,7 @@ func queue_and_array_remover(body):
 	action_counter()
 
 func default_attack_step(defender):
+	on_attack_trigger(current_character)
 	match current_character.default_attack_targeting:
 		"Single":
 			current_character.instantiate_default_attack()
@@ -564,3 +569,18 @@ func victory():
 	scene_transition_animation.play("fade_in")
 	await get_tree().create_timer(1).timeout
 	tb_battle_arena.tree_is_leaving()
+
+func on_sprint_trigger(body):
+	for node in get_tree().get_nodes_in_group("on_sprint"):
+		if body.is_ancestor_of(node): 
+			node.trigger(body)
+
+func on_default_trigger(body):
+	for node in get_tree().get_nodes_in_group("on_default"):
+		if body.is_ancestor_of(node): 
+			node.trigger(body)
+
+func on_attack_trigger(body):
+	for node in get_tree().get_nodes_in_group("on_attack"):
+		if body.is_ancestor_of(node): 
+			node.trigger(body)

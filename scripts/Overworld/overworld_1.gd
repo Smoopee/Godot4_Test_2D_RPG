@@ -22,6 +22,8 @@ func show_side_scene(side_scene: Node) -> void:
 func _on_side_scene_layer_child_exiting_tree(node):
 	get_tree().paused = false
 	djinn_menu.visible = true
+	party = Global.current_party
+	
 	print("We are back")
 
 func load_djinn_data():

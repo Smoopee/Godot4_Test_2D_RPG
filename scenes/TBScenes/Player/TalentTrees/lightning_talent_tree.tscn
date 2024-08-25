@@ -1,0 +1,296 @@
+[gd_scene load_steps=10 format=3 uid="uid://15splqebme12"]
+
+[ext_resource type="Script" path="res://scripts/TurnBased/Player/TalentTree/lightning_talent_tree.gd" id="1_4ifm5"]
+[ext_resource type="ButtonGroup" uid="uid://bfi6ltld1r7l4" path="res://scenes/TBScenes/Player/TalentTrees/lightning_t1_button_group.tres" id="1_jiwm3"]
+[ext_resource type="ButtonGroup" uid="uid://diit6g2bs54rs" path="res://scenes/TBScenes/Player/TalentTrees/lightning_t2_button_group.tres" id="2_dlvq8"]
+[ext_resource type="ButtonGroup" uid="uid://bmst3t3c781lg" path="res://scenes/TBScenes/Player/TalentTrees/lightning_t3_button_group.tres" id="3_bom2j"]
+[ext_resource type="ButtonGroup" uid="uid://c1q2u767kaqbd" path="res://scenes/TBScenes/Player/TalentTrees/lightning_t4_button_group.tres" id="4_pwnsa"]
+[ext_resource type="ButtonGroup" uid="uid://cejrqqqsx5sq2" path="res://scenes/TBScenes/Player/TalentTrees/lightning_t5_button_group.tres" id="5_4a6n3"]
+[ext_resource type="ButtonGroup" uid="uid://bj3sbgprc2gjd" path="res://scenes/TBScenes/Player/TalentTrees/lightning_t6_button_group.tres" id="6_tqvk2"]
+[ext_resource type="ButtonGroup" uid="uid://cb6by32jqkqbs" path="res://scenes/TBScenes/Player/TalentTrees/lightning_t7_button_group.tres" id="7_ov2es"]
+[ext_resource type="ButtonGroup" uid="uid://benotxp5jv22k" path="res://scenes/TBScenes/Player/TalentTrees/lightning_t8_button_group.tres" id="8_wh26b"]
+
+[node name="LightningTalentTree" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4ifm5")
+
+[node name="Tier1Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.0
+offset_top = -140.0
+offset_right = 71.0
+offset_bottom = 207.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Tier1Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Tier1Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="T1B1" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer" groups=["lightning_talent_button", "lightning_tier1"]]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+button_group = ExtResource("1_jiwm3")
+text = "T1B1
+"
+
+[node name="T1B2" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer" groups=["lightning_talent_button", "lightning_tier1"]]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+button_group = ExtResource("1_jiwm3")
+text = "T1B2"
+
+[node name="T1B3" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer" groups=["lightning_talent_button", "lightning_tier1"]]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+button_group = ExtResource("1_jiwm3")
+text = "T1B3"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Tier1Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="T2B1" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer2" groups=["lightning_talent_button", "lightning_tier2"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("2_dlvq8")
+text = "T2B1
+"
+
+[node name="T2B2" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer2" groups=["lightning_talent_button", "lightning_tier2"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("2_dlvq8")
+text = "T2B2"
+
+[node name="T2B3" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer2" groups=["lightning_talent_button", "lightning_tier2"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("2_dlvq8")
+text = "T2B3"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Tier1Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="T3B1" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer3" groups=["lightning_talent_button", "lightning_tier3"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("3_bom2j")
+text = "T3B1
+"
+
+[node name="T3B2" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer3" groups=["lightning_talent_button", "lightning_tier3"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("3_bom2j")
+text = "T3B2"
+
+[node name="T3B3" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer3" groups=["lightning_talent_button", "lightning_tier3"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("3_bom2j")
+text = "T3B3"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Tier1Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="T4B1" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer4" groups=["lightning_talent_button", "lightning_tier4"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("4_pwnsa")
+text = "T4B1
+"
+
+[node name="T4B2" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer4" groups=["lightning_talent_button", "lightning_tier4"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("4_pwnsa")
+text = "T4B2"
+
+[node name="T4B3" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer4" groups=["lightning_talent_button", "lightning_tier4"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("4_pwnsa")
+text = "T4B3"
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="Tier1Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="T5B1" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer5" groups=["lightning_talent_button", "lightning_tier5"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("5_4a6n3")
+text = "T5B1
+"
+
+[node name="T5B2" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer5" groups=["lightning_talent_button", "lightning_tier5"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("5_4a6n3")
+text = "T5B2"
+
+[node name="T5B3" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer5" groups=["lightning_talent_button", "lightning_tier5"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("5_4a6n3")
+text = "T5B3"
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="Tier1Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="T6B1" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer6" groups=["lightning_talent_button", "lightning_tier6"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("6_tqvk2")
+text = "T6B1
+"
+
+[node name="T6B2" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer6" groups=["lightning_talent_button", "lightning_tier6"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("6_tqvk2")
+text = "T6B2"
+
+[node name="T6B3" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer6" groups=["lightning_talent_button", "lightning_tier6"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("6_tqvk2")
+text = "T6B3"
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="Tier1Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="T7B1" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer7" groups=["lightning_talent_button", "lightning_tier7"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("7_ov2es")
+text = "T7B1
+"
+
+[node name="T7B2" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer7" groups=["lightning_talent_button", "lightning_tier7"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("7_ov2es")
+text = "T7B2"
+
+[node name="T7B3" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer7" groups=["lightning_talent_button", "lightning_tier7"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("7_ov2es")
+text = "T7B3"
+
+[node name="HBoxContainer8" type="HBoxContainer" parent="Tier1Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="T8B1" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer8" groups=["lightning_talent_button", "lightning_tier8"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("8_wh26b")
+text = "T8B1
+"
+
+[node name="T8B2" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer8" groups=["lightning_talent_button", "lightning_tier8"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("8_wh26b")
+text = "T8B2"
+
+[node name="T8B3" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer8" groups=["lightning_talent_button", "lightning_tier8"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("8_wh26b")
+text = "T8B3"
+
+[node name="Reset Button" type="Button" parent="Tier1Panel/VBoxContainer"]
+layout_mode = 2
+text = "Reset
+"
+
+[node name="CloseButton" type="Button" parent="Tier1Panel/VBoxContainer"]
+layout_mode = 2
+text = "Close"
+
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer/T1B1" to="." method="_on_t_1b_1_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer/T1B2" to="." method="_on_t_1b_2_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer/T1B3" to="." method="_on_t_1b_3_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer2/T2B1" to="." method="_on_t_2b_1_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer2/T2B2" to="." method="_on_t_2b_2_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer2/T2B3" to="." method="_on_t_2b_3_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer3/T3B1" to="." method="_on_t_3b_1_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer3/T3B2" to="." method="_on_t_3b_2_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer3/T3B3" to="." method="_on_t_3b_3_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer4/T4B1" to="." method="_on_t_4b_1_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer4/T4B2" to="." method="_on_t_4b_2_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer4/T4B3" to="." method="_on_t_4b_3_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer5/T5B1" to="." method="_on_t_5b_1_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer5/T5B2" to="." method="_on_t_5b_2_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer5/T5B3" to="." method="_on_t_5b_3_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer6/T6B1" to="." method="_on_t_6b_1_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer6/T6B2" to="." method="_on_t_6b_2_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer6/T6B3" to="." method="_on_t_6b_3_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer7/T7B1" to="." method="_on_t_7b_1_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer7/T7B2" to="." method="_on_t_7b_2_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer7/T7B3" to="." method="_on_t_7b_3_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer8/T8B1" to="." method="_on_t_8b_1_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer8/T8B2" to="." method="_on_t_8b_2_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer8/T8B3" to="." method="_on_t_8b_3_toggled"]
+[connection signal="pressed" from="Tier1Panel/VBoxContainer/Reset Button" to="." method="_on_reset_button_pressed"]
+[connection signal="pressed" from="Tier1Panel/VBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]

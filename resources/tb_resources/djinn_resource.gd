@@ -36,6 +36,17 @@ class_name Djinn
 @export var default_attack_path: String
 @export var node_name: String
 @export var save_file_name: String
+@export var talent_tree_path: String
+@export var talent_tree_spread: Array = [
+	[0,0,0],
+	[0,0,0],
+	[0,0,0],
+	[0,0,0],
+	[0,0,0],
+	[0,0,0],
+	[0,0,0],
+	[0,0,0],
+]
 
 var level_experience_bracket = [0,40,90,150,250,450,650,1000]
 
