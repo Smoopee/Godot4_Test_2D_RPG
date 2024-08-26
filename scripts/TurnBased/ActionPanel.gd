@@ -97,6 +97,9 @@ func _ready():
 	player_3 = party_members.players_array[2]
 	set_mode(Mode.BATTLE)
 	
+	for i in turn_queue.characters_array:
+		on_start_of_game_trigger(i)
+	
 	
 func turn_keeper():
 	turn_queue.turn_cycle()
@@ -582,5 +585,10 @@ func on_default_trigger(body):
 
 func on_attack_trigger(body):
 	for node in get_tree().get_nodes_in_group("on_attack"):
+		if body.is_ancestor_of(node): 
+			node.trigger(body)
+			
+func on_start_of_game_trigger(body):
+	for node in get_tree().get_nodes_in_group("on_start_of_game"):
 		if body.is_ancestor_of(node): 
 			node.trigger(body)

@@ -7,4 +7,5 @@ func ready():
 	
 	
 func trigger(djinn):
+	print("Talent Mana Siphon Triggered")
 	djinn.change_mana(20)

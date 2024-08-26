@@ -1,0 +1,296 @@
+[gd_scene load_steps=10 format=3 uid="uid://cu48rhwcukhw5"]
+
+[ext_resource type="Script" path="res://scripts/TurnBased/Player/TalentTree/fire_talent_tree.gd" id="1_a5o2r"]
+[ext_resource type="ButtonGroup" uid="uid://d1lveyql1bndy" path="res://scenes/TBScenes/Player/TalentTrees/fire_t1_button_group.tres" id="2_l83gh"]
+[ext_resource type="ButtonGroup" uid="uid://dv8e2y4f7t3al" path="res://scenes/TBScenes/Player/TalentTrees/fire_t2_button_group.tres" id="3_s6ka7"]
+[ext_resource type="ButtonGroup" uid="uid://c7vse1gr3flng" path="res://scenes/TBScenes/Player/TalentTrees/fire_t3_button_group.tres" id="4_y7tm2"]
+[ext_resource type="ButtonGroup" uid="uid://b2bkhnvvvqt2k" path="res://scenes/TBScenes/Player/TalentTrees/fire_t4_button_group.tres" id="5_54ynl"]
+[ext_resource type="ButtonGroup" uid="uid://wll40ibpwa14" path="res://scenes/TBScenes/Player/TalentTrees/fire_t5_button_group.tres" id="6_w28y7"]
+[ext_resource type="ButtonGroup" uid="uid://bqk26pl0jng1r" path="res://scenes/TBScenes/Player/TalentTrees/fire_t6_button_group.tres" id="7_mvlhu"]
+[ext_resource type="ButtonGroup" uid="uid://bca1reahvfal2" path="res://scenes/TBScenes/Player/TalentTrees/fire_t7_button_group.tres" id="8_vdynt"]
+[ext_resource type="ButtonGroup" uid="uid://cwul815pc8l6v" path="res://scenes/TBScenes/Player/TalentTrees/fire_t8_button_group.tres" id="9_1wgnj"]
+
+[node name="FireTalentTree" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_a5o2r")
+
+[node name="Tier1Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.0
+offset_top = -140.0
+offset_right = 71.0
+offset_bottom = 207.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Tier1Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Tier1Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="T1B1" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer" groups=["fire_talent_button", "fire_tier1"]]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+button_group = ExtResource("2_l83gh")
+text = "T1B1
+"
+
+[node name="T1B2" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer" groups=["fire_talent_button", "fire_tier1"]]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+button_group = ExtResource("2_l83gh")
+text = "T1B2"
+
+[node name="T1B3" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer" groups=["fire_talent_button", "fire_tier1"]]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+button_group = ExtResource("2_l83gh")
+text = "T1B3"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Tier1Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="T2B1" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer2" groups=["fire_talent_button", "fire_tier2"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("3_s6ka7")
+text = "T2B1
+"
+
+[node name="T2B2" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer2" groups=["fire_talent_button", "fire_tier2"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("3_s6ka7")
+text = "T2B2"
+
+[node name="T2B3" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer2" groups=["fire_talent_button", "fire_tier2"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("3_s6ka7")
+text = "T2B3"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Tier1Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="T3B1" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer3" groups=["fire_talent_button", "fire_tier3"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("4_y7tm2")
+text = "T3B1
+"
+
+[node name="T3B2" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer3" groups=["fire_talent_button", "fire_tier3"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("4_y7tm2")
+text = "T3B2"
+
+[node name="T3B3" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer3" groups=["fire_talent_button", "fire_tier3"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("4_y7tm2")
+text = "T3B3"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Tier1Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="T4B1" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer4" groups=["fire_talent_button", "fire_tier4"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("5_54ynl")
+text = "T4B1
+"
+
+[node name="T4B2" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer4" groups=["fire_talent_button", "fire_tier4"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("5_54ynl")
+text = "T4B2"
+
+[node name="T4B3" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer4" groups=["fire_talent_button", "fire_tier4"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("5_54ynl")
+text = "T4B3"
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="Tier1Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="T5B1" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer5" groups=["fire_talent_button", "fire_tier5"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("6_w28y7")
+text = "T5B1
+"
+
+[node name="T5B2" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer5" groups=["fire_talent_button", "fire_tier5"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("6_w28y7")
+text = "T5B2"
+
+[node name="T5B3" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer5" groups=["fire_talent_button", "fire_tier5"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("6_w28y7")
+text = "T5B3"
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="Tier1Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="T6B1" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer6" groups=["fire_talent_button", "fire_tier6"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("7_mvlhu")
+text = "T6B1
+"
+
+[node name="T6B2" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer6" groups=["fire_talent_button", "fire_tier6"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("7_mvlhu")
+text = "T6B2"
+
+[node name="T6B3" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer6" groups=["fire_talent_button", "fire_tier6"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("7_mvlhu")
+text = "T6B3"
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="Tier1Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="T7B1" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer7" groups=["fire_talent_button", "fire_tier7"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("8_vdynt")
+text = "T7B1
+"
+
+[node name="T7B2" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer7" groups=["fire_talent_button", "fire_tier7"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("8_vdynt")
+text = "T7B2"
+
+[node name="T7B3" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer7" groups=["fire_talent_button", "fire_tier7"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("8_vdynt")
+text = "T7B3"
+
+[node name="HBoxContainer8" type="HBoxContainer" parent="Tier1Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="T8B1" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer8" groups=["fire_talent_button", "fire_tier8"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("9_1wgnj")
+text = "T8B1
+"
+
+[node name="T8B2" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer8" groups=["fire_talent_button", "fire_tier8"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("9_1wgnj")
+text = "T8B2"
+
+[node name="T8B3" type="Button" parent="Tier1Panel/VBoxContainer/HBoxContainer8" groups=["fire_talent_button", "fire_tier8"]]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("9_1wgnj")
+text = "T8B3"
+
+[node name="Reset Button" type="Button" parent="Tier1Panel/VBoxContainer"]
+layout_mode = 2
+text = "Reset
+"
+
+[node name="CloseButton" type="Button" parent="Tier1Panel/VBoxContainer"]
+layout_mode = 2
+text = "Close"
+
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer/T1B1" to="." method="_on_t_1b_1_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer/T1B2" to="." method="_on_t_1b_2_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer/T1B3" to="." method="_on_t_1b_3_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer2/T2B1" to="." method="_on_t_2b_1_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer2/T2B2" to="." method="_on_t_2b_2_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer2/T2B3" to="." method="_on_t_2b_3_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer3/T3B1" to="." method="_on_t_3b_1_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer3/T3B2" to="." method="_on_t_3b_2_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer3/T3B3" to="." method="_on_t_3b_3_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer4/T4B1" to="." method="_on_t_4b_1_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer4/T4B2" to="." method="_on_t_4b_2_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer4/T4B3" to="." method="_on_t_4b_3_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer5/T5B1" to="." method="_on_t_5b_1_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer5/T5B2" to="." method="_on_t_5b_2_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer5/T5B3" to="." method="_on_t_5b_3_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer6/T6B1" to="." method="_on_t_6b_1_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer6/T6B2" to="." method="_on_t_6b_2_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer6/T6B3" to="." method="_on_t_6b_3_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer7/T7B1" to="." method="_on_t_7b_1_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer7/T7B2" to="." method="_on_t_7b_2_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer7/T7B3" to="." method="_on_t_7b_3_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer8/T8B1" to="." method="_on_t_8b_1_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer8/T8B2" to="." method="_on_t_8b_2_toggled"]
+[connection signal="toggled" from="Tier1Panel/VBoxContainer/HBoxContainer8/T8B3" to="." method="_on_t_8b_3_toggled"]
+[connection signal="pressed" from="Tier1Panel/VBoxContainer/Reset Button" to="." method="_on_reset_button_pressed"]
+[connection signal="pressed" from="Tier1Panel/VBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]

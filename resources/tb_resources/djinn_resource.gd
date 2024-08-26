@@ -47,6 +47,14 @@ class_name Djinn
 	[0,0,0],
 	[0,0,0],
 ]
+@export var talent1_path: String
+@export var talent2_path: String
+@export var talent3_path: String
+@export var talent4_path: String
+@export var talent5_path: String
+@export var talent6_path: String
+@export var talent7_path: String
+@export var talent8_path: String
 
 var level_experience_bracket = [0,40,90,150,250,450,650,1000]
 

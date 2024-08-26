@@ -11,4 +11,5 @@ func trigger(djinn):
 	game_state_tracker = game_state_tracker_array[0]
 	
 	if game_state_tracker.turn_queue.action_counter == 1:
+		print("Talent Mana Shift Triggered")
 		djinn.change_mana(20)

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dt7yda15ffe2c"]
+
+[ext_resource type="Script" path="res://scripts/TurnBased/Player/TalentTree/WaterTalents/mana_adept.gd" id="1_nii7m"]
+
+[node name="ManaAdept" type="Node" groups=["on_start_of_game"]]
+script = ExtResource("1_nii7m")

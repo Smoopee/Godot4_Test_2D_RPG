@@ -2,7 +2,8 @@ extends Control
 
 var current_djinn
 
-@onready var lightning_talent_tree = $"."
+@onready var fire_talent_tree = $"."
+
 
 @onready var t_1b_1 = $Tier1Panel/VBoxContainer/HBoxContainer/T1B1
 @onready var t_1b_2 = $Tier1Panel/VBoxContainer/HBoxContainer/T1B2
@@ -37,7 +38,7 @@ var current_button
 
 
 func _ready():
-	for button in get_tree().get_nodes_in_group("lightning_talent_button"):
+	for button in get_tree().get_nodes_in_group("fire_talent_button"):
 		button.pressed.connect(on_pressed.bind(button))
 
 
@@ -48,15 +49,15 @@ func transfer_djinn(djinn):
 
 func _on_t_1b_1_toggled(toggled_on):
 	current_djinn.talent_tree_spread[0] = [1, 0, 0]
-	current_djinn.talent1_path = "res://scenes/TBScenes/Player/TalentTrees/LightningTalents/mana_shift.tscn"
+	current_djinn.talent1_path = ""
 
 func _on_t_1b_2_toggled(toggled_on):
 	current_djinn.talent_tree_spread[0] = [0, 1, 0]
-	current_djinn.talent1_path = "res://scenes/TBScenes/Player/TalentTrees/LightningTalents/mana_siphon.tscn"
+	current_djinn.talent1_path = ""
 
 func _on_t_1b_3_toggled(toggled_on):
 	current_djinn.talent_tree_spread[0] = [0, 0, 1]
-	current_djinn.talent1_path = "res://scenes/TBScenes/Player/TalentTrees/LightningTalents/quick_charge.tscn"
+	current_djinn.talent1_path = ""
 
 func _on_t_2b_1_toggled(toggled_on):
 	current_djinn.talent_tree_spread[1] = [1, 0, 0]
@@ -146,61 +147,61 @@ func on_pressed(button):
 	
 	current_button = button
 	
-	if current_button.is_in_group("lightning_tier1") && current_button.button_pressed == true:
+	if current_button.is_in_group("fire_tier1") && current_button.button_pressed == true:
 		enable_row(2)
 	
-	if current_button.is_in_group("lightning_tier2") && current_button.button_pressed == true:
+	if current_button.is_in_group("fire_tier2") && current_button.button_pressed == true:
 		enable_row(3)
 	
-	if current_button.is_in_group("lightning_tier3") && current_button.button_pressed == true:
+	if current_button.is_in_group("fire_tier3") && current_button.button_pressed == true:
 		enable_row(4)
 			
-	if current_button.is_in_group("lightning_tier4") && current_button.button_pressed == true:
+	if current_button.is_in_group("fire_tier4") && current_button.button_pressed == true:
 		enable_row(5)
 			
-	if current_button.is_in_group("lightning_tier5") && current_button.button_pressed == true:
+	if current_button.is_in_group("fire_tier5") && current_button.button_pressed == true:
 		enable_row(6)
 			
-	if current_button.is_in_group("lightning_tier6") && current_button.button_pressed == true:
+	if current_button.is_in_group("fire_tier6") && current_button.button_pressed == true:
 		enable_row(7)
 			
-	if current_button.is_in_group("lightning_tier7") && current_button.button_pressed == true:
+	if current_button.is_in_group("fire_tier7") && current_button.button_pressed == true:
 		enable_row(8)
 
 func enable_row(row_number):
 	match(row_number):
 		1:
-			for i in get_tree().get_nodes_in_group("lightning_tier1"):
+			for i in get_tree().get_nodes_in_group("fire_tier1"):
 				i.disabled = false
 		2:
-			for i in get_tree().get_nodes_in_group("lightning_tier2"):
+			for i in get_tree().get_nodes_in_group("fire_tier2"):
 				i.disabled = false
 		3:
-			for i in get_tree().get_nodes_in_group("lightning_tier3"):
+			for i in get_tree().get_nodes_in_group("fire_tier3"):
 				i.disabled = false
 		4:
-			for i in get_tree().get_nodes_in_group("lightning_tier4"):
+			for i in get_tree().get_nodes_in_group("fire_tier4"):
 				i.disabled = false
 		5:
-			for i in get_tree().get_nodes_in_group("lightning_tier5"):
+			for i in get_tree().get_nodes_in_group("fire_tier5"):
 				i.disabled = false
 		6:
-			for i in get_tree().get_nodes_in_group("lightning_tier6"):
+			for i in get_tree().get_nodes_in_group("fire_tier6"):
 				i.disabled = false
 		7:
-			for i in get_tree().get_nodes_in_group("lightning_tier7"):
+			for i in get_tree().get_nodes_in_group("fire_tier7"):
 				i.disabled = false
 		8:
-			for i in get_tree().get_nodes_in_group("lightning_tier8"):
+			for i in get_tree().get_nodes_in_group("fire_tier8"):
 				i.disabled = false
 
 
 func _on_reset_button_pressed():
-	for button in get_tree().get_nodes_in_group("lightning_talent_button"):
+	for button in get_tree().get_nodes_in_group("fire_talent_button"):
 		button.button_pressed = false
 		button.disabled = true
 		
-	for i in get_tree().get_nodes_in_group("lightning_tier1"):
+	for i in get_tree().get_nodes_in_group("fire_tier1"):
 			i.disabled = false
 	
 	current_djinn.talent_tree_spread = [
@@ -302,7 +303,7 @@ func talent_allocator(i, j):
 
 
 func _on_close_button_pressed():
-	lightning_talent_tree.visible = false
+	fire_talent_tree.visible = false
 	save_djinn_data()
 	queue_free()
 

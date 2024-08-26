@@ -49,8 +49,6 @@ var default_attack_name: String
 var default_attack_targeting: String 
 var default_attack
 
-#TALENT SETUP-----------------------------------------------------------
-var talent
 
 #BATTLE ARENA VARIABLES---------------------------------------------------------
 var player_panel
@@ -140,9 +138,45 @@ func instantiate_turn_sprite(target, zSetter = 1):
 	turn_sprite.z_index = zSetter
 	
 func instantiate_talents():
-	var talent_scene = load("res://scenes/TBScenes/Player/TalentTrees/LightningTalents/mana_shift.tscn")
-	talent = talent_scene.instantiate()
-	add_child(talent)
+	var talent1_scene = load(stats.talent1_path)
+	if talent1_scene == null: return
+	var talent1 = talent1_scene.instantiate()
+	add_child(talent1)
+	
+	var talent2_scene = load(stats.talent2_path)
+	if talent2_scene == null: return
+	var talent2 = talent2_scene.instantiate()
+	add_child(talent2)
+	
+	var talent3_scene = load(stats.talent3_path)
+	if talent3_scene == null: return
+	var talent3 = talent3_scene.instantiate()
+	add_child(talent3)
+	
+	var talent4_scene = load(stats.talent4_path)
+	if talent4_scene == null: return
+	var talent4 = talent4_scene.instantiate()
+	add_child(talent4)
+	
+	var talent5_scene = load(stats.talent5_path)
+	if talent5_scene == null: return
+	var talent5 = talent5_scene.instantiate()
+	add_child(talent5)
+	
+	var talent6_scene = load(stats.talent6_path)
+	if talent6_scene == null: return
+	var talent6 = talent6_scene.instantiate()
+	add_child(talent6)
+	
+	var talent7_scene = load(stats.talent7_path)
+	if talent7_scene == null: return
+	var talent7 = talent7_scene.instantiate()
+	add_child(talent7)
+	
+	var talent8_scene = load(stats.talent8_path)
+	if talent8_scene == null: return
+	var talent8 = talent8_scene.instantiate()
+	add_child(talent8)
 
 func cast_sprint():
 	change_stamina(-50)
