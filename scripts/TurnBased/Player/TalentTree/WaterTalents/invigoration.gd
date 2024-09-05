@@ -7,6 +7,6 @@ func ready():
 	
 	
 func trigger(djinn):
-	print("Talent Mana Adept Triggered")
-	djinn.skill_one_mana_cost -= 40
-	djinn.skill_two_mana_cost -= 40
+	print("Talent Invigoration Triggered")
+	djinn.change_mana(15)
+	

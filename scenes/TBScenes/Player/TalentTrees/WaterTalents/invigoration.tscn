@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7kl2wvhtun2n"]
+
+[ext_resource type="Script" path="res://scripts/TurnBased/Player/TalentTree/WaterTalents/invigoration.gd" id="1_50qbf"]
+
+[node name="Invigoration" type="Node" groups=["on_upkeep"]]
+script = ExtResource("1_50qbf")

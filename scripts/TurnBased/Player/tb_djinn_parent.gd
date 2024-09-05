@@ -24,6 +24,7 @@ func set_state(new_state):
 #Generic Stats------------------------------------------------------------------
 var is_sprinting: bool = false
 var is_dodging: bool = false
+var life_as_mana: bool = false
 
 var stats: Djinn = null 
 
@@ -69,7 +70,7 @@ func get_speed():
 	return stats.speed
 
 func change_health(value):
-	stats.health += value
+	stats.health += value 	
 	if stats.health <= 0:
 		stats.health = 0
 		set_state(State.DEAD)
@@ -77,11 +78,14 @@ func change_health(value):
 	player_panel[0].change_health()
 
 func change_mana(value):
+	print("Change mana value is " + str(value))
 	stats.mana += value
 	if stats.mana <= 0:
 		stats.mana = 0
 	print("tb_djinn_parent: Player panel is " + str(player_panel))
 	player_panel[0].change_mana()
+	
+	
 
 func change_stamina(value):
 	stats.stamina += value
@@ -196,12 +200,22 @@ func stop_dodge():
 
 func cast_skill_one(caster = self, target = null):
 	print("skill one is " + str(skill_one))
-	skill_one.cast_skill(caster, target)
+	if typeof(target) == 28: 
+		for i in target:
+			skill_one.cast_skill(caster, i)
+	else: skill_one.cast_skill(caster, target)
+	if life_as_mana: change_health(-skill_one_mana_cost)
+	else: change_mana(-skill_one_mana_cost)
 	charge_ultimate(stats.ultimate_charge)
 	print("skill one has been cast and ultimate is charged by: " + str(stats.ultimate_charge))
 
 func cast_skill_two(caster = self, target = null):
-	skill_two.cast_skill(caster, target)
+	if typeof(target) == 28: 
+		for i in target:
+			skill_two.cast_skill(caster, i)
+	else: skill_two.cast_skill(caster, target)
+	if life_as_mana: change_health(-skill_two_mana_cost)
+	else: change_mana(-skill_two_mana_cost)
 	charge_ultimate(stats.ultimate_charge)
 
 func cast_default_attack(caster = self, target = null):

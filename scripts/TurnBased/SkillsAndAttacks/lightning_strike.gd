@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
 
-var power: int = 1000
-var multi_attack_power = 1000
+var power: int = 20
+var multi_attack_power = 15
 var mana_cost: int = 60
 var hit_rate: float = .95
 var target_selection: String = "Multi"
@@ -15,18 +15,6 @@ var spell_name = "Lightning Strike"
 var enemy_group
 func _ready():
 	visible = false
-
-func _process(_delta):
-	start_cast_path()
-
-func start_cast_path():
-	
-	if animation_lok:
-		velocity = global_position.direction_to(global_position) * 600
-		move_and_slide()
-		animation_lok = false
-		await get_tree().create_timer(1).timeout
-		queue_free()
 
 func get_group_array():
 	enemy_group = []

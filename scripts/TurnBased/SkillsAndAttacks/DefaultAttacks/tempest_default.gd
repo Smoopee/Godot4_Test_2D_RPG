@@ -1,6 +1,6 @@
 extends Node2D
 
-var power = 20
+var power = 5
 var target_selection: String = "AOE"
 var default_attack_name: String = "Swirl"
 

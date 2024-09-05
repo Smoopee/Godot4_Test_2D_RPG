@@ -16,18 +16,6 @@ var spell_name = "Drizzle"
 func _ready():
 	visible = false
 
-func _process(_delta):
-	start_cast_path()
-
-
-func start_cast_path():
-	
-	if animation_lok:
-		global_position = self.global_position
-		velocity = global_position.direction_to(self.global_position) * 600
-		move_and_slide()
-		animation_lok = false
-		await get_tree().create_timer(1).timeout
 
 func cast_skill(caster = null, target = null):
 	var elemental_reaction_power = caster.stats.reaction_power

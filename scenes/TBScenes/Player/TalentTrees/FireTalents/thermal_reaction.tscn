@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://xq6sxfnnhkn6"]
+
+[ext_resource type="Script" path="res://scripts/TurnBased/Player/TalentTree/FireTalents/thermal_reaction.gd" id="1_q0ljb"]
+
+[node name="ThermalReaction" type="Node" groups=["on_start_of_game"]]
+script = ExtResource("1_q0ljb")

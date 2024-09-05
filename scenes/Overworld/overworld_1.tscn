@@ -2632,7 +2632,7 @@ script = ExtResource("10_37g7a")
 
 [connection signal="child_exiting_tree" from="SideSceneLayer" to="." method="_on_side_scene_layer_child_exiting_tree"]
 [connection signal="body_entered" from="TileMap/TallGrass" to="TileMap/TallGrass" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMap/@Area2D@423211" to="TileMap/@Area2D@423211" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMap/@Area2D@423212" to="TileMap/@Area2D@423212" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMap/@Area2D@423213" to="TileMap/@Area2D@423213" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@52512" to="TileMap/@Area2D@52512" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@52513" to="TileMap/@Area2D@52513" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@52514" to="TileMap/@Area2D@52514" method="_on_body_entered"]
 [connection signal="pressed" from="CanvasLayer/Save" to="." method="_on_save_pressed"]

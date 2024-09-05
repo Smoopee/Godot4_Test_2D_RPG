@@ -104,6 +104,7 @@ func _ready():
 func turn_keeper():
 	turn_queue.turn_cycle()
 	current_character = turn_queue.active_character
+	on_upkeep_trigger(current_character)
 	active_player_highlighter()
 	print("Current character is " + str(current_character))
 	if current_character.is_in_group("enemy"):
@@ -329,7 +330,7 @@ func the_attack_step(defender):
 
 	set_state(State.SELECTING)
 	current_character.buff_incrementer(current_character)
-	
+
 	end_turn()
 
 func enemy_ai(body):
@@ -390,15 +391,12 @@ func default_attack_step(defender):
 	on_attack_trigger(current_character)
 	match current_character.default_attack_targeting:
 		"Single":
-			current_character.instantiate_default_attack()
 			current_character.cast_default_attack(current_character, defender)
 
 		"Multi":
-			current_character.instantiate_default_attack()
 			current_character.cast_default_attack(current_character, defender)
 		
 		"AOE":
-			current_character.instantiate_default_attack()
 			
 			for i in enemies.enemies_array.size():
 			#SKIPS DEAD ENEMIES
@@ -408,13 +406,10 @@ func default_attack_step(defender):
 				current_character.cast_default_attack(current_character, enemies.enemies_array[i])
 					
 		"Friendly_Single":
-			current_character.instantiate_default_attack()
 			current_character.default_attack(current_character, defender)
 		"Friendly_Multi":
-			current_character.instantiate_default_attack()
 			current_character.default_attack(current_character, defender)
 		"Friendly_AOE":
-			current_character.instantiate_default_attack()
 			for i in party_members.players_array.size():
 				
 				if party_members.players_array[i].current_state == 0:
@@ -422,80 +417,54 @@ func default_attack_step(defender):
 				current_character.cast_default_attack(current_character, party_members.players_array[i])
 
 func skill_one_attack_step(defender):
+	var available_targets = []
+	
 	match current_character.skill_one_targeting:
 		"Single":
-			current_character.instantiate_skill_one()
-			current_character.change_mana(-current_character.skill_one_mana_cost)
 			current_character.cast_skill_one(current_character, defender)
-
 		"Multi":
-			current_character.instantiate_skill_one()
-			current_character.change_mana(-current_character.skill_one_mana_cost)
 			current_character.cast_skill_one(current_character, defender)
-		
 		"AOE":
-			current_character.instantiate_skill_one()
-			current_character.change_mana(-current_character.skill_one_mana_cost)
-			
 			for i in enemies.enemies_array.size():
 			#SKIPS DEAD ENEMIES
 				if enemies.enemies_array[i].current_state == 0:
 					continue
+				available_targets.push_front(enemies.enemies_array[i])
 				
-				current_character.cast_skill_one(current_character, enemies.enemies_array[i])
-					
+			current_character.cast_skill_one(current_character, available_targets)
+
 		"Friendly_Single":
-			current_character.instantiate_skill_one()
-			current_character.change_mana(-current_character.skill_one_mana_cost)
 			current_character.cast_skill_one(current_character, defender)
 		"Friendly_Multi":
-			current_character.instantiate_skill_one()
-			current_character.change_mana(-current_character.skill_one_mana_cost)
 			current_character.cast_skill_one(current_character, defender)
 		"Friendly_AOE":
-			current_character.instantiate_skill_one()
-			current_character.change_mana(-current_character.skill_one_mana_cost)
-			
 			for i in party_members.players_array.size():
 				
 				if party_members.players_array[i].current_state == 0:
 					continue
 				current_character.cast_skill_one(current_character, party_members.players_array[i])
-	
 
 func skill_two_attack_step(defender):
+	var available_targets = []
+	
 	match current_character.skill_two_targeting:
 		"Single":
-			current_character.instantiate_skill_two()
-			current_character.change_mana(-current_character.skill_two_mana_cost)
 			current_character.cast_skill_two(current_character, defender)
 		"Multi":
-			current_character.instantiate_skill_two()
-			current_character.change_mana(-current_character.skill_two_mana_cost)
 			current_character.cast_skill_two(current_character, defender)
-			
 		"AOE":
-			current_character.instantiate_skill_two()
-			current_character.change_mana(-current_character.skill_two_mana_cost)
-			
 			for i in enemies.enemies_array.size():
 			#SKIPS DEAD ENEMIES
 				if enemies.enemies_array[i].current_state == 0:
 					continue
-				
-				current_character.cast_skill_two(current_character, enemies.enemies_array[i])
+				available_targets.push_front(enemies.enemies_array[i])
+
+			current_character.cast_skill_two(current_character, available_targets)
 		"Friendly_Single":
-			current_character.instantiate_skill_two()
-			current_character.change_mana(-current_character.skill_two_mana_cost)
 			current_character.cast_skill_two(current_character, defender)
 		"Friendly_Multi":
-			current_character.instantiate_skill_two()
-			current_character.change_mana(-current_character.skill_two_mana_cost)
 			current_character.cast_skill_two(current_character, defender)
 		"Friendly_AOE":
-			current_character.instantiate_skill_two()
-			current_character.change_mana(-current_character.skill_two_mana_cost)
-			
 			for i in party_members.players_array.size():
 				
 				if party_members.players_array[i].current_state == 0:
@@ -590,5 +559,10 @@ func on_attack_trigger(body):
 			
 func on_start_of_game_trigger(body):
 	for node in get_tree().get_nodes_in_group("on_start_of_game"):
+		if body.is_ancestor_of(node): 
+			node.trigger(body)
+
+func on_upkeep_trigger(body):
+	for node in get_tree().get_nodes_in_group("on_upkeep"):
 		if body.is_ancestor_of(node): 
 			node.trigger(body)

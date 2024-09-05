@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://drcoevg168g36"]
+
+[ext_resource type="Script" path="res://scripts/TurnBased/Player/TalentTree/FireTalents/heated_reaction.gd" id="1_nmfja"]
+
+[node name="HeatedReaction" type="Node" groups=["on_upkeep"]]
+script = ExtResource("1_nmfja")

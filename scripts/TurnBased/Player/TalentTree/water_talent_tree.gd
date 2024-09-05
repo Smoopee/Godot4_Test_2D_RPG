@@ -54,7 +54,7 @@ func _on_t_1b_1_toggled(toggled_on):
 
 func _on_t_1b_2_toggled(toggled_on):
 	current_djinn.talent_tree_spread[0] = [0, 1, 0]
-	current_djinn.talent1_path = ""
+	current_djinn.talent1_path = "res://scenes/TBScenes/Player/TalentTrees/WaterTalents/invigoration.tscn"
 
 func _on_t_1b_3_toggled(toggled_on):
 	current_djinn.talent_tree_spread[0] = [0, 0, 1]
